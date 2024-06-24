@@ -83,10 +83,10 @@ class SimCLR(nn.Module):
         return e1
     
 class SimCLRPredictor(nn.Module):
-    def __init__(self, simclr_model, num_classes, tune_encoder):
+    def __init__(self, simclr_model, num_classes, tune_encoder = False):
         super(SimCLRPredictor, self).__init__()
         self.simclr = simclr_model
-        self.linear_predictor = nn.Linear(self.simclr.proj_head.fc2.out_features, num_classes)
+        self.linear_predictor = nn.Linear(self.simclr.proj_head.out_features, num_classes)
         
         if not tune_encoder:
             for param in self.simclr.parameters():
