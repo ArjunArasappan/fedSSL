@@ -7,8 +7,8 @@ from torch import Generator
 
 
     
-global_batch = 16
-global_epoch = 10
+global_batch = 32
+num_iters = 10
 validation_split = 0.1
 #batch size usually at 512, num workers at 8
 
@@ -35,8 +35,8 @@ def load_data(num_clients, image_size=32, batch_size = global_batch, num_workers
         len_val = int(len(ds) * validation_split)  # 10 % validation set
         len_train = len(ds) - len_val
         lengths = [len_train, len_val]
-        print(type(Generator().manual_seed(42)))
-        print(len(ds))
+        # print(type(Generator().manual_seed(42)))
+        # print(len(ds))
         
         ds_train, ds_val = random_split(ds, lengths)
         

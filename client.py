@@ -9,7 +9,7 @@ from torchvision.datasets import CIFAR10
 from torchvision.models import resnet18, ResNet18_Weights
 from torch.utils.data import Dataset
 
-NUM_CLIENTS = 3
+NUM_CLIENTS = 2
 
 from collections import OrderedDict
 from typing import Dict, List, Optional, Tuple
@@ -19,7 +19,7 @@ from typing import Dict, List, Optional, Tuple
 
 from transform import SimCLRTransform
 from model import SimCLR, NTXentLoss, SimCLRPredictor
-from dataset import load_data, global_batch, global_epoch
+from dataset import load_data, global_batch, num_iters
 
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -31,17 +31,19 @@ def train(net, trainloader, optimizer, criterion, epochs):
     for epoch in range(epochs):
         num_batches = len(trainloader)
         batch = 0
-        for (x_i, x_j), _ in trainloader:
+        for (x, x_i, x_j), _ in trainloader:
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
             optimizer.zero_grad()
             z_i = net(x_i)
             z_j = net(x_j)
             loss = criterion(z_i, z_j)
+            # print("training loss: ", loss)
+
             loss.backward()
             optimizer.step()
             batch += 1
 
-            if(batch == global_epoch):
+            if(batch == num_iters):
                 print("Exited at batch 10")
                 break
             
@@ -52,42 +54,53 @@ def train_predictor(base_encoder, trainloader, optimizer, criterion, epochs):
     
     for epoch in range(epochs):
         iter = 0
-        for images, labels in trainloader:
-            images, labels = images.to(DEVICE), labels.to(DEVICE)
+
+        for (x, x_i, x_j), labels in trainloader:
+
+            x, labels = x.to(DEVICE), labels.to(DEVICE)
+            
             optimizer.zero_grad()
-            outputs = simclr_predictor(images)
+            
+            outputs = simclr_predictor(x)
             loss = criterion(outputs, labels)
+            print("training loss: ", loss)
             loss.backward()
+            
             optimizer.step()
-            if iter == 10:
+            if iter == num_iters:
                 break
+    return simclr_predictor
                      
 
 def test(net, predictor, testloader, criterion):
     net.eval()
     loss_epoch = 0
     count = 0
+    
     with torch.no_grad():
-        for (x_i, x_j), label in testloader:
-            print(label)
-            x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
-            z_i = predictor(x_i)
-            z_j = predictor(x_j)
+        for (x, x_i, x_j), label in testloader:
+            x, x_i, x_j = x.to(DEVICE), x_i.to(DEVICE), x_j.to(DEVICE)
             
+            z_i = net(x_i)
+            z_j = net(x_j)
             loss = criterion(z_i, z_j)
+            
+            
+
+            
             loss_epoch += loss.item()
             count += 1
-            if count == global_epoch:
+            if count == num_iters:
                 print("Exited Test Loop")
                 break 
-    return loss_epoch / (count)
+    return loss_epoch / (count), -1
 
 
 
 trainloaders, valloaders, testloader, num_examples = load_data(NUM_CLIENTS)
 
 #batch size usually at 16
-criterion = NTXentLoss(batch_size=global_batch, temperature=0.5, device=DEVICE)
+NTXentLoss = NTXentLoss(batch_size=global_batch, temperature=0.5, device=DEVICE)
 
 
 class CifarClient(fl.client.NumPyClient):
@@ -111,26 +124,25 @@ class CifarClient(fl.client.NumPyClient):
     def fit(self, parameters, config):
         self.set_parameters(parameters)
         
-        train(self.simclr, self.trainloader, self.optimizer, criterion, epochs=1)
+        train(self.simclr, self.trainloader, self.optimizer, NTXentLoss, epochs=1)
         
-        print("NUMEXAMPLES: ", num_examples)
+        # print("Type: ", type(num_examples))
+        
         return self.get_parameters(config={}), num_examples[self.cid], {}
 
     def evaluate(self, parameters, config):
         self.set_parameters(parameters)
-        self.simclr_predictor = train_predictor(self.simclr, self.trainloader, self.optimizer, nn.CrossEntropyLoss, epochs=1)
-
-        # train_predictor(net)
-        loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, self.optimizer, nn.CrossEntropyLoss)
+        # self.simclr_predictor = train_predictor(self.simclr, self.trainloader, self.optimizer, nn.CrossEntropyLoss(reduction='mean'), epochs=1)
         
-        print("Loss: ", float(loss))
-        print("Accuracy: ", float(accuracy))
-        return float(loss), num_examples["testset"], {"accuracy": accuracy}
+        loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, NTXentLoss)
+        
+        print("Loss: ", float(loss), ', ', self.cid)
+    
+        # print("Accuracy: ", float(accuracy))
+        return float(loss), num_examples[self.cid], {"accuracy": accuracy}
 
 def client_fn(cid):
     clientID = int(cid)
-    print("CID: ", clientID)
-    print(clientID)
     simclr = SimCLR().to(DEVICE)
     trainloader = trainloaders[clientID]
     valloader = valloaders[clientID]

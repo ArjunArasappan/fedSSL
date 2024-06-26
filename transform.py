@@ -92,18 +92,27 @@ class SimCLRTransform:
             transforms.RandomApply([color_jitter], p=0.8),
             transforms.RandomGrayscale(p=0.2)
         ]
+        
+        self.no_augment = [transforms.RandomResizedCrop(size=size), transforms.ToTensor()]
+        
         if gaussian:
             self.base_transform.append(GaussianBlur(kernel_size=int(0.1 * size)))
+            
         self.base_transform.append(transforms.ToTensor())
 
     def __call__(self, x):
         if isinstance(x, PIL.Image.Image):
             transform_list = self.base_transform
+            original = self.no_augment
         else:
             transform_list = [transforms.ToPILImage()] + self.base_transform
+            no_augment =  [transforms.ToPILImage()] + self.no_augment 
         
         transform = transforms.Compose(transform_list)
-        return transform(x), transform(x)
+        no_augment = transforms.Compose(original)
+        
+        
+        return no_augment(x), transform(x), transform(x)
 
     def test_transform(self):
         return transforms.Compose([

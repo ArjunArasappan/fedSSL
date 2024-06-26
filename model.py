@@ -45,6 +45,9 @@ class MLP(nn.Module):
     def __init__(self, dim, projection_size, hidden_size=4096, num_layer=2):
         super().__init__()
         self.in_features = dim
+        self.out_features = projection_size
+        
+        
         if num_layer == 1:
             self.net = nn.Sequential(
                 nn.Linear(dim, projection_size),
