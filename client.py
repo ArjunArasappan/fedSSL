@@ -25,6 +25,9 @@ from dataset import load_data, global_batch, num_iters
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
+progress_interval = 0.1
+
+
 def train(net, trainloader, optimizer, criterion, epochs):
     net.train()
     
@@ -41,11 +44,12 @@ def train(net, trainloader, optimizer, criterion, epochs):
 
             loss.backward()
             optimizer.step()
-            batch += 1
 
-            if(batch == num_iters):
-                print("Exited at batch 10")
-                break
+
+            # if(batch % (progress_interval * num_batches) == 0):
+            print("Batch:", batch, "/", num_batches)
+                
+            batch += 1
             
 def train_predictor(base_encoder, trainloader, optimizer, criterion, epochs):
     simclr_predictor = SimCLRPredictor(base_encoder, tune_encoder = False, num_classes=10).to(DEVICE)
@@ -100,7 +104,7 @@ def test(net, predictor, testloader, criterion):
 trainloaders, valloaders, testloader, num_examples = load_data(NUM_CLIENTS)
 
 #batch size usually at 16
-NTXentLoss = NTXentLoss(batch_size=global_batch, temperature=0.5, device=DEVICE)
+ntxent = NTXentLoss(batch_size=global_batch, temperature=0.5, device=DEVICE)
 
 
 class CifarClient(fl.client.NumPyClient):
@@ -124,7 +128,7 @@ class CifarClient(fl.client.NumPyClient):
     def fit(self, parameters, config):
         self.set_parameters(parameters)
         
-        train(self.simclr, self.trainloader, self.optimizer, NTXentLoss, epochs=1)
+        train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
         
         # print("Type: ", type(num_examples))
         
@@ -134,7 +138,7 @@ class CifarClient(fl.client.NumPyClient):
         self.set_parameters(parameters)
         # self.simclr_predictor = train_predictor(self.simclr, self.trainloader, self.optimizer, nn.CrossEntropyLoss(reduction='mean'), epochs=1)
         
-        loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, NTXentLoss)
+        loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
         
         print("Loss: ", float(loss), ', ', self.cid)
     

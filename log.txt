@@ -1,0 +1,26 @@
+debug | INFO flwr 2024-06-26 02:53:17,849 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-26 02:53:19,775 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37992313652.0, 'node:__internal_head__': 1.0, 'object_store_memory': 18996156825.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+debug | INFO flwr 2024-06-26 02:53:19,775 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-26 02:53:19,775 | app.py:242 | No `client_resources` specified. Using minimal resources for clients.
+debug | INFO flwr 2024-06-26 02:53:19,775 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+debug | INFO flwr 2024-06-26 02:53:19,782 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 11 actors
+debug | INFO flwr 2024-06-26 02:53:19,782 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-26 02:53:19,782 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-26 02:53:22,591 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-26 02:53:22,591 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-26 02:53:22,591 | server.py:110 | 
+debug | INFO flwr 2024-06-26 02:53:22,591 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-26 02:53:22,591 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-26 02:54:17,567 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-26 02:54:19,486 | app.py:228 | Flower VCE: Ray initialized with resources: {'CPU': 11.0, 'node:172.17.0.2': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'memory': 37993033728.0, 'node:__internal_head__': 1.0, 'object_store_memory': 18996516864.0}
+debug | INFO flwr 2024-06-26 02:54:19,486 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-26 02:54:19,486 | app.py:242 | No `client_resources` specified. Using minimal resources for clients.
+debug | INFO flwr 2024-06-26 02:54:19,486 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+debug | INFO flwr 2024-06-26 02:54:19,496 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 11 actors
+debug | INFO flwr 2024-06-26 02:54:19,497 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-26 02:54:19,497 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-26 02:54:22,271 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-26 02:54:22,271 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-26 02:54:22,271 | server.py:110 | 
+debug | INFO flwr 2024-06-26 02:54:22,271 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-26 02:54:22,272 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)

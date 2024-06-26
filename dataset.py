@@ -7,8 +7,8 @@ from torch import Generator
 
 
     
-global_batch = 32
-num_iters = 10
+global_batch = 512
+num_iters = -1
 validation_split = 0.1
 #batch size usually at 512, num workers at 8
 
