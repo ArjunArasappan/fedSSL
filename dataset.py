@@ -9,7 +9,7 @@ from torch import Generator
     
 global_batch = 512
 num_iters = -1
-validation_split = 0.1
+validation_split = 0.0
 #batch size usually at 512, num workers at 8
 
 def load_data(num_clients, image_size=32, batch_size = global_batch, num_workers = 0):

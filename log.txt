@@ -24,3 +24,767 @@ debug | INFO flwr 2024-06-26 02:54:22,271 | server.py:94 | Evaluating initial gl
 debug | INFO flwr 2024-06-26 02:54:22,271 | server.py:110 | 
 debug | INFO flwr 2024-06-26 02:54:22,271 | server.py:111 | [ROUND 1]
 debug | INFO flwr 2024-06-26 02:54:22,272 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | ERROR flwr 2024-06-26 03:05:17,276 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 42, in train
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 912
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 912
+
+debug | ERROR flwr 2024-06-26 03:05:17,276 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 42, in train
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 912
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 912
+debug | ERROR flwr 2024-06-26 03:05:20,201 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 42, in train
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 912
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 912
+
+debug | ERROR flwr 2024-06-26 03:05:20,201 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 42, in train
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 912
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 912
+debug | INFO flwr 2024-06-26 03:05:20,201 | server.py:238 | aggregate_fit: received 0 results and 2 failures
+debug | INFO flwr 2024-06-26 03:05:20,201 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | ERROR flwr 2024-06-26 03:06:17,594 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 141, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 90, in test
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 64
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 64
+
+debug | ERROR flwr 2024-06-26 03:06:17,594 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 141, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 90, in test
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 64
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 64
+debug | ERROR flwr 2024-06-26 03:06:18,550 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 141, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 90, in test
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 64
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 64
+
+debug | ERROR flwr 2024-06-26 03:06:18,550 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 141, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 90, in test
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 64
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 64
+debug | INFO flwr 2024-06-26 03:06:18,550 | server.py:190 | aggregate_evaluate: received 0 results and 2 failures
+debug | INFO flwr 2024-06-26 03:06:18,550 | server.py:110 | 
+debug | INFO flwr 2024-06-26 03:06:18,550 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-06-26 03:06:18,550 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | ERROR flwr 2024-06-26 03:17:16,938 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 42, in train
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 912
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 912
+
+debug | ERROR flwr 2024-06-26 03:17:16,938 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 42, in train
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 912
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74117, ip=172.17.0.2, actor_id=4bfab70664aa3af2b82bbcef01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x787c941bdf60>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 912
+debug | ERROR flwr 2024-06-26 03:17:23,648 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 42, in train
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 912
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 912
+
+debug | ERROR flwr 2024-06-26 03:17:23,648 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 42, in train
+    loss = criterion(z_i, z_j)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 43, in forward
+    positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
+RuntimeError: shape '[1024, 1]' is invalid for input of size 912
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=74118, ip=172.17.0.2, actor_id=089550ca53278baf21ff51cc01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x734450365ea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: shape '[1024, 1]' is invalid for input of size 912
+debug | INFO flwr 2024-06-26 03:17:23,648 | server.py:238 | aggregate_fit: received 0 results and 2 failures
+debug | INFO flwr 2024-06-26 03:17:23,649 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-26 03:17:59,289 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-26 03:18:01,192 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 18994563072.0, 'memory': 37989126144.0, 'node:__internal_head__': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0}
+debug | INFO flwr 2024-06-26 03:18:01,193 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-26 03:18:01,193 | app.py:242 | No `client_resources` specified. Using minimal resources for clients.
+debug | INFO flwr 2024-06-26 03:18:01,193 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+debug | INFO flwr 2024-06-26 03:18:01,200 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 11 actors
+debug | INFO flwr 2024-06-26 03:18:01,200 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-26 03:18:01,200 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-26 03:18:04,009 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-26 03:18:04,009 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-26 03:18:04,009 | server.py:110 | 
+debug | INFO flwr 2024-06-26 03:18:04,009 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-26 03:18:04,009 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | ERROR flwr 2024-06-26 03:18:04,303 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=94155, ip=172.17.0.2, actor_id=a72ad0f95702ec2d60a806c601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7e6d2c6b9f30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 40, in train
+    z_i = net(x_i)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 90, in forward
+    e1 = self.encoder(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 285, in forward
+    return self._forward_impl(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 276, in _forward_impl
+    x = self.layer4(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 93, in forward
+    out = self.bn1(out)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 175, in forward
+    return F.batch_norm(
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 2507, in batch_norm
+    _verify_batch_size(input.size())
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 2475, in _verify_batch_size
+    raise ValueError(f"Expected more than 1 value per channel when training, got input size {size}")
+ValueError: Expected more than 1 value per channel when training, got input size torch.Size([1, 512, 1, 1])
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=94155, ip=172.17.0.2, actor_id=a72ad0f95702ec2d60a806c601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7e6d2c6b9f30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: Expected more than 1 value per channel when training, got input size torch.Size([1, 512, 1, 1])
+
+debug | ERROR flwr 2024-06-26 03:18:04,303 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=94155, ip=172.17.0.2, actor_id=a72ad0f95702ec2d60a806c601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7e6d2c6b9f30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 40, in train
+    z_i = net(x_i)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 90, in forward
+    e1 = self.encoder(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 285, in forward
+    return self._forward_impl(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 276, in _forward_impl
+    x = self.layer4(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 93, in forward
+    out = self.bn1(out)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 175, in forward
+    return F.batch_norm(
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 2507, in batch_norm
+    _verify_batch_size(input.size())
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 2475, in _verify_batch_size
+    raise ValueError(f"Expected more than 1 value per channel when training, got input size {size}")
+ValueError: Expected more than 1 value per channel when training, got input size torch.Size([1, 512, 1, 1])
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=94155, ip=172.17.0.2, actor_id=a72ad0f95702ec2d60a806c601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7e6d2c6b9f30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: Expected more than 1 value per channel when training, got input size torch.Size([1, 512, 1, 1])
+debug | ERROR flwr 2024-06-26 03:18:06,365 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=94154, ip=172.17.0.2, actor_id=1fdc6c4b9b5fbed78025619401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x79ba006c5f30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 40, in train
+    z_i = net(x_i)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 90, in forward
+    e1 = self.encoder(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 285, in forward
+    return self._forward_impl(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 276, in _forward_impl
+    x = self.layer4(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 93, in forward
+    out = self.bn1(out)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 175, in forward
+    return F.batch_norm(
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 2507, in batch_norm
+    _verify_batch_size(input.size())
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 2475, in _verify_batch_size
+    raise ValueError(f"Expected more than 1 value per channel when training, got input size {size}")
+ValueError: Expected more than 1 value per channel when training, got input size torch.Size([1, 512, 1, 1])
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=94154, ip=172.17.0.2, actor_id=1fdc6c4b9b5fbed78025619401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x79ba006c5f30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: Expected more than 1 value per channel when training, got input size torch.Size([1, 512, 1, 1])
+
+debug | ERROR flwr 2024-06-26 03:18:06,365 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=94154, ip=172.17.0.2, actor_id=1fdc6c4b9b5fbed78025619401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x79ba006c5f30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 130, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 131, in fit
+    train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+  File "/root/src/fedSSL/client.py", line 40, in train
+    z_i = net(x_i)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/src/fedSSL/model.py", line 90, in forward
+    e1 = self.encoder(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 285, in forward
+    return self._forward_impl(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 276, in _forward_impl
+    x = self.layer4(x)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torchvision/models/resnet.py", line 93, in forward
+    out = self.bn1(out)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 175, in forward
+    return F.batch_norm(
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 2507, in batch_norm
+    _verify_batch_size(input.size())
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 2475, in _verify_batch_size
+    raise ValueError(f"Expected more than 1 value per channel when training, got input size {size}")
+ValueError: Expected more than 1 value per channel when training, got input size torch.Size([1, 512, 1, 1])
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=94154, ip=172.17.0.2, actor_id=1fdc6c4b9b5fbed78025619401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x79ba006c5f30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: Expected more than 1 value per channel when training, got input size torch.Size([1, 512, 1, 1])
+debug | INFO flwr 2024-06-26 03:18:06,365 | server.py:238 | aggregate_fit: received 0 results and 2 failures
+debug | INFO flwr 2024-06-26 03:18:06,366 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-26 03:19:13,453 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-26 03:19:15,377 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37786823886.0, 'object_store_memory': 18893411942.0, 'node:__internal_head__': 1.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-06-26 03:19:15,377 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-26 03:19:15,377 | app.py:242 | No `client_resources` specified. Using minimal resources for clients.
+debug | INFO flwr 2024-06-26 03:19:15,378 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+debug | INFO flwr 2024-06-26 03:19:15,384 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 11 actors
+debug | INFO flwr 2024-06-26 03:19:15,385 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-26 03:19:15,385 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-26 03:19:18,182 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-26 03:19:18,182 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-26 03:19:18,182 | server.py:110 | 
+debug | INFO flwr 2024-06-26 03:19:18,182 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-26 03:19:18,183 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)

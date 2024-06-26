@@ -37,7 +37,7 @@ class NTXentLoss(nn.Module):
         sim_i_j = torch.diag(sim, self.batch_size)
         sim_j_i = torch.diag(sim, -self.batch_size)
         
-        print(f"z_i: {z_i.shape}, z_j: {z_j.shape}, sim_ij: {sim_i_j.shape}, sim_ji: {sim_j_i.shape}")
+        print(f"z_i: {z_i.shape}, z_j: {z_j.shape}, sim_ij: {sim_i_j.shape}, sim_ji: {sim_j_i.shape}, n: {N}")
 
         
         positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
