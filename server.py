@@ -4,31 +4,37 @@ from flwr.server.strategy import FedAvg
 import torch
 
 from client import predictorloader, testloader, DEVICE
-from dataset import num_classes
+from dataset import NUM_CLASSES
+from model import SimCLRPredictor
+import torch.nn as nn
+import numpy as np
+import torch
 
-strategy = fl.server.strategy.FedAvg()
+from flwr.common import NDArrays, Scalar
+
+from typing import Dict, Optional, Tuple
+
+
 
 fl.common.logger.configure(identifier="debug", filename="log.txt")
-
-def train_predictor(model, trainloaders, optimizer, criterion, epochs):    
 
     
 class global_predictor:
     
-    def __init__(self, tune_encoder, trainloader, testloader):
+    def __init__(self, tune_encoder, trainloader, testloader, useResnet18 = True):
         
-        self.simclr_predictor = SimCLRPredictor(DEVICE, useResnet18 = True, tune_encoder = tune_encoder, num_classes=NUM_CLASSES).to(DEVICE)
+        self.simclr_predictor = SimCLRPredictor(NUM_CLASSES, DEVICE, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(DEVICE)
         
         self.trainloader = trainloader
         self.testloader = testloader
         
         self.epochs = 1
-        self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
+        self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
         
     def get_evaluate_fn(self):
         
-        def evaluate(server_round: int, parameters: NDArrays, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
+        def evaluate(server_round: int, parameters, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
             self.update_encoder(parameters)
             
             self.fine_tune_predictor()
@@ -58,6 +64,8 @@ class global_predictor:
                 loss.backward()
                 self.optimizer.step()
                 
+                batch += 1
+                
                 print("Predictor Train Batch:", batch, "/", num_batches)
                 
     def evaluate(self):
@@ -76,10 +84,13 @@ class global_predictor:
                     x, labels = x.to(DEVICE), labels.to(DEVICE)
                     
                     logits = self.simclr_predictor(x)
-                    predicted = torch.max(output, 1)  
+                    predicted = torch.max(logits, 1)  
                     
-                    total += labels.shape(0)
+                    total += labels.size(0)
+                    
                     correct += (predicted == labels).sum().item()
+                    
+                    batch += 1
                     
                     print("Predictor Test Batch:", batch, "/", num_batches)
             
@@ -93,7 +104,11 @@ class global_predictor:
         self.simclr_predictor.set_encoder_parameters(weights)
 
 
-gb_pred = global_predictor(tune_encoder = False, predictorloader, testloader)
+gb_pred = global_predictor(False, predictorloader, testloader, useResnet18 = True)
+
+strategy = fl.server.strategy.FedAvg(
+    evaluate_fn = gb_pred.get_evaluate_fn(),
+)
 
 if __name__ == "__main__":
     print("Cuda?:", torch.cuda.is_available())
@@ -113,6 +128,5 @@ if __name__ == "__main__":
         num_clients=NUM_CLIENTS,
         config=fl.server.ServerConfig(num_rounds=3),
         client_resources=client_resources,
-        evaluate_fn = gb_pred.get_evaluate_fn()
         strategy=strategy
     )

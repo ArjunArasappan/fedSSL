@@ -76,12 +76,18 @@ class SimCLR(nn.Module):
         
         if useResnet18:
             self.encoder = resnet18(weights=ResNet18_Weights.IMAGENET1K_V1).to(device)
+            print("Using ResNet 18 Encoder")
         else:
             self.encoder = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1).to(device)
+            print("Using ResNet 50 Encoder")
+
 
         self.encoded_size = self.encoder.fc.in_features
-
         self.encoder.fc = nn.Identity()
+        
+        self.projected_size = projection_size
+
+
                 
         self.proj_head = None
         
@@ -105,25 +111,29 @@ class SimCLR(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         e1 = self.encoder(x)
-        if not self.isInference:
-            return self.proj_head(e1)
-        return e1
+        if self.isInference:
+            return e1
+        return self.proj_head(e1)
 
    
     
 class SimCLRPredictor(nn.Module):
-    def __init__(self, num_classes, device, tune_encoder = False):
+    def __init__(self, num_classes, device, useResnet18 = True, tune_encoder = False):
         super(SimCLRPredictor, self).__init__()
         
-        self.simclr = SimCLR(device, useResnet18 = True).to(device)
-        self.linear_predictor = nn.Linear(self.simclr.proj_head.out_features, num_classes)
+        self.simclr = SimCLR(device, useResnet18 = useResnet18).to(device)
+        self.linear_predictor = nn.Linear(self.simclr.encoded_size, num_classes)
         
         if not tune_encoder:
             for param in self.simclr.parameters():
                 param.requires_grad = False
                 
-    def set_encoder_parameters(weights):
-        self.simclr.set_weights(weights)
+    def set_encoder_parameters(self, weights):
+        
+        params_dict = zip(self.simclr.state_dict().keys(), weights)
+        state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+        
+        self.simclr.load_state_dict(state_dict, strict=True)
 
     def forward(self, x):
         self.simclr.setInference(True)

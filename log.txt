@@ -21609,3 +21609,254 @@ debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:498 | 		round 1: 5.9713676
 debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:498 | 		round 2: 5.859543812274933
 debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:498 | 		round 3: 5.822723925113678
 debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:499 | 
+debug | INFO flwr 2024-06-27 22:18:07,092 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:18:08,972 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 18992866099.0, 'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'memory': 37985732199.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0}
+debug | INFO flwr 2024-06-27 22:18:08,972 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:18:08,972 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:18:08,977 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:18:08,977 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:18:08,977 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:18:11,577 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:18:11,578 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:18:11,601 | app.py:328 | SimCLRPredictor.set_encoder_parameters() takes 1 positional argument but 2 were given
+debug | ERROR flwr 2024-06-27 22:18:11,601 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 38, in evaluate
+    self.update_encoder(parameters)
+  File "/root/src/fedSSL/server.py", line 99, in update_encoder
+    self.simclr_predictor.set_encoder_parameters(weights)
+TypeError: SimCLRPredictor.set_encoder_parameters() takes 1 positional argument but 2 were given
+
+debug | ERROR flwr 2024-06-27 22:18:11,601 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:18:35,058 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:18:36,970 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37986368718.0, 'node:__internal_head__': 1.0, 'object_store_memory': 18993184358.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+debug | INFO flwr 2024-06-27 22:18:36,970 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:18:36,970 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:18:36,975 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:18:36,975 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:18:36,975 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:18:39,548 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:18:39,548 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:18:39,571 | app.py:328 | 'SimCLR' object has no attribute 'set_weights'
+debug | ERROR flwr 2024-06-27 22:18:39,572 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 38, in evaluate
+    self.update_encoder(parameters)
+  File "/root/src/fedSSL/server.py", line 99, in update_encoder
+    self.simclr_predictor.set_encoder_parameters(weights)
+  File "/root/src/fedSSL/model.py", line 132, in set_encoder_parameters
+    self.simclr.set_weights(weights)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1709, in __getattr__
+    raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+AttributeError: 'SimCLR' object has no attribute 'set_weights'
+
+debug | ERROR flwr 2024-06-27 22:18:39,572 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:19:45,601 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:19:47,540 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 18993455923.0, 'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'memory': 37986911847.0}
+debug | INFO flwr 2024-06-27 22:19:47,540 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:19:47,540 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:19:47,545 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:19:47,545 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:19:47,545 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:19:50,152 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:19:50,152 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:19:50,176 | app.py:328 | name 'parameters' is not defined
+debug | ERROR flwr 2024-06-27 22:19:50,177 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 38, in evaluate
+    self.update_encoder(parameters)
+  File "/root/src/fedSSL/server.py", line 99, in update_encoder
+    self.simclr_predictor.set_encoder_parameters(weights)
+  File "/root/src/fedSSL/model.py", line 133, in set_encoder_parameters
+    params_dict = zip(self.simclr.state_dict().keys(), parameters)
+NameError: name 'parameters' is not defined
+
+debug | ERROR flwr 2024-06-27 22:19:50,177 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:20:02,149 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:20:04,062 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 19011311616.0, 'node:__internal_head__': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'memory': 38022623232.0}
+debug | INFO flwr 2024-06-27 22:20:04,062 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:20:04,062 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:20:04,067 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:20:04,067 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:20:04,067 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:20:06,622 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:20:06,622 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:20:49,290 | app.py:328 | name 'output' is not defined
+debug | ERROR flwr 2024-06-27 22:20:49,290 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 41, in evaluate
+    accuracy = self.evaluate()
+  File "/root/src/fedSSL/server.py", line 85, in evaluate
+    predicted = torch.max(output, 1)
+NameError: name 'output' is not defined
+
+debug | ERROR flwr 2024-06-27 22:20:49,290 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:21:05,697 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:21:07,596 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37987302606.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'object_store_memory': 18993651302.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:__internal_head__': 1.0}
+debug | INFO flwr 2024-06-27 22:21:07,596 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:21:07,596 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:21:07,601 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:21:07,601 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:21:07,601 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:21:10,170 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:21:10,170 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:21:52,467 | app.py:328 | name 'outputs' is not defined
+debug | ERROR flwr 2024-06-27 22:21:52,468 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 41, in evaluate
+    accuracy = self.evaluate()
+  File "/root/src/fedSSL/server.py", line 87, in evaluate
+    predicted = torch.max(outputs, 1)
+NameError: name 'outputs' is not defined
+
+debug | ERROR flwr 2024-06-27 22:21:52,468 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:22:45,166 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:22:47,082 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37986398208.0, 'object_store_memory': 18993199104.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'node:__internal_head__': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-06-27 22:22:47,082 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:22:47,082 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:22:47,087 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:22:47,087 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:22:47,087 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:22:49,653 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:22:49,653 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:23:32,194 | app.py:328 | 'torch.Size' object is not callable
+debug | ERROR flwr 2024-06-27 22:23:32,194 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 41, in evaluate
+    accuracy = self.evaluate()
+  File "/root/src/fedSSL/server.py", line 89, in evaluate
+    total += labels.shape(0)
+TypeError: 'torch.Size' object is not callable
+
+debug | ERROR flwr 2024-06-27 22:23:32,194 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:26:45,707 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:26:47,608 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37985461863.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'node:__internal_head__': 1.0, 'object_store_memory': 18992730931.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-06-27 22:26:47,608 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:26:47,608 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:26:47,613 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:26:47,613 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:26:47,613 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:26:50,219 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:26:50,219 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:27:32,770 | app.py:328 | 'bool' object has no attribute 'sum'
+debug | ERROR flwr 2024-06-27 22:27:32,770 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 41, in evaluate
+    accuracy = self.evaluate()
+  File "/root/src/fedSSL/server.py", line 90, in evaluate
+    correct += (predicted == labels).sum().item()
+AttributeError: 'bool' object has no attribute 'sum'
+
+debug | ERROR flwr 2024-06-27 22:27:32,770 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.

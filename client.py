@@ -7,7 +7,7 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10
 from torchvision.models import resnet18, ResNet18_Weights
-from torch.utils.data import Dataset, 
+from torch.utils.data import Dataset
 
 
 
