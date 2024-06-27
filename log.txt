@@ -21572,3 +21572,40 @@ debug | INFO flwr 2024-06-26 18:48:28,934 | server.py:498 | 		round 1: 5.9858951
 debug | INFO flwr 2024-06-26 18:48:28,934 | server.py:498 | 		round 2: 5.86846284866333
 debug | INFO flwr 2024-06-26 18:48:28,934 | server.py:498 | 		round 3: 5.820194244384766
 debug | INFO flwr 2024-06-26 18:48:28,934 | server.py:499 | 
+debug | INFO flwr 2024-06-27 20:11:05,683 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 20:11:07,584 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37980055143.0, 'object_store_memory': 18990027571.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'node:__internal_head__': 1.0}
+debug | INFO flwr 2024-06-27 20:11:07,584 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 20:11:07,584 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 20:11:07,589 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 20:11:07,589 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 20:11:07,589 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 20:11:10,213 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 20:11:10,213 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-27 20:11:10,213 | server.py:110 | 
+debug | INFO flwr 2024-06-27 20:11:10,213 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-27 20:11:10,213 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 20:11:56,855 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 20:11:56,956 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 20:11:56,957 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 20:12:15,452 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 20:12:15,452 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 20:12:15,452 | server.py:110 | 
+debug | INFO flwr 2024-06-27 20:12:15,452 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-06-27 20:12:15,452 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 20:13:01,816 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 20:13:01,913 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 20:13:20,419 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 20:13:20,419 | server.py:110 | 
+debug | INFO flwr 2024-06-27 20:13:20,419 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-06-27 20:13:20,419 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 20:14:06,320 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 20:14:06,390 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 20:14:24,712 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:494 | 
+debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:496 | Run finished 3 round(s) in 194.50s
+debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:498 | 		round 1: 5.971367681026459
+debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:498 | 		round 2: 5.859543812274933
+debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:498 | 		round 3: 5.822723925113678
+debug | INFO flwr 2024-06-27 20:14:24,714 | server.py:499 | 

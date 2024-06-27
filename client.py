@@ -7,7 +7,7 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10
 from torchvision.models import resnet18, ResNet18_Weights
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, 
 
 
 
@@ -16,7 +16,7 @@ from typing import Dict, List, Optional, Tuple
 
 from transform import SimCLRTransform
 from model import SimCLR, NTXentLoss, SimCLRPredictor
-from dataset import load_data, global_batch, num_iters
+from dataset import load_data, global_batch, num_iters, NUM_CLASSES
 
 NUM_CLIENTS = 2
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -44,34 +44,10 @@ def train(net, trainloader, optimizer, criterion, epochs):
 
 
             # if(batch % (progress_interval * num_batches) == 0):
-            print("Batch:", batch, "/", num_batches)
+            print("Client Train Batch:", batch, "/", num_batches)
                 
             batch += 1
-            
-def train_predictor(base_encoder, trainloader, optimizer, criterion, epochs):
-    simclr_predictor = SimCLRPredictor(base_encoder, tune_encoder = False, num_classes=10).to(DEVICE)
-    
-    simclr_predictor.train()
-    
-    for epoch in range(epochs):
-        iter = 0
-
-        for (x, x_i, x_j), labels in trainloader:
-
-            x, labels = x.to(DEVICE), labels.to(DEVICE)
-            
-            optimizer.zero_grad()
-            
-            outputs = simclr_predictor(x)
-            loss = criterion(outputs, labels)
-            # print("training loss: ", loss)
-            loss.backward()
-            
-            optimizer.step()
-            if iter == num_iters:
-                break
-    return simclr_predictor
-                     
+                 
 
 def test(net, predictor, testloader, criterion):
     net.eval()
@@ -98,7 +74,7 @@ def test(net, predictor, testloader, criterion):
 
 
 
-trainloaders, valloaders, testloader, num_examples = load_data(NUM_CLIENTS)
+trainloaders, valloaders, testloader, predictorloader, num_examples = load_data(NUM_CLIENTS)
 
 #batch size usually at 16
 ntxent = NTXentLoss(batch_size=global_batch, temperature=0.5, device=DEVICE)
@@ -108,7 +84,7 @@ class CifarClient(fl.client.NumPyClient):
     def __init__(self, cid, simclr, trainloader, valloader):
         self.cid = cid
         self.simclr = simclr
-        self.optimizer = optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
+        self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
         self.simclr_predictor = None
         self.trainloader = trainloader
         self.valloader = valloader
@@ -144,7 +120,7 @@ class CifarClient(fl.client.NumPyClient):
 
 def client_fn(cid):
     clientID = int(cid)
-    simclr = SimCLR(DEVICE).to(DEVICE)
+    simclr = SimCLR(DEVICE, useResnet18=True).to(DEVICE)
     trainloader = trainloaders[clientID]
     valloader = valloaders[clientID]
     return CifarClient(clientID, simclr, trainloader, valloader).to_client()
