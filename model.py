@@ -10,42 +10,40 @@ from torchvision.models import resnet18, ResNet18_Weights
 from flwr.common.logger import log
 from logging import INFO, DEBUG
 
+from dataset import global_batch
+
+
 
 class NTXentLoss(nn.Module):
-    def __init__(self, batch_size, temperature, device):
+    def __init__(self, batch_size, temperature=0.5, device='cuda'):
         super(NTXentLoss, self).__init__()
-        self.batch_size = batch_size
         self.temperature = temperature
         self.device = device
-        self.mask = self.mask_correlated_samples(batch_size)
-        self.criterion = nn.CrossEntropyLoss(reduction="sum")
-        self.similarity_f = nn.CosineSimilarity(dim=2)
-
-    def mask_correlated_samples(self, batch_size):
-        N = 2 * batch_size
-        mask = torch.ones((N, N), dtype=bool)
-        mask = mask.fill_diagonal_(0)
-        for i in range(batch_size):
-            mask[i, batch_size + i] = 0
-            mask[batch_size + i, i] = 0
-        return mask
+        self.batch_size = None
+        self.criterion = nn.CrossEntropyLoss(reduction="mean",)
 
     def forward(self, z_i, z_j):
-        N = 2 * self.batch_size
-        z = torch.cat((z_i, z_j), dim=0)
-        sim = self.similarity_f(z.unsqueeze(1), z.unsqueeze(0)) / self.temperature
-        sim_i_j = torch.diag(sim, self.batch_size)
-        sim_j_i = torch.diag(sim, -self.batch_size)
-        
-        print(f"z_i: {z_i.shape}, z_j: {z_j.shape}, sim_ij: {sim_i_j.shape}, sim_ji: {sim_j_i.shape}, n: {N}")
 
+        self.batch_size = z_i.size(0)
+        feature_dim = z_i.size(1)
         
-        positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
-        negatives = sim[self.mask].view(N, -1)
-        labels = torch.zeros(N).to(self.device).long()
-        logits = torch.cat((positives, negatives), dim=1)
-        loss = self.criterion(logits, labels)
-        loss /= N
+        z_i = F.normalize(z_i)
+        z_j = F.normalize(z_j)
+        
+        z = torch.cat((z_i, z_j), dim=0)  
+
+        sim_matrix = torch.matmul(z, z.T) / self.temperature
+        sim_matrix.fill_diagonal_(-float('inf'))
+
+        labels = torch.arange(self.batch_size, 2 * self.batch_size, device=self.device)
+        labels = torch.cat((labels, labels - self.batch_size))  
+
+        loss = self.criterion(sim_matrix, labels)
+        return loss
+
+
+        loss = self.criterion(sim_matrix, labels) #ignores zero index which 
+        
         return loss
 
 class MLP(nn.Module):
@@ -73,14 +71,31 @@ class MLP(nn.Module):
         return self.net(x)
 
 class SimCLR(nn.Module):
-    def __init__(self, encoder=resnet18, image_size=32, projection_size=2048, projection_hidden_size=4096) -> None:
+    def __init__(self, device, encoder=resnet18, image_size=32, projection_size=2048, projection_hidden_size=4096, num_layer = 2) -> None:
         super(SimCLR, self).__init__()
         super(SimCLR, self).__init__()
-        self.encoder = encoder(weights=ResNet18_Weights.IMAGENET1K_V1)
+        self.encoder = encoder(weights=ResNet18_Weights.IMAGENET1K_V1).to(device)
         self.encoded_size = self.encoder.fc.in_features
 
         self.encoder.fc = nn.Identity()
-        self.proj_head = MLP(self.encoded_size, projection_size, projection_hidden_size)
+        
+        # self.proj_head = MLP(self.encoded_size, projection_size, projection_hidden_size).to(device)
+        
+        self.proj_head = None
+        
+        if num_layer == 1:
+            self.proj_head = nn.Sequential(
+                nn.Linear(self.encoded_size, projection_size),
+            )
+        elif num_layer == 2:
+            self.proj_head = nn.Sequential(
+                nn.Linear(self.encoded_size, projection_hidden_size),
+                nn.BatchNorm1d(projection_hidden_size),
+                nn.ReLU(inplace=True),
+                nn.Linear(projection_hidden_size, projection_size),
+            )
+        
+        
         self.isInference = False
         
     def setInference(self, isInference):
@@ -88,9 +103,11 @@ class SimCLR(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         e1 = self.encoder(x)
-        if self.isInference:
+        if not self.isInference:
             return self.proj_head(e1)
         return e1
+
+   
     
 class SimCLRPredictor(nn.Module):
     def __init__(self, simclr_model, num_classes, tune_encoder = False):

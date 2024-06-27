@@ -9,19 +9,16 @@ from torchvision.datasets import CIFAR10
 from torchvision.models import resnet18, ResNet18_Weights
 from torch.utils.data import Dataset
 
-NUM_CLIENTS = 2
+
 
 from collections import OrderedDict
 from typing import Dict, List, Optional, Tuple
-
-
-
 
 from transform import SimCLRTransform
 from model import SimCLR, NTXentLoss, SimCLRPredictor
 from dataset import load_data, global_batch, num_iters
 
-
+NUM_CLIENTS = 2
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
@@ -68,7 +65,7 @@ def train_predictor(base_encoder, trainloader, optimizer, criterion, epochs):
             
             outputs = simclr_predictor(x)
             loss = criterion(outputs, labels)
-            print("training loss: ", loss)
+            # print("training loss: ", loss)
             loss.backward()
             
             optimizer.step()
@@ -148,7 +145,7 @@ class CifarClient(fl.client.NumPyClient):
 
 def client_fn(cid):
     clientID = int(cid)
-    simclr = SimCLR().to(DEVICE)
+    simclr = SimCLR(DEVICE).to(DEVICE)
     trainloader = trainloaders[clientID]
     valloader = valloaders[clientID]
     return CifarClient(clientID, simclr, trainloader, valloader).to_client()

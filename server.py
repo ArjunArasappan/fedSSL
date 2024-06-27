@@ -14,10 +14,17 @@ if __name__ == "__main__":
     
     print(torch.__version__)
     print(torch.version.cuda)
+    
+    client_resources = {
+        "num_cpus": 8,
+        "num_gpus": 1.0,
+    }
+
 
     fl.simulation.start_simulation(
         client_fn=client_fn,
         num_clients=NUM_CLIENTS,
         config=fl.server.ServerConfig(num_rounds=3),
+        client_resources=client_resources,
         strategy=strategy
     )
