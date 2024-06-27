@@ -34,8 +34,9 @@ def train(net, trainloader, optimizer, criterion, epochs):
         for (x, x_i, x_j), _ in trainloader:
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
             optimizer.zero_grad()
-            z_i = net(x_i)
-            z_j = net(x_j)
+            # z_i = net(x_i)
+            # z_j = net(x_j)
+            
             loss = criterion(z_i, z_j)
             # print("training loss: ", loss)
 
