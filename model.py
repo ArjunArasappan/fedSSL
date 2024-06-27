@@ -121,6 +121,8 @@ class SimCLRPredictor(nn.Module):
     def __init__(self, num_classes, device, useResnet18 = True, tune_encoder = False):
         super(SimCLRPredictor, self).__init__()
         
+        print("New Predictor Created!")
+        
         self.simclr = SimCLR(device, useResnet18 = useResnet18).to(device)
         self.linear_predictor = nn.Linear(self.simclr.encoded_size, num_classes)
         

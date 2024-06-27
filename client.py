@@ -22,7 +22,10 @@ NUM_CLIENTS = 2
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-progress_interval = 0.1
+
+
+batch_break = -1
+print_interval = 0.2
 
 
 def train(net, trainloader, optimizer, criterion, epochs):
@@ -31,6 +34,7 @@ def train(net, trainloader, optimizer, criterion, epochs):
     for epoch in range(epochs):
         num_batches = len(trainloader)
         batch = 0
+        
         for (x, x_i, x_j), _ in trainloader:
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
             optimizer.zero_grad()
@@ -43,16 +47,21 @@ def train(net, trainloader, optimizer, criterion, epochs):
             optimizer.step()
 
 
-            # if(batch % (progress_interval * num_batches) == 0):
+            # if(batch % (print_interval * num_batches) == 0):
             print("Client Train Batch:", batch, "/", num_batches)
-                
+            
+            if batch == batch_break:
+                print("Exited Test Loop")
+                break 
+            
             batch += 1
                  
 
 def test(net, predictor, testloader, criterion):
     net.eval()
     loss_epoch = 0
-    count = 0
+    batch = 0
+    num_batches = len(testloader)
     
     with torch.no_grad():
         for (x, x_i, x_j), label in testloader:
@@ -62,15 +71,17 @@ def test(net, predictor, testloader, criterion):
             z_j = net(x_j)
             loss = criterion(z_i, z_j)
             
-            
-
-            
             loss_epoch += loss.item()
-            count += 1
-            if count == num_iters:
+            
+            # if(batch % (print_interval * num_batches) == 0):
+            print("Client Train Batch:", batch, "/", num_batches)
+                
+            if batch == batch_break:
                 print("Exited Test Loop")
                 break 
-    return loss_epoch / (count), -1
+            
+            batch += 1
+    return loss_epoch / (batch), -1
 
 
 

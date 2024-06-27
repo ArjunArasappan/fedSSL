@@ -21860,3 +21860,745 @@ debug | ERROR flwr 2024-06-27 22:27:32,770 | app.py:330 | Your simulation crashe
 		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
 		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
 Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:30:00,315 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:30:02,244 | app.py:228 | Flower VCE: Ray initialized with resources: {'CPU': 11.0, 'node:172.17.0.2': 1.0, 'memory': 37984016795.0, 'object_store_memory': 18992008396.0, 'node:__internal_head__': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-06-27 22:30:02,244 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:30:02,244 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:30:02,249 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:30:02,249 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:30:02,249 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:30:04,859 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:30:04,859 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:30:55,037 | app.py:328 | 'bool' object has no attribute 'sum'
+debug | ERROR flwr 2024-06-27 22:30:55,037 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 41, in evaluate
+    accuracy = self.evaluate()
+  File "/root/src/fedSSL/server.py", line 91, in evaluate
+    correct += (predicted == labels).sum().item()
+AttributeError: 'bool' object has no attribute 'sum'
+
+debug | ERROR flwr 2024-06-27 22:30:55,037 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:31:16,411 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:31:18,299 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 38018418279.0, 'node:__internal_head__': 1.0, 'object_store_memory': 19009209139.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+debug | INFO flwr 2024-06-27 22:31:18,299 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:31:18,299 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:31:18,304 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:31:18,304 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:31:18,304 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:31:20,857 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:31:20,857 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:31:22,682 | app.py:328 | 'bool' object has no attribute 'sum'
+debug | ERROR flwr 2024-06-27 22:31:22,682 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 41, in evaluate
+    accuracy = self.evaluate()
+  File "/root/src/fedSSL/server.py", line 97, in evaluate
+    correct += (predicted == labels).sum().item()
+AttributeError: 'bool' object has no attribute 'sum'
+
+debug | ERROR flwr 2024-06-27 22:31:22,682 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:32:02,625 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:32:04,524 | app.py:228 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'memory': 37981394535.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'object_store_memory': 18990697267.0}
+debug | INFO flwr 2024-06-27 22:32:04,524 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:32:04,524 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:32:04,529 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:32:04,529 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:32:04,529 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:32:07,107 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:32:07,107 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:32:07,488 | app.py:328 | 'torch.return_types.max' object has no attribute 'shape'
+debug | ERROR flwr 2024-06-27 22:32:07,489 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 41, in evaluate
+    accuracy = self.evaluate()
+  File "/root/src/fedSSL/server.py", line 98, in evaluate
+    print(predicted.shape)
+AttributeError: 'torch.return_types.max' object has no attribute 'shape'
+
+debug | ERROR flwr 2024-06-27 22:32:07,489 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:32:35,436 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:32:37,320 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37981613262.0, 'node:__internal_head__': 1.0, 'object_store_memory': 18990806630.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+debug | INFO flwr 2024-06-27 22:32:37,320 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:32:37,320 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:32:37,325 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:32:37,325 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:32:37,325 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:32:39,915 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:32:39,915 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:32:40,472 | app.py:328 | not enough values to unpack (expected 2, got 1)
+debug | ERROR flwr 2024-06-27 22:32:40,472 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 170, in evaluate
+    loss, metrics = eval_res
+ValueError: not enough values to unpack (expected 2, got 1)
+
+debug | ERROR flwr 2024-06-27 22:32:40,472 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:33:01,409 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:33:03,303 | app.py:228 | Flower VCE: Ray initialized with resources: {'node:172.17.0.2': 1.0, 'CPU': 11.0, 'memory': 37981485467.0, 'object_store_memory': 18990742732.0, 'node:__internal_head__': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-06-27 22:33:03,303 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:33:03,303 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:33:03,308 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:33:03,309 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:33:03,309 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:33:05,917 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:33:05,917 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-27 22:33:06,466 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': 0.056818181818181816}
+debug | INFO flwr 2024-06-27 22:33:06,466 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:33:06,466 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-27 22:33:06,466 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:34:25,980 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 22:34:26,074 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 22:34:26,457 | server.py:129 | fit progress: (1, -1, {'accuracy': 0.125}, 79.99125635798555)
+debug | INFO flwr 2024-06-27 22:34:26,457 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:34:49,243 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 22:34:49,243 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 22:34:49,243 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:34:49,243 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-06-27 22:34:49,243 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:36:40,481 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:36:42,388 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37799251968.0, 'node:__internal_head__': 1.0, 'object_store_memory': 18899625984.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0}
+debug | INFO flwr 2024-06-27 22:36:42,388 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:36:42,388 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:36:42,393 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:36:42,393 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:36:42,393 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:36:44,964 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:36:44,964 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-27 22:36:54,658 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': 0.09197443181818182}
+debug | INFO flwr 2024-06-27 22:36:54,659 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:36:54,659 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-27 22:36:54,659 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:37:05,889 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 22:37:05,966 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 22:37:15,514 | server.py:129 | fit progress: (1, -1, {'accuracy': 0.1807528409090909}, 20.855830161017366)
+debug | INFO flwr 2024-06-27 22:37:15,515 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | ERROR flwr 2024-06-27 22:37:16,294 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 118, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 72, in test
+    count += 1
+UnboundLocalError: local variable 'count' referenced before assignment
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: local variable 'count' referenced before assignment
+
+debug | ERROR flwr 2024-06-27 22:37:16,294 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 118, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 72, in test
+    count += 1
+UnboundLocalError: local variable 'count' referenced before assignment
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: local variable 'count' referenced before assignment
+debug | ERROR flwr 2024-06-27 22:37:16,924 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 118, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 72, in test
+    count += 1
+UnboundLocalError: local variable 'count' referenced before assignment
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: local variable 'count' referenced before assignment
+
+debug | ERROR flwr 2024-06-27 22:37:16,924 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 118, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 72, in test
+    count += 1
+UnboundLocalError: local variable 'count' referenced before assignment
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: local variable 'count' referenced before assignment
+debug | INFO flwr 2024-06-27 22:37:16,924 | server.py:190 | aggregate_evaluate: received 0 results and 2 failures
+debug | INFO flwr 2024-06-27 22:37:16,924 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:37:16,924 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-06-27 22:37:16,924 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:37:27,713 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:37:37,301 | server.py:129 | fit progress: (2, -1, {'accuracy': 0.3016690340909091}, 42.64205834304448)
+debug | INFO flwr 2024-06-27 22:37:37,301 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | ERROR flwr 2024-06-27 22:37:38,036 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 118, in evaluate
+    # self.simclr_predictor = train_predictor(self.simclr, self.trainloader, self.optimizer, nn.CrossEntropyLoss(reduction='mean'), epochs=1)
+  File "/root/src/fedSSL/client.py", line 72, in test
+UnboundLocalError: local variable 'count' referenced before assignment
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: local variable 'count' referenced before assignment
+
+debug | ERROR flwr 2024-06-27 22:37:38,036 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 118, in evaluate
+    # self.simclr_predictor = train_predictor(self.simclr, self.trainloader, self.optimizer, nn.CrossEntropyLoss(reduction='mean'), epochs=1)
+  File "/root/src/fedSSL/client.py", line 72, in test
+UnboundLocalError: local variable 'count' referenced before assignment
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: local variable 'count' referenced before assignment
+debug | ERROR flwr 2024-06-27 22:37:38,694 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 118, in evaluate
+    # self.simclr_predictor = train_predictor(self.simclr, self.trainloader, self.optimizer, nn.CrossEntropyLoss(reduction='mean'), epochs=1)
+  File "/root/src/fedSSL/client.py", line 72, in test
+UnboundLocalError: local variable 'count' referenced before assignment
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: local variable 'count' referenced before assignment
+
+debug | ERROR flwr 2024-06-27 22:37:38,694 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 118, in evaluate
+    # self.simclr_predictor = train_predictor(self.simclr, self.trainloader, self.optimizer, nn.CrossEntropyLoss(reduction='mean'), epochs=1)
+  File "/root/src/fedSSL/client.py", line 72, in test
+UnboundLocalError: local variable 'count' referenced before assignment
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=265133, ip=172.17.0.2, actor_id=e17ec4e368956af027bca30001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x76e5501cdea0>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: local variable 'count' referenced before assignment
+debug | INFO flwr 2024-06-27 22:37:38,694 | server.py:190 | aggregate_evaluate: received 0 results and 2 failures
+debug | INFO flwr 2024-06-27 22:37:38,694 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:37:38,694 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-06-27 22:37:38,694 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:37:46,191 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:37:48,127 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 18989228851.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'memory': 37978457703.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:__internal_head__': 1.0}
+debug | INFO flwr 2024-06-27 22:37:48,127 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:37:48,128 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:37:48,132 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:37:48,133 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:37:48,133 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:37:50,737 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:37:50,737 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-27 22:38:00,358 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': 0.10884232954545454}
+debug | INFO flwr 2024-06-27 22:38:00,358 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:38:00,359 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-27 22:38:00,359 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:38:11,469 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 22:38:11,560 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 22:38:20,843 | server.py:129 | fit progress: (1, -1, {'accuracy': 0.234375}, 20.48469698196277)
+debug | INFO flwr 2024-06-27 22:38:20,843 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:38:31,526 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 22:38:31,526 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 22:38:31,526 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:38:31,526 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-06-27 22:38:31,526 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:38:42,502 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:38:51,898 | server.py:129 | fit progress: (2, -1, {'accuracy': 0.3318536931818182}, 51.539253128983546)
+debug | INFO flwr 2024-06-27 22:38:51,898 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:39:02,520 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:39:02,520 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:39:02,520 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-06-27 22:39:02,521 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:39:13,377 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:39:22,937 | server.py:129 | fit progress: (3, -1, {'accuracy': 0.40092329545454547}, 82.57827791495947)
+debug | INFO flwr 2024-06-27 22:39:22,937 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:39:33,475 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:494 | 
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:496 | Run finished 3 round(s) in 93.12s
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 		round 1: 7.110887598991394
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 		round 2: 6.836659336090088
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 		round 3: 6.705723214149475
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 	History (loss, centralized):
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 		round 0: -1
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 		round 1: -1
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 		round 2: -1
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 		round 3: -1
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 	History (metrics, centralized):
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 	{'accuracy': [(0, 0.10884232954545454),
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 	              (1, 0.234375),
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 	              (2, 0.3318536931818182),
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:498 | 	              (3, 0.40092329545454547)]}
+debug | INFO flwr 2024-06-27 22:39:33,478 | server.py:499 | 
+debug | INFO flwr 2024-06-27 22:43:53,098 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:43:54,998 | app.py:228 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'memory': 37979657012.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'object_store_memory': 18989828505.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+debug | INFO flwr 2024-06-27 22:43:54,998 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:43:54,998 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:43:55,004 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:43:55,004 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:43:55,004 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:43:57,589 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:43:57,589 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-06-27 22:44:39,796 | app.py:328 | Expected floating point type for target with class probabilities, got Long
+debug | ERROR flwr 2024-06-27 22:44:39,797 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/src/fedSSL/server.py", line 44, in evaluate
+    accuracy = self.evaluate()
+  File "/root/src/fedSSL/server.py", line 101, in evaluate
+    loss += self.criterion(predicted, labels)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/modules/loss.py", line 1185, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/nn/functional.py", line 3086, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+RuntimeError: Expected floating point type for target with class probabilities, got Long
+
+debug | ERROR flwr 2024-06-27 22:44:39,797 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 8, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 8, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-06-27 22:45:34,193 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:45:36,111 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37979794638.0, 'object_store_memory': 18989897318.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'node:__internal_head__': 1.0}
+debug | INFO flwr 2024-06-27 22:45:36,112 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:45:36,112 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:45:36,116 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:45:36,117 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:45:36,117 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:45:38,748 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:45:38,748 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-27 22:46:18,064 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:46:19,980 | app.py:228 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'object_store_memory': 18989581516.0, 'memory': 37979163035.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-06-27 22:46:19,980 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:46:19,980 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:46:19,985 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:46:19,985 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:46:19,985 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:46:22,564 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:46:22,564 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-27 22:47:12,952 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': (tensor(0.0040, device='cuda:0'), 0.3027)}
+debug | INFO flwr 2024-06-27 22:47:12,953 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:47:12,953 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-27 22:47:12,953 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:47:58,925 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 22:47:59,019 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 22:48:49,095 | server.py:129 | fit progress: (1, -1, {'accuracy': (tensor(0.0030, device='cuda:0'), 0.4779)}, 96.14160640595946)
+debug | INFO flwr 2024-06-27 22:48:49,096 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | ERROR flwr 2024-06-27 22:48:49,827 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=270866, ip=172.17.0.2, actor_id=bf18ea18c0637be71666570a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x735a4c4cdf30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 123, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 74, in test
+    # if(batch % (print_interval * num_batches) == 0):
+NameError: name 'num_batches' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=270866, ip=172.17.0.2, actor_id=bf18ea18c0637be71666570a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x735a4c4cdf30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'num_batches' is not defined
+
+debug | ERROR flwr 2024-06-27 22:48:49,827 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=270866, ip=172.17.0.2, actor_id=bf18ea18c0637be71666570a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x735a4c4cdf30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 123, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 74, in test
+    # if(batch % (print_interval * num_batches) == 0):
+NameError: name 'num_batches' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=270866, ip=172.17.0.2, actor_id=bf18ea18c0637be71666570a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x735a4c4cdf30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'num_batches' is not defined
+debug | ERROR flwr 2024-06-27 22:48:50,482 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/myprojectenv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=270866, ip=172.17.0.2, actor_id=bf18ea18c0637be71666570a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x735a4c4cdf30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 123, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 74, in test
+    # if(batch % (print_interval * num_batches) == 0):
+NameError: name 'num_batches' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=270866, ip=172.17.0.2, actor_id=bf18ea18c0637be71666570a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x735a4c4cdf30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'num_batches' is not defined
+
+debug | ERROR flwr 2024-06-27 22:48:50,482 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=270866, ip=172.17.0.2, actor_id=bf18ea18c0637be71666570a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x735a4c4cdf30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/root/src/fedSSL/client.py", line 123, in evaluate
+    loss, accuracy = test(self.simclr, self.simclr_predictor, testloader, ntxent)
+  File "/root/src/fedSSL/client.py", line 74, in test
+    # if(batch % (print_interval * num_batches) == 0):
+NameError: name 'num_batches' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=270866, ip=172.17.0.2, actor_id=bf18ea18c0637be71666570a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x735a4c4cdf30>)
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'num_batches' is not defined
+debug | INFO flwr 2024-06-27 22:48:50,482 | server.py:190 | aggregate_evaluate: received 0 results and 2 failures
+debug | INFO flwr 2024-06-27 22:48:50,482 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:48:50,482 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-06-27 22:48:50,482 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:49:35,961 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:50:00,117 | app.py:193 | Starting Flower simulation, config: num_rounds=3, no round_timeout
+debug | INFO flwr 2024-06-27 22:50:02,030 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 18886571212.0, 'node:__internal_head__': 1.0, 'memory': 37773142427.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0}
+debug | INFO flwr 2024-06-27 22:50:02,030 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-06-27 22:50:02,030 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 8, 'num_gpus': 1.0}
+debug | INFO flwr 2024-06-27 22:50:02,035 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-06-27 22:50:02,035 | server.py:92 | [INIT]
+debug | INFO flwr 2024-06-27 22:50:02,035 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:50:04,644 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-06-27 22:50:04,645 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-06-27 22:50:55,072 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': (tensor(0.0040, device='cuda:0'), 0.2985)}
+debug | INFO flwr 2024-06-27 22:50:55,073 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:50:55,073 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-06-27 22:50:55,073 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:51:41,426 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 22:51:41,518 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 22:52:30,854 | server.py:129 | fit progress: (1, -1, {'accuracy': (tensor(0.0029, device='cuda:0'), 0.4767)}, 95.78077190800104)
+debug | INFO flwr 2024-06-27 22:52:30,855 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:52:49,422 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-06-27 22:52:49,422 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-06-27 22:52:49,422 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:52:49,422 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-06-27 22:52:49,422 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:53:36,056 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:54:25,480 | server.py:129 | fit progress: (2, -1, {'accuracy': (tensor(0.0027, device='cuda:0'), 0.5093)}, 210.40664819598896)
+debug | INFO flwr 2024-06-27 22:54:25,481 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:54:43,763 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:54:43,763 | server.py:110 | 
+debug | INFO flwr 2024-06-27 22:54:43,763 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-06-27 22:54:43,763 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:55:29,448 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:56:19,757 | server.py:129 | fit progress: (3, -1, {'accuracy': (tensor(0.0026, device='cuda:0'), 0.5279)}, 324.68334057100583)
+debug | INFO flwr 2024-06-27 22:56:19,757 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-06-27 22:56:38,374 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-06-27 22:56:38,376 | server.py:494 | 
+debug | INFO flwr 2024-06-27 22:56:38,376 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-06-27 22:56:38,377 | server.py:496 | Run finished 3 round(s) in 343.30s
+debug | INFO flwr 2024-06-27 22:56:38,382 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-06-27 22:56:38,382 | server.py:498 | 		round 1: 5.96146422624588
+debug | INFO flwr 2024-06-27 22:56:38,382 | server.py:498 | 		round 2: 5.8617241978645325
+debug | INFO flwr 2024-06-27 22:56:38,382 | server.py:498 | 		round 3: 5.810686755180359
+debug | INFO flwr 2024-06-27 22:56:38,382 | server.py:498 | 	History (loss, centralized):
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 		round 0: -1
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 		round 1: -1
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 		round 2: -1
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 		round 3: -1
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 	History (metrics, centralized):
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 	{'accuracy': [(0, (tensor(0.0040, device='cuda:0'), 0.2985)),
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 	              (1, (tensor(0.0029, device='cuda:0'), 0.4767)),
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 	              (2, (tensor(0.0027, device='cuda:0'), 0.5093)),
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:498 | 	              (3, (tensor(0.0026, device='cuda:0'), 0.5279))]}
+debug | INFO flwr 2024-06-27 22:56:38,383 | server.py:499 | 

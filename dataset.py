@@ -49,7 +49,7 @@ def load_data(num_clients, image_size=32, batch_size = global_batch, num_workers
             DataLoader(ds_val, batch_size = batch_size))
         
     testloader = DataLoader(test_dataset, batch_size = batch_size)
-    predictorloader = DataLoader(train_dataset, batch_size = batch_size)
+    predictorloader = DataLoader(train_dataset, batch_size = batch_size, shuffle = True)
     
     return trainloaders, valloaders, testloader, predictorloader, partition_lengths
 

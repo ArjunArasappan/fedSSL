@@ -18,6 +18,9 @@ from typing import Dict, Optional, Tuple
 
 fl.common.logger.configure(identifier="debug", filename="log.txt")
 
+batch_break = -1
+print_interval = 0.2
+
     
 class global_predictor:
     
@@ -38,10 +41,10 @@ class global_predictor:
             self.update_encoder(parameters)
             
             self.fine_tune_predictor()
-            accuracy = self.evaluate()
+            loss, accuracy = self.evaluate()
             print("Global Model Accuracy: ", accuracy)
             
-            return {"accuracy": accuracy}
+            return loss, {"accuracy": accuracy}
 
         return evaluate
 
@@ -51,6 +54,7 @@ class global_predictor:
         for epoch in range(self.epochs):
             batch = 0
             num_batches = len(self.trainloader)
+            percent_trained = 0.2
 
             for (x, x_i, x_j), labels in self.trainloader:
 
@@ -64,15 +68,22 @@ class global_predictor:
                 loss.backward()
                 self.optimizer.step()
                 
-                batch += 1
-                
+
+                if batch == 0.2 * num_batches:
+                    break        
+
+                # if batch % (print_interval * num_batches) == 0:
                 print("Predictor Train Batch:", batch, "/", num_batches)
+
+                
+                batch += 1
                 
     def evaluate(self):
         self.simclr_predictor.eval()
         
         total = 0
         correct = 0
+        loss = 0
     
         for epoch in range(self.epochs):
             batch = 0
@@ -84,17 +95,27 @@ class global_predictor:
                     x, labels = x.to(DEVICE), labels.to(DEVICE)
                     
                     logits = self.simclr_predictor(x)
-                    predicted = torch.max(logits, 1)  
+                    values, predicted = torch.max(logits, 1)  
                     
                     total += labels.size(0)
                     
+                    loss += self.criterion(logits, labels)
+                    
+                    
                     correct += (predicted == labels).sum().item()
                     
-                    batch += 1
+         
                     
+                    
+                    if batch == batch_break:
+                        break
+
+                    # if batch % (print_interval * num_batches) == 0:
                     print("Predictor Test Batch:", batch, "/", num_batches)
+                    
+                    batch += 1
             
-        return correct / total
+        return loss / total, correct / total
             
             
 
