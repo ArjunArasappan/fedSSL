@@ -13,7 +13,7 @@ fl.common.logger.configure(identifier="debug", filename="log.txt")
 def train_predictor(model, trainloaders, optimizer, criterion, epochs):    
 
     
-class global_predictor():
+class global_predictor:
     
     def __init__(self, tune_encoder, trainloader, testloader):
         
@@ -21,25 +21,30 @@ class global_predictor():
         
         self.trainloader = trainloader
         self.testloader = testloader
-        self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
+        
         self.epochs = 1
+        self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
+        
+    def get_evaluate_fn(self):
         
         def evaluate(server_round: int, parameters: NDArrays, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
             self.update_encoder(parameters)
+            
             self.fine_tune_predictor()
-            loss, accuracy = model.evaluate(x_val, y_val)
-            return loss, {"accuracy": accuracy}
+            accuracy = self.evaluate()
+            print("Global Model Accuracy: ", accuracy)
+            
+            return {"accuracy": accuracy}
 
         return evaluate
 
-    self.fine_tune_predictor():
+    def fine_tune_predictor(self):
         self.simclr_predictor.train()
     
         for epoch in range(self.epochs):
             batch = 0
             num_batches = len(self.trainloader)
-
 
             for (x, x_i, x_j), labels in self.trainloader:
 
@@ -54,6 +59,33 @@ class global_predictor():
                 self.optimizer.step()
                 
                 print("Predictor Train Batch:", batch, "/", num_batches)
+                
+    def evaluate(self):
+        self.simclr_predictor.eval()
+        
+        total = 0
+        correct = 0
+    
+        for epoch in range(self.epochs):
+            batch = 0
+            num_batches = len(self.testloader)
+            
+            with torch.no_grad():
+                
+                for (x, x_i, x_j), labels in self.testloader:
+                    x, labels = x.to(DEVICE), labels.to(DEVICE)
+                    
+                    logits = self.simclr_predictor(x)
+                    predicted = torch.max(output, 1)  
+                    
+                    total += labels.shape(0)
+                    correct += (predicted == labels).sum().item()
+                    
+                    print("Predictor Test Batch:", batch, "/", num_batches)
+            
+        return correct / total
+            
+            
 
 
         
@@ -81,6 +113,6 @@ if __name__ == "__main__":
         num_clients=NUM_CLIENTS,
         config=fl.server.ServerConfig(num_rounds=3),
         client_resources=client_resources,
-        evaluate_fn = 
+        evaluate_fn = gb_pred.get_evaluate_fn()
         strategy=strategy
     )
