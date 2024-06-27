@@ -7,6 +7,9 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10
 from torchvision.models import resnet18, ResNet18_Weights
+from flwr.common.logger import log
+from logging import INFO, DEBUG
+
 
 class NTXentLoss(nn.Module):
     def __init__(self, batch_size, temperature, device):
@@ -33,6 +36,10 @@ class NTXentLoss(nn.Module):
         sim = self.similarity_f(z.unsqueeze(1), z.unsqueeze(0)) / self.temperature
         sim_i_j = torch.diag(sim, self.batch_size)
         sim_j_i = torch.diag(sim, -self.batch_size)
+        
+        print(f"z_i: {z_i.shape}, z_j: {z_j.shape}, sim_ij: {sim_i_j.shape}, sim_ji: {sim_j_i.shape}, n: {N}")
+
+        
         positives = torch.cat((sim_i_j, sim_j_i), dim=0).view(N, 1)
         negatives = sim[self.mask].view(N, -1)
         labels = torch.zeros(N).to(self.device).long()
