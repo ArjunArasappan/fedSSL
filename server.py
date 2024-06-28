@@ -5,7 +5,7 @@ import torch
 
 from client import predictorloader, testloader, DEVICE
 from dataset import NUM_CLASSES
-from model import SimCLRPredictor
+from model import SimCLRPredictor, NTXentLoss
 import torch.nn as nn
 import numpy as np
 import torch
@@ -14,30 +14,35 @@ from flwr.common import NDArrays, Scalar
 
 from typing import Dict, Optional, Tuple
 
-
+NUM_ROUNDS = 1
 
 fl.common.logger.configure(identifier="debug", filename="log.txt")
 
 batch_break = -1
-print_interval = 0.2
+print_interval = 0.1
 
     
 class global_predictor:
     
     def __init__(self, tune_encoder, trainloader, testloader, useResnet18 = True):
+        self.round = 0
         
         self.simclr_predictor = SimCLRPredictor(NUM_CLASSES, DEVICE, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(DEVICE)
         
         self.trainloader = trainloader
         self.testloader = testloader
         
-        self.epochs = 1
+        self.epochs = 5
         self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
         
     def get_evaluate_fn(self):
         
         def evaluate(server_round: int, parameters, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
+            if self.round != NUM_ROUNDS:
+                self.round = self.round + 1
+                return -1, {"accuracy": -1}
+            
             self.update_encoder(parameters)
             
             self.fine_tune_predictor()
@@ -54,7 +59,7 @@ class global_predictor:
         for epoch in range(self.epochs):
             batch = 0
             num_batches = len(self.trainloader)
-            percent_trained = 0.2
+            percent_trained = 1
 
             for (x, x_i, x_j), labels in self.trainloader:
 
@@ -69,11 +74,11 @@ class global_predictor:
                 self.optimizer.step()
                 
 
-                if batch == 0.2 * num_batches:
+                if batch >= int(percent_trained * num_batches):
                     break        
 
                 # if batch % (print_interval * num_batches) == 0:
-                print("Predictor Train Batch:", batch, "/", num_batches)
+                print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
 
                 
                 batch += 1
@@ -82,6 +87,7 @@ class global_predictor:
         self.simclr_predictor.eval()
         
         total = 0
+        count = 0
         correct = 0
         loss = 0
     
@@ -111,11 +117,14 @@ class global_predictor:
                         break
 
                     # if batch % (print_interval * num_batches) == 0:
-                    print("Predictor Test Batch:", batch, "/", num_batches)
+                    print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
                     
                     batch += 1
+                    count += 1
+                    
+                break
             
-        return loss / total, correct / total
+        return loss / count, correct / total
             
             
 
@@ -125,11 +134,12 @@ class global_predictor:
         self.simclr_predictor.set_encoder_parameters(weights)
 
 
-gb_pred = global_predictor(False, predictorloader, testloader, useResnet18 = True)
+gb_pred = global_predictor(True, predictorloader, testloader, useResnet18 = False)
 
 strategy = fl.server.strategy.FedAvg(
     evaluate_fn = gb_pred.get_evaluate_fn(),
 )
+
 
 if __name__ == "__main__":
     print("Cuda?:", torch.cuda.is_available())
@@ -142,12 +152,22 @@ if __name__ == "__main__":
         "num_cpus": 8,
         "num_gpus": 1.0,
     }
+    
+    # ntxent = NTXentLoss(DEVICE).to(DEVICE)
+    # t1, t2 = ntxent.testBatch()
+    
+    # t1 = t1.to(DEVICE)
+    # t2 = t2.to(DEVICE)
+    
+    # print(f'Same Tensor: {ntxent(t1, t1)}')
+    # print(f'Diff Tensor: {ntxent(t1, t2)}')
+
 
 
     fl.simulation.start_simulation(
         client_fn=client_fn,
         num_clients=NUM_CLIENTS,
-        config=fl.server.ServerConfig(num_rounds=3),
+        config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
         client_resources=client_resources,
         strategy=strategy
     )

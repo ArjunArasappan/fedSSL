@@ -38,8 +38,8 @@ def train(net, trainloader, optimizer, criterion, epochs):
         for (x, x_i, x_j), _ in trainloader:
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
             optimizer.zero_grad()
-            z_i = net(x_i)
-            z_j = net(x_j)
+            z_i = net(x_i).to(DEVICE)
+            z_j = net(x_j).to(DEVICE)
             loss = criterion(z_i, z_j)
             # print("training loss: ", loss)
 
@@ -67,8 +67,8 @@ def test(net, predictor, testloader, criterion):
         for (x, x_i, x_j), label in testloader:
             x, x_i, x_j = x.to(DEVICE), x_i.to(DEVICE), x_j.to(DEVICE)
             
-            z_i = net(x_i)
-            z_j = net(x_j)
+            z_i = net(x_i).to(DEVICE)
+            z_j = net(x_j).to(DEVICE)
             loss = criterion(z_i, z_j)
             
             loss_epoch += loss.item()
@@ -88,7 +88,7 @@ def test(net, predictor, testloader, criterion):
 trainloaders, valloaders, testloader, predictorloader, num_examples = load_data(NUM_CLIENTS)
 
 #batch size usually at 16
-ntxent = NTXentLoss(batch_size=global_batch, temperature=0.5, device=DEVICE)
+ntxent = NTXentLoss(temperature=0.5, device=DEVICE).to(DEVICE)
 
 
 class CifarClient(fl.client.NumPyClient):
@@ -131,7 +131,7 @@ class CifarClient(fl.client.NumPyClient):
 
 def client_fn(cid):
     clientID = int(cid)
-    simclr = SimCLR(DEVICE, useResnet18=True).to(DEVICE)
+    simclr = SimCLR(DEVICE, useResnet18=False).to(DEVICE)
     trainloader = trainloaders[clientID]
     valloader = valloaders[clientID]
     return CifarClient(clientID, simclr, trainloader, valloader).to_client()

@@ -15,36 +15,46 @@ from dataset import global_batch
 
 
 class NTXentLoss(nn.Module):
-    def __init__(self, batch_size, temperature=0.5, device='cuda'):
+    def __init__(self, device, temperature=0.2, ):
         super(NTXentLoss, self).__init__()
         self.temperature = temperature
         self.device = device
         self.batch_size = None
         self.criterion = nn.CrossEntropyLoss(reduction="mean",)
+        
+    def testBatch(self):
+        batchSize = 2
+        random1Tensor = torch.randn((batchSize, 5))
+        random2Tensor = torch.randn((batchSize, 5))
+        
+        return random1Tensor, random2Tensor
+        
 
     def forward(self, z_i, z_j):
 
         self.batch_size = z_i.size(0)
         feature_dim = z_i.size(1)
         
-        z_i = F.normalize(z_i)
-        z_j = F.normalize(z_j)
+        z_i = F.normalize(z_i).to(self.device)
+        z_j = F.normalize(z_j).to(self.device)
         
-        z = torch.cat((z_i, z_j), dim=0)  
+        z = torch.cat((z_i, z_j), dim=0).to(self.device)
+        
+        # print(z)
 
-        sim_matrix = torch.matmul(z, z.T) / self.temperature
+        sim_matrix = torch.matmul(z, z.T).to(self.device) / self.temperature
         sim_matrix.fill_diagonal_(-float('inf'))
+        
+        # print(sim_matrix)
 
         labels = torch.arange(self.batch_size, 2 * self.batch_size, device=self.device)
         labels = torch.cat((labels, labels - self.batch_size))  
+        
+        # print(labels)
 
         loss = self.criterion(sim_matrix, labels)
         return loss
 
-
-        loss = self.criterion(sim_matrix, labels) #ignores zero index which 
-        
-        return loss
 
 class MLP(nn.Module):
     def __init__(self, dim, projection_size, hidden_size=4096, num_layer=2):
