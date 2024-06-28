@@ -14,7 +14,7 @@ from flwr.common import NDArrays, Scalar
 
 from typing import Dict, Optional, Tuple
 
-NUM_ROUNDS = 1
+NUM_ROUNDS = 7
 
 fl.common.logger.configure(identifier="debug", filename="log.txt")
 
@@ -32,7 +32,7 @@ class global_predictor:
         self.trainloader = trainloader
         self.testloader = testloader
         
-        self.epochs = 5
+        self.epochs = 20
         self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
         
@@ -59,7 +59,7 @@ class global_predictor:
         for epoch in range(self.epochs):
             batch = 0
             num_batches = len(self.trainloader)
-            percent_trained = 1
+            percent_trained = .1
 
             for (x, x_i, x_j), labels in self.trainloader:
 
