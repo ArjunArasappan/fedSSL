@@ -16,13 +16,16 @@ from typing import Dict, List, Optional, Tuple
 
 from transform import SimCLRTransform
 from model import SimCLR, NTXentLoss, SimCLRPredictor
-from dataset import load_data, global_batch, num_iters
+from dataset import load_data, global_batch, num_iters, NUM_CLASSES
 
-NUM_CLIENTS = 2
+NUM_CLIENTS = 3
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-progress_interval = 0.1
+
+
+batch_break = -1
+print_interval = 0.2
 
 
 def train(net, trainloader, optimizer, criterion, epochs):
@@ -31,12 +34,12 @@ def train(net, trainloader, optimizer, criterion, epochs):
     for epoch in range(epochs):
         num_batches = len(trainloader)
         batch = 0
+        
         for (x, x_i, x_j), _ in trainloader:
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
             optimizer.zero_grad()
-            # z_i = net(x_i)
-            # z_j = net(x_j)
-            
+            z_i = net(x_i).to(DEVICE)
+            z_j = net(x_j).to(DEVICE)
             loss = criterion(z_i, z_j)
             # print("training loss: ", loss)
 
@@ -44,72 +47,55 @@ def train(net, trainloader, optimizer, criterion, epochs):
             optimizer.step()
 
 
-            # if(batch % (progress_interval * num_batches) == 0):
-            print("Batch:", batch, "/", num_batches)
-                
+            # if(batch % (print_interval * num_batches) == 0):
+            print("Client Train Batch:", batch, "/", num_batches)
+            
+            if batch == batch_break:
+                print("Exited Test Loop")
+                break 
+            
             batch += 1
-            
-def train_predictor(base_encoder, trainloader, optimizer, criterion, epochs):
-    simclr_predictor = SimCLRPredictor(base_encoder, tune_encoder = False, num_classes=10).to(DEVICE)
-    
-    simclr_predictor.train()
-    
-    for epoch in range(epochs):
-        iter = 0
-
-        for (x, x_i, x_j), labels in trainloader:
-
-            x, labels = x.to(DEVICE), labels.to(DEVICE)
-            
-            optimizer.zero_grad()
-            
-            outputs = simclr_predictor(x)
-            loss = criterion(outputs, labels)
-            # print("training loss: ", loss)
-            loss.backward()
-            
-            optimizer.step()
-            if iter == num_iters:
-                break
-    return simclr_predictor
-                     
+                 
 
 def test(net, predictor, testloader, criterion):
     net.eval()
     loss_epoch = 0
-    count = 0
+    batch = 0
+    num_batches = len(testloader)
     
     with torch.no_grad():
         for (x, x_i, x_j), label in testloader:
             x, x_i, x_j = x.to(DEVICE), x_i.to(DEVICE), x_j.to(DEVICE)
             
-            z_i = net(x_i)
-            z_j = net(x_j)
+            z_i = net(x_i).to(DEVICE)
+            z_j = net(x_j).to(DEVICE)
             loss = criterion(z_i, z_j)
             
-            
-
-            
             loss_epoch += loss.item()
-            count += 1
-            if count == num_iters:
+            
+            # if(batch % (print_interval * num_batches) == 0):
+            print("Client Train Batch:", batch, "/", num_batches)
+                
+            if batch == batch_break:
                 print("Exited Test Loop")
                 break 
-    return loss_epoch / (count), -1
+            
+            batch += 1
+    return loss_epoch / (batch), -1
 
 
 
-trainloaders, valloaders, testloader, num_examples = load_data(NUM_CLIENTS)
+trainloaders, valloaders, testloader, predictorloader, num_examples = load_data(NUM_CLIENTS)
 
 #batch size usually at 16
-ntxent = NTXentLoss(batch_size=global_batch, temperature=0.5, device=DEVICE)
+ntxent = NTXentLoss(temperature=0.5, device=DEVICE).to(DEVICE)
 
 
 class CifarClient(fl.client.NumPyClient):
     def __init__(self, cid, simclr, trainloader, valloader):
         self.cid = cid
         self.simclr = simclr
-        self.optimizer = optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
+        self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
         self.simclr_predictor = None
         self.trainloader = trainloader
         self.valloader = valloader
@@ -145,7 +131,7 @@ class CifarClient(fl.client.NumPyClient):
 
 def client_fn(cid):
     clientID = int(cid)
-    simclr = SimCLR(DEVICE).to(DEVICE)
+    simclr = SimCLR(DEVICE, useResnet18=False).to(DEVICE)
     trainloader = trainloaders[clientID]
     valloader = valloaders[clientID]
     return CifarClient(clientID, simclr, trainloader, valloader).to_client()

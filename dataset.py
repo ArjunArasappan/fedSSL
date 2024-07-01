@@ -10,7 +10,10 @@ from torch import Generator
 global_batch = 512
 num_iters = -1
 validation_split = 0.0
+NUM_CLASSES = 10
+
 #batch size usually at 512, num workers at 8
+
 
 def load_data(num_clients, image_size=32, batch_size = global_batch, num_workers = 0):
     
@@ -46,4 +49,7 @@ def load_data(num_clients, image_size=32, batch_size = global_batch, num_workers
             DataLoader(ds_val, batch_size = batch_size))
         
     testloader = DataLoader(test_dataset, batch_size = batch_size)
-    return trainloaders, valloaders, testloader, partition_lengths
+    predictorloader = DataLoader(train_dataset, batch_size = batch_size, shuffle = True)
+    
+    return trainloaders, valloaders, testloader, predictorloader, partition_lengths
+
