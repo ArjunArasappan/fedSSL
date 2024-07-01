@@ -1,6 +1,6 @@
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader, random_split
-from torchvision.datasets import CIFAR10
+from torchvision.datasets import CIFAR10, CIFAR100
 from transform import SimCLRTransform
 from torch.utils.data import Dataset
 from torch import Generator
@@ -10,17 +10,24 @@ from torch import Generator
 global_batch = 512
 num_iters = -1
 validation_split = 0.0
-NUM_CLASSES = 10
-
+NUM_CLASSES = None
+useCifar10 = False
 #batch size usually at 512, num workers at 8
 
 
 def load_data(num_clients, image_size=32, batch_size = global_batch, num_workers = 0):
-    
     transformation = SimCLRTransform(size = image_size, gaussian = False)
+    global NUM_CLASSES, train_dataset, test_dataset
+
+    if useCifar10:
+        train_dataset = CIFAR10(".", train=True, download=True, transform = transformation)
+        test_dataset = CIFAR10(".", train=False, download=True, transform = transformation)
+        NUM_CLASSES = 10
     
-    train_dataset = CIFAR10(".", train=True, download=True, transform = transformation)
-    test_dataset = CIFAR10(".", train=False, download=True, transform = transformation)
+    else:
+        train_dataset = CIFAR100(".", train=True, download=True, transform = transformation)
+        test_dataset = CIFAR100(".", train=False, download=True, transform = transformation)
+        NUM_CLASSES = 100
     
     partition_size = len(train_dataset) // num_clients
 
