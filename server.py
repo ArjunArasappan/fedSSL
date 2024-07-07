@@ -2,6 +2,7 @@ import flwr as fl
 from client import client_fn, NUM_CLIENTS
 from flwr.server.strategy import FedAvg
 import torch
+import argparse
 
 from client import predictorloader, testloader, DEVICE
 from dataset import NUM_CLASSES
@@ -16,10 +17,28 @@ from typing import Dict, Optional, Tuple
 
 NUM_ROUNDS = 7
 
+
 fl.common.logger.configure(identifier="debug", filename="log.txt")
 
 batch_break = -1
 print_interval = 0.1
+
+parser = argparse.ArgumentParser(description="Flower Simulation with PyTorch")
+
+parser.add_argument(
+    "--num_cpus",
+    type=int,
+    default=1,
+    help="Number of CPUs to assign to a virtual client",
+)
+parser.add_argument(
+    "--num_gpus",
+    type=float,
+    default=2.0,
+    help="Ratio of GPU memory to assign to a virtual client",
+)
+
+
 
     
 class global_predictor:
@@ -110,9 +129,6 @@ class global_predictor:
                     
                     correct += (predicted == labels).sum().item()
                     
-         
-                    
-                    
                     if batch == batch_break:
                         break
 
@@ -148,21 +164,12 @@ if __name__ == "__main__":
     print(torch.__version__)
     print(torch.version.cuda)
     
-    hist = client_resources = {
-        "num_cpus": 8,
-        "num_gpus": 1.0,
+    args = parser.parse_args()
+
+    client_resources = {
+        "num_cpus": args.num_cpus,
+        "num_gpus": args.num_gpus,
     }
-    
-    # ntxent = NTXentLoss(DEVICE).to(DEVICE)
-    # t1, t2 = ntxent.testBatch()
-    
-    # t1 = t1.to(DEVICE)
-    # t2 = t2.to(DEVICE)
-    
-    # print(f'Same Tensor: {ntxent(t1, t1)}')
-    # print(f'Diff Tensor: {ntxent(t1, t2)}')
-
-
 
     fl.simulation.start_simulation(
         client_fn=client_fn,

@@ -25473,3 +25473,21 @@ debug | INFO flwr 2024-06-28 13:00:02,124 | server.py:498 | 	              (5, -
 debug | INFO flwr 2024-06-28 13:00:02,124 | server.py:498 | 	              (6, -1),
 debug | INFO flwr 2024-06-28 13:00:02,124 | server.py:498 | 	              (7, 0.7288)]}
 debug | INFO flwr 2024-06-28 13:00:02,124 | server.py:499 | 
+debug | INFO flwr 2024-07-07 03:51:26,321 | app.py:193 | Starting Flower simulation, config: num_rounds=7, no round_timeout
+debug | INFO flwr 2024-07-07 03:51:28,298 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 37612501403.0, 'object_store_memory': 18806250700.0, 'node:__internal_head__': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0}
+debug | INFO flwr 2024-07-07 03:51:28,298 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-07 03:51:28,298 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 8.0}
+debug | WARNING flwr 2024-07-07 03:51:28,299 | ray_actor.py:124 | The ActorPool is empty. The system (CPUs=11.0, GPUs=1.0) does not meet the criteria to host at least one client with resources: {'num_cpus': 1, 'num_gpus': 8.0}. Lowering the `client_resources` could help.
+debug | INFO flwr 2024-07-07 03:52:49,972 | app.py:193 | Starting Flower simulation, config: num_rounds=7, no round_timeout
+debug | INFO flwr 2024-07-07 03:52:51,907 | app.py:228 | Flower VCE: Ray initialized with resources: {'CPU': 11.0, 'node:172.17.0.2': 1.0, 'node:__internal_head__': 1.0, 'object_store_memory': 18806304768.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'memory': 37612609536.0}
+debug | INFO flwr 2024-07-07 03:52:51,908 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-07 03:52:51,908 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-07 03:52:51,913 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-07 03:52:51,913 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-07 03:52:51,913 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-07 03:52:54,766 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-07 03:52:54,766 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-07 03:52:54,810 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': -1}
+debug | INFO flwr 2024-07-07 03:52:54,810 | server.py:110 | 
+debug | INFO flwr 2024-07-07 03:52:54,810 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-07 03:52:54,810 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
