@@ -34,7 +34,7 @@ parser.add_argument(
 parser.add_argument(
     "--num_gpus",
     type=float,
-    default=2.0,
+    default=1.0,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 

@@ -18,7 +18,7 @@ from transform import SimCLRTransform
 from model import SimCLR, NTXentLoss, SimCLRPredictor
 from dataset import load_data, global_batch, num_iters, NUM_CLASSES
 
-NUM_CLIENTS = 3
+NUM_CLIENTS = 5
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 

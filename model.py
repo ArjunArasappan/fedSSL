@@ -15,7 +15,7 @@ from dataset import global_batch
 
 
 class NTXentLoss(nn.Module):
-    def __init__(self, device, temperature=0.2, ):
+    def __init__(self, device, temperature=0.5, ):
         super(NTXentLoss, self).__init__()
         self.temperature = temperature
         self.device = device
