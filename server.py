@@ -3,14 +3,11 @@ from client import client_fn, NUM_CLIENTS
 from flwr.server.strategy import FedAvg
 import torch
 import argparse
-
-from client import predictorloader, testloader, DEVICE
-from dataset import NUM_CLASSES
-from model import SimCLRPredictor, NTXentLoss, GlobalPredictor
-from utils import NUM_CLIENTS, NUM_CLASSES, NUM_ROUNDS, DEVICE
 import torch.nn as nn
 import numpy as np
-import torch
+
+from model import SimCLRPredictor, NTXentLoss, GlobalPredictor
+from utils import NUM_CLIENTS, NUM_CLASSES, NUM_ROUNDS, DEVICE, useResnet18, fineTuneEncoder, load_centralized_data
 
 
 
@@ -32,7 +29,9 @@ parser.add_argument(
 )
 
 
-gb_pred = GlobalPredictor(True, predictorloader, testloader, useResnet18 = False)
+centralized_finetune, centralized_test = load_centralized_data()
+
+gb_pred = GlobalPredictor(fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = useResnet18)
 
 strategy = fl.server.strategy.FedAvg(
     evaluate_fn = gb_pred.get_evaluate_fn(),

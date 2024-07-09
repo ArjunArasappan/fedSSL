@@ -5,78 +5,6 @@ from torch import nn
 from torchvision import transforms
 import PIL
 
-class MoCoTransform:
-    """
-    A stochastic data augmentation module that transforms any given data example randomly
-    resulting in two correlated views of the same example,
-    denoted x ̃i and x ̃j, which we consider as a positive pair.
-    """
-
-    def __init__(self, size=32, gaussian=False):
-        self.train_transform = transforms.Compose([
-            transforms.ToPILImage(mode='RGB'),
-            transforms.RandomResizedCrop(size),
-            transforms.RandomHorizontalFlip(p=0.5),
-            transforms.RandomApply([transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)], p=0.8),
-            transforms.RandomGrayscale(p=0.2),
-            transforms.ToTensor()])
-
-        self.test_transform = transforms.Compose([
-            torchvision.transforms.Resize(size=size),
-            transforms.ToTensor()]
-        )
-
-    def __call__(self, x):
-        return self.train_transform(x), self.train_transform(x)
-
-
-class SimSiamTransform:
-    """
-    A stochastic data augmentation module that transforms any given data example randomly
-    resulting in two correlated views of the same example,
-    denoted x ̃i and x ̃j, which we consider as a positive pair.
-    """
-
-    def __init__(self, size=32, gaussian=False):
-        s = 1
-        color_jitter = torchvision.transforms.ColorJitter(
-            0.8 * s, 0.8 * s, 0.8 * s, 0.2 * s
-        )
-        if gaussian:
-            self.train_transform = torchvision.transforms.Compose(
-                [
-                    torchvision.transforms.ToPILImage(mode='RGB'),
-                    torchvision.transforms.RandomResizedCrop(size=size),
-                    torchvision.transforms.RandomHorizontalFlip(),  # with 0.5 probability
-                    torchvision.transforms.RandomApply([color_jitter], p=0.8),
-                    torchvision.transforms.RandomGrayscale(p=0.2),
-                    GaussianBlur(kernel_size=int(0.1 * size)),
-                    torchvision.transforms.ToTensor(),
-                ]
-            )
-        else:
-            self.train_transform = torchvision.transforms.Compose(
-                [
-                    torchvision.transforms.ToPILImage(mode='RGB'),
-                    torchvision.transforms.RandomResizedCrop(size=size),
-                    torchvision.transforms.RandomHorizontalFlip(),  # with 0.5 probability
-                    torchvision.transforms.RandomApply([color_jitter], p=0.8),
-                    torchvision.transforms.RandomGrayscale(p=0.2),
-                    torchvision.transforms.ToTensor(),
-                ]
-            )
-
-        self.test_transform = torchvision.transforms.Compose(
-            [
-                torchvision.transforms.Resize(size=size),
-                torchvision.transforms.ToTensor(),
-            ]
-        )
-
-    def __call__(self, x):
-        return self.train_transform(x), self.train_transform(x)
-
-
 
 class SimCLRTransform:
     def __init__(self, size=32, gaussian=False, data_format="array"):
@@ -112,7 +40,7 @@ class SimCLRTransform:
         no_augment = transforms.Compose(original)
         
         
-        return no_augment(x), transform(x), transform(x)
+        return (no_augment(x), transform(x), transform(x))
 
     def test_transform(self):
         return transforms.Compose([

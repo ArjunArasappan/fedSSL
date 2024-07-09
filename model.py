@@ -9,12 +9,11 @@ from torchvision.datasets import CIFAR10
 from torchvision.models import resnet18, ResNet18_Weights, resnet50, ResNet50_Weights
 from flwr.common.logger import log
 from logging import INFO, DEBUG
-
-from utils import NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, DEVICE
-
-from utils import global_batch
 from flwr.common import NDArrays, Scalar
 from typing import Dict, Optional, Tuple
+
+from utils import NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, DEVICE, BATCH_SIZE
+
 
 
 
@@ -170,7 +169,7 @@ class GlobalPredictor:
         self.trainloader = trainloader
         self.testloader = testloader
         
-        self.epochs = 20
+        self.epochs = 1
         self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
         
@@ -197,10 +196,10 @@ class GlobalPredictor:
         for epoch in range(self.epochs):
             batch = 0
             num_batches = len(self.trainloader)
-            percent_trained = .1
+        
 
-            for (x, x_i, x_j), labels in self.trainloader:
-
+            for item in self.trainloader:
+                (x, x_i, x_j), labels = item['img'], item['label']
                 x, labels = x.to(DEVICE), labels.to(DEVICE)
                 
                 self.optimizer.zero_grad()
@@ -211,10 +210,6 @@ class GlobalPredictor:
                 loss.backward()
                 self.optimizer.step()
                 
-
-                if batch >= int(percent_trained * num_batches):
-                    break        
-
                 # if batch % (print_interval * num_batches) == 0:
                 print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
 
@@ -235,7 +230,9 @@ class GlobalPredictor:
             
             with torch.no_grad():
                 
-                for (x, x_i, x_j), labels in self.testloader:
+                for item in self.testloader:
+                    (x, x_i, x_j), labels = item['img'], item['label']
+
                     x, labels = x.to(DEVICE), labels.to(DEVICE)
                     
                     logits = self.simclr_predictor(x)

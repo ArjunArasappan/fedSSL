@@ -2,66 +2,53 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader, random_split
 from torchvision.datasets import CIFAR10, CIFAR100
 from transform import SimCLRTransform
-from torch.utils.data import Dataset
+from torch.utils.data import TensorDataset, Dataset
 from torch import Generator
 import torch
 from flwr_datasets import FederatedDataset
 
-fds = FederatedDataset(dataset="cifar10", partitioners={"train": 10})
-
-NUM_CLIENTS = 5
-NUM_CLASSES = None
+NUM_CLIENTS = 2
+NUM_CLASSES = 10
+NUM_ROUNDS = 4
+useResnet18 = False
+fineTuneEncoder = True
+addGausainBlur = False
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    
-global_batch = 512
-num_iters = -1
-useCifar10 = True
-#batch size usually at 512, num workers at 8
+centralized_fine_tune = 0.9
 
+BATCH_SIZE = 512
+transform = SimCLRTransform(size=32, gaussian=addGausainBlur)
+federated_dataset = None
 
-def load_data(num_clients, image_size=32, batch_size = global_batch, num_workers = 0):
-    transformation = SimCLRTransform(size = image_size, gaussian = False)
-    global NUM_CLASSES, train_dataset, test_dataset
+def apply_transforms(batch):
+    batch["img"] = [transform(img) for img in batch["img"]]
+    return batch
 
-    if useCifar10:
-        train_dataset = CIFAR10(".", train=True, download=True, transform = transformation)
-        test_dataset = CIFAR10(".", train=False, download=True, transform = transformation)
-        NUM_CLASSES = 10
-    
-    else:
-        train_dataset = CIFAR100(".", train=True, download=True, transform = transformation)
-        test_dataset = CIFAR100(".", train=False, download=True, transform = transformation)
-        NUM_CLASSES = 100
-    
-    partition_size = len(train_dataset) // num_clients
+def load_partition(partition_id, image_size=32):
+    global federated_dataset
 
-    partition_lengths = [partition_size] * num_clients
-    print("LENGTHS: ", partition_lengths)
-    
-    for i in range(0, len(train_dataset) % num_clients):
-        partition_lengths[i] = partition_lengths[i] + 1
+    if federated_dataset is None:
+        federated_dataset = FederatedDataset(dataset="cifar10", partitioners={"train": NUM_CLIENTS})
 
-    datasets = random_split(train_dataset, partition_lengths, Generator().manual_seed(42))
+    partition = federated_dataset.load_partition(partition_id)
+    partition = partition.with_transform(apply_transforms)
+    partition = partition.train_test_split(test_size=0.2, seed=42)
+
+    trainloader = DataLoader(partition["train"], batch_size=BATCH_SIZE)
+    testloader = DataLoader(partition["test"], batch_size=BATCH_SIZE)
     
-    trainloaders = []
-    valloaders = []
-    for ds in datasets:
-        len_val = int(len(ds) * validation_split)  # 10 % validation set
-        len_train = len(ds) - len_val
-        lengths = [len_train, len_val]
-        # print(type(Generator().manual_seed(42)))
-        # print(len(ds))
-        
-        ds_train, ds_val = random_split(ds, lengths)
-        
-        trainloaders.append(
-            DataLoader(ds_train, batch_size = batch_size, shuffle = True))
-        valloaders.append(
-            DataLoader(ds_val, batch_size = batch_size))
-        
-    testloader = DataLoader(test_dataset, batch_size = batch_size)
-    predictorloader = DataLoader(train_dataset, batch_size = batch_size, shuffle = True)
+    return trainloader, testloader
+
+def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
+    fds = FederatedDataset(dataset="cifar10", partitioners={"test": 1})
+    centralized_data = fds.load_split("test")
+    centralized_data = centralized_data.with_transform(apply_transforms)
     
-    return trainloaders, valloaders, testloader, predictorloader, partition_lengths
+    centralized_data = centralized_data.train_test_split(test_size=centralized_fine_tune)
+    
+    trainloader = DataLoader(centralized_data["train"], batch_size=batch_size)
+    testloader = DataLoader(centralized_data["test"], batch_size=batch_size)
+
+    return trainloader, testloader
 
