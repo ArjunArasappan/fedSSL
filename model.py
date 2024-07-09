@@ -10,7 +10,13 @@ from torchvision.models import resnet18, ResNet18_Weights, resnet50, ResNet50_We
 from flwr.common.logger import log
 from logging import INFO, DEBUG
 
-from dataset import global_batch
+from utils import NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, DEVICE
+
+from utils import global_batch
+from flwr.common import NDArrays, Scalar
+from typing import Dict, Optional, Tuple
+
+
 
 
 
@@ -152,4 +158,112 @@ class SimCLRPredictor(nn.Module):
         features = self.simclr(x)
         output = self.linear_predictor(features)
         return output
+    
+    
+class GlobalPredictor:
+    
+    def __init__(self, tune_encoder, trainloader, testloader, device, useResnet18 = True):
+        self.round = 0
+        
+        self.simclr_predictor = SimCLRPredictor(NUM_CLASSES, device, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(device)
+        
+        self.trainloader = trainloader
+        self.testloader = testloader
+        
+        self.epochs = 20
+        self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
+        self.criterion = nn.CrossEntropyLoss()
+        
+    def get_evaluate_fn(self):
+        
+        def evaluate(server_round: int, parameters, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
+            if self.round != NUM_ROUNDS:
+                self.round = self.round + 1
+                return -1, {"accuracy": -1}
+            
+            self.update_encoder(parameters)
+            
+            self.fine_tune_predictor()
+            loss, accuracy = self.evaluate()
+            print("Global Model Accuracy: ", accuracy)
+            
+            return loss, {"accuracy": accuracy}
+
+        return evaluate
+
+    def fine_tune_predictor(self):
+        self.simclr_predictor.train()
+    
+        for epoch in range(self.epochs):
+            batch = 0
+            num_batches = len(self.trainloader)
+            percent_trained = .1
+
+            for (x, x_i, x_j), labels in self.trainloader:
+
+                x, labels = x.to(DEVICE), labels.to(DEVICE)
+                
+                self.optimizer.zero_grad()
+                
+                outputs = self.simclr_predictor(x)
+                loss = self.criterion(outputs, labels)
+                
+                loss.backward()
+                self.optimizer.step()
+                
+
+                if batch >= int(percent_trained * num_batches):
+                    break        
+
+                # if batch % (print_interval * num_batches) == 0:
+                print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
+
+                
+                batch += 1
+                
+    def evaluate(self):
+        self.simclr_predictor.eval()
+        
+        total = 0
+        count = 0
+        correct = 0
+        loss = 0
+    
+        for epoch in range(self.epochs):
+            batch = 0
+            num_batches = len(self.testloader)
+            
+            with torch.no_grad():
+                
+                for (x, x_i, x_j), labels in self.testloader:
+                    x, labels = x.to(DEVICE), labels.to(DEVICE)
+                    
+                    logits = self.simclr_predictor(x)
+                    values, predicted = torch.max(logits, 1)  
+                    
+                    total += labels.size(0)
+                    
+                    loss += self.criterion(logits, labels)
+                    
+                    
+                    correct += (predicted == labels).sum().item()
+                    
+
+                    # if batch % (print_interval * num_batches) == 0:
+                    print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
+                    
+                    batch += 1
+                    count += 1
+                    
+                break
+            
+        return loss / count, correct / total
+            
+            
+
+
+        
+    def update_encoder(self, weights):
+        self.simclr_predictor.set_encoder_parameters(weights)
+
     

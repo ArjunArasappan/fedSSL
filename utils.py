@@ -4,16 +4,18 @@ from torchvision.datasets import CIFAR10, CIFAR100
 from transform import SimCLRTransform
 from torch.utils.data import Dataset
 from torch import Generator
+import torch
 from flwr_datasets import FederatedDataset
 
 fds = FederatedDataset(dataset="cifar10", partitioners={"train": 10})
 
+NUM_CLIENTS = 5
+NUM_CLASSES = None
 
+DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
 global_batch = 512
 num_iters = -1
-validation_split = 0.0
-NUM_CLASSES = None
 useCifar10 = True
 #batch size usually at 512, num workers at 8
 
