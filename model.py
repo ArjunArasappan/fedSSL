@@ -169,16 +169,16 @@ class GlobalPredictor:
         self.trainloader = trainloader
         self.testloader = testloader
         
-        self.epochs = 1
+        self.epochs = 15
         self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
         
     def get_evaluate_fn(self):
         
         def evaluate(server_round: int, parameters, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
-            if self.round != NUM_ROUNDS:
-                self.round = self.round + 1
-                return -1, {"accuracy": -1}
+            # if self.round != NUM_ROUNDS:
+            #     self.round = self.round + 1
+            #     return -1, {"accuracy": -1}
             
             self.update_encoder(parameters)
             
