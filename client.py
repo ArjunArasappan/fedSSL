@@ -82,7 +82,7 @@ def test(net, testloader, criterion):
 
 
 
-ntxent = NTXentLoss(temperature=0.5, device=DEVICE).to(DEVICE)
+ntxent = NTXentLoss( device=DEVICE).to(DEVICE)
 
 
 class CifarClient(fl.client.NumPyClient):

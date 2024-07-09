@@ -7,15 +7,16 @@ from torch import Generator
 import torch
 from flwr_datasets import FederatedDataset
 
-NUM_CLIENTS = 2
+NUM_CLIENTS = 3
 NUM_CLASSES = 10
-NUM_ROUNDS = 4
+NUM_ROUNDS = 7
 useResnet18 = False
 fineTuneEncoder = True
-addGausainBlur = False
+addGausainBlur = True
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-centralized_fine_tune = 0.9
+centralized_fine_tune = 0.5
+client_train_split = 0.02
 
 BATCH_SIZE = 512
 transform = SimCLRTransform(size=32, gaussian=addGausainBlur)
@@ -33,7 +34,7 @@ def load_partition(partition_id, image_size=32):
 
     partition = federated_dataset.load_partition(partition_id)
     partition = partition.with_transform(apply_transforms)
-    partition = partition.train_test_split(test_size=0.2, seed=42)
+    partition = partition.train_test_split(test_size=client_train_split, seed=42)
 
     trainloader = DataLoader(partition["train"], batch_size=BATCH_SIZE)
     testloader = DataLoader(partition["test"], batch_size=BATCH_SIZE)

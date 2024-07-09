@@ -20,7 +20,7 @@ from utils import NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, DEVICE, BATCH_SIZE
 
 
 class NTXentLoss(nn.Module):
-    def __init__(self, device, temperature=0.5, ):
+    def __init__(self, device, temperature=0.2, ):
         super(NTXentLoss, self).__init__()
         self.temperature = temperature
         self.device = device
@@ -169,16 +169,16 @@ class GlobalPredictor:
         self.trainloader = trainloader
         self.testloader = testloader
         
-        self.epochs = 15
+        self.epochs = 30
         self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
         
     def get_evaluate_fn(self):
         
         def evaluate(server_round: int, parameters, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
-            # if self.round != NUM_ROUNDS:
-            #     self.round = self.round + 1
-            #     return -1, {"accuracy": -1}
+            if self.round != NUM_ROUNDS:
+                self.round = self.round + 1
+                return -1, {"accuracy": -1}
             
             self.update_encoder(parameters)
             
@@ -247,7 +247,7 @@ class GlobalPredictor:
                     
 
                     # if batch % (print_interval * num_batches) == 0:
-                    print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
+                    print(f"Epoch: {epoch} Predictor Test Batch: {batch} / {num_batches}")
                     
                     batch += 1
                     count += 1
