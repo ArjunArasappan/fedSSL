@@ -159,108 +159,108 @@ class SimCLRPredictor(nn.Module):
         return output
     
     
-class GlobalPredictor:
+# class GlobalPredictor:
     
-    def __init__(self, tune_encoder, trainloader, testloader, device, useResnet18 = True):
-        self.round = 0
+#     def __init__(self, tune_encoder, trainloader, testloader, device, useResnet18 = True):
+#         self.round = 0
         
-        self.simclr_predictor = SimCLRPredictor(NUM_CLASSES, device, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(device)
+#         self.simclr_predictor = SimCLRPredictor(NUM_CLASSES, device, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(device)
         
-        self.trainloader = trainloader
-        self.testloader = testloader
+#         self.trainloader = trainloader
+#         self.testloader = testloader
         
-        self.epochs = 5
-        self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
-        self.criterion = nn.CrossEntropyLoss()
+#         self.epochs = 5
+#         self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
+#         self.criterion = nn.CrossEntropyLoss()
         
-    def get_evaluate_fn(self):
+#     def get_evaluate_fn(self):
         
-        def evaluate(server_round: int, parameters, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
-            if self.round != NUM_ROUNDS:
-                self.round = self.round + 1
-                return -1, {"accuracy": -1}
+#         def evaluate(server_round: int, parameters, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
+#             if self.round != NUM_ROUNDS:
+#                 self.round = self.round + 1
+#                 return -1, {"accuracy": -1}
             
-            self.update_encoder(parameters)
+#             self.update_encoder(parameters)
             
-            self.fine_tune_predictor()
-            loss, accuracy = self.evaluate()
-            print("Global Model Accuracy: ", accuracy)
+#             self.fine_tune_predictor()
+#             loss, accuracy = self.evaluate()
+#             print("Global Model Accuracy: ", accuracy)
             
-            return loss, {"accuracy": accuracy}
+#             return loss, {"accuracy": accuracy}
 
-        return evaluate
+#         return evaluate
 
-    def fine_tune_predictor(self):
-        self.simclr_predictor.train()
+#     def fine_tune_predictor(self):
+#         self.simclr_predictor.train()
     
-        for epoch in range(self.epochs):
-            batch = 0
-            num_batches = len(self.trainloader)
+#         for epoch in range(self.epochs):
+#             batch = 0
+#             num_batches = len(self.trainloader)
         
 
-            for item in self.trainloader:
-                (x, x_i, x_j), labels = item['img'], item['label']
-                x, labels = x.to(DEVICE), labels.to(DEVICE)
+#             for item in self.trainloader:
+#                 (x, x_i, x_j), labels = item['img'], item['label']
+#                 x, labels = x.to(DEVICE), labels.to(DEVICE)
                 
-                self.optimizer.zero_grad()
+#                 self.optimizer.zero_grad()
                 
-                outputs = self.simclr_predictor(x)
-                loss = self.criterion(outputs, labels)
+#                 outputs = self.simclr_predictor(x)
+#                 loss = self.criterion(outputs, labels)
                 
-                loss.backward()
-                self.optimizer.step()
+#                 loss.backward()
+#                 self.optimizer.step()
                 
-                # if batch % (print_interval * num_batches) == 0:
-                print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
+#                 # if batch % (print_interval * num_batches) == 0:
+#                 print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
 
                 
-                batch += 1
+#                 batch += 1
                 
-    def evaluate(self):
-        self.simclr_predictor.eval()
+#     def evaluate(self):
+#         self.simclr_predictor.eval()
         
-        total = 0
-        count = 0
-        correct = 0
-        loss = 0
+#         total = 0
+#         count = 0
+#         correct = 0
+#         loss = 0
     
-        for epoch in range(self.epochs):
-            batch = 0
-            num_batches = len(self.testloader)
+#         for epoch in range(self.epochs):
+#             batch = 0
+#             num_batches = len(self.testloader)
             
-            with torch.no_grad():
+#             with torch.no_grad():
                 
-                for item in self.testloader:
-                    (x, x_i, x_j), labels = item['img'], item['label']
+#                 for item in self.testloader:
+#                     (x, x_i, x_j), labels = item['img'], item['label']
 
-                    x, labels = x.to(DEVICE), labels.to(DEVICE)
+#                     x, labels = x.to(DEVICE), labels.to(DEVICE)
                     
-                    logits = self.simclr_predictor(x)
-                    values, predicted = torch.max(logits, 1)  
+#                     logits = self.simclr_predictor(x)
+#                     values, predicted = torch.max(logits, 1)  
                     
-                    total += labels.size(0)
+#                     total += labels.size(0)
                     
-                    loss += self.criterion(logits, labels)
+#                     loss += self.criterion(logits, labels)
                     
                     
-                    correct += (predicted == labels).sum().item()
+#                     correct += (predicted == labels).sum().item()
                     
 
-                    # if batch % (print_interval * num_batches) == 0:
-                    print(f"Epoch: {epoch} Predictor Test Batch: {batch} / {num_batches}")
+#                     # if batch % (print_interval * num_batches) == 0:
+#                     print(f"Epoch: {epoch} Predictor Test Batch: {batch} / {num_batches}")
                     
-                    batch += 1
-                    count += 1
+#                     batch += 1
+#                     count += 1
                     
-                break
+#                 break
             
-        return loss / count, correct / total
+#         return loss / count, correct / total
             
             
 
 
         
-    def update_encoder(self, weights):
-        self.simclr_predictor.set_encoder_parameters(weights)
+#     def update_encoder(self, weights):
+#         self.simclr_predictor.set_encoder_parameters(weights)
 
     

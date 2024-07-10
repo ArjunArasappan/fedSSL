@@ -12921,3 +12921,175 @@ debug | INFO flwr 2024-07-10 04:43:46,777 | server.py:498 | 		round 5: 5.7987510
 debug | INFO flwr 2024-07-10 04:43:46,777 | server.py:498 | 		round 6: 5.774398994445801
 debug | INFO flwr 2024-07-10 04:43:46,777 | server.py:498 | 		round 7: 5.7242742538452145
 debug | INFO flwr 2024-07-10 04:43:46,777 | server.py:499 | 
+debug | INFO flwr 2024-07-10 04:54:43,265 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 04:54:45,166 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 18946770124.0, 'memory': 37893540251.0, 'node:__internal_head__': 1.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-07-10 04:54:45,166 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 04:54:45,166 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 04:54:45,172 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 04:54:45,172 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 04:54:45,172 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 04:54:51,786 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-10 04:54:51,786 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-10 04:54:51,786 | server.py:110 | 
+debug | INFO flwr 2024-07-10 04:54:51,786 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-10 04:55:18,399 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 04:55:20,331 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 18996740505.0, 'node:__internal_head__': 1.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'memory': 37993481012.0}
+debug | INFO flwr 2024-07-10 04:55:20,331 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 04:55:20,331 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 04:55:20,336 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 04:55:20,336 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 04:55:20,336 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 04:55:31,742 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-10 04:55:31,742 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-10 04:55:31,742 | server.py:110 | 
+debug | INFO flwr 2024-07-10 04:55:31,742 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-10 04:58:13,754 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 04:58:15,655 | app.py:228 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'object_store_memory': 19028781465.0, 'memory': 38057562932.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0}
+debug | INFO flwr 2024-07-10 04:58:15,655 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 04:58:15,655 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 04:58:15,661 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 04:58:15,661 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 04:58:15,661 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 04:58:22,029 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-10 04:58:22,029 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-10 04:58:22,029 | server.py:110 | 
+debug | INFO flwr 2024-07-10 04:58:22,029 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-10 04:58:22,029 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 04:59:45,727 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 04:59:45,909 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | ERROR flwr 2024-07-10 04:59:45,987 | app.py:328 | Parent directory model_weights does not exist.
+debug | ERROR flwr 2024-07-10 04:59:45,988 | app.py:329 | Traceback (most recent call last):
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 113, in fit
+    res_fit = self.fit_round(
+  File "/root/myprojectenv/lib/python3.10/site-packages/flwr/server/server.py", line 249, in fit_round
+    ] = self.strategy.aggregate_fit(server_round, results, failures)
+  File "/root/src/fedSSL/server.py", line 64, in aggregate_fit
+    torch.save(gb_simclr.state_dict(), f"model_weights/model_round_{server_round}.pth")
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/serialization.py", line 627, in save
+    with _open_zipfile_writer(f) as opened_zipfile:
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/serialization.py", line 501, in _open_zipfile_writer
+    return container(name_or_buffer)
+  File "/root/myprojectenv/lib/python3.10/site-packages/torch/serialization.py", line 472, in __init__
+    super().__init__(torch._C.PyTorchFileWriter(self.name))
+RuntimeError: Parent directory model_weights does not exist.
+
+debug | ERROR flwr 2024-07-10 04:59:45,988 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 1, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 1, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-07-10 05:01:09,526 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 05:01:11,424 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 38054105088.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'node:__internal_head__': 1.0, 'object_store_memory': 19027052544.0}
+debug | INFO flwr 2024-07-10 05:01:11,424 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 05:01:11,424 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 05:01:11,430 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 05:01:11,430 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 05:01:11,430 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:01:17,871 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:01:17,871 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-10 05:01:17,871 | server.py:110 | 
+debug | INFO flwr 2024-07-10 05:01:17,871 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-10 05:01:17,871 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 05:02:41,247 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 05:02:41,431 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-10 05:02:41,616 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 05:02:46,791 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 05:02:46,791 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-10 05:02:46,794 | server.py:494 | 
+debug | INFO flwr 2024-07-10 05:02:46,794 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-07-10 05:02:46,794 | server.py:496 | Run finished 1 round(s) in 88.92s
+debug | INFO flwr 2024-07-10 05:02:46,794 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-07-10 05:02:46,794 | server.py:498 | 		round 1: 5.715798536936442
+debug | INFO flwr 2024-07-10 05:02:46,794 | server.py:499 | 
+debug | INFO flwr 2024-07-10 05:05:50,385 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 05:05:52,279 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 38086338971.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'node:__internal_head__': 1.0, 'object_store_memory': 19043169484.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0}
+debug | INFO flwr 2024-07-10 05:05:52,279 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 05:05:52,279 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 05:05:52,285 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 05:05:52,285 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 05:05:52,285 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:05:58,642 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:05:58,643 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-10 05:05:58,643 | server.py:110 | 
+debug | INFO flwr 2024-07-10 05:05:58,643 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-10 05:05:58,643 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 05:07:22,355 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 05:07:22,539 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-10 05:07:22,839 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 05:07:28,063 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 05:07:28,064 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-10 05:07:28,067 | server.py:494 | 
+debug | INFO flwr 2024-07-10 05:07:28,067 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-07-10 05:07:28,067 | server.py:496 | Run finished 1 round(s) in 89.42s
+debug | INFO flwr 2024-07-10 05:07:28,067 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-07-10 05:07:28,067 | server.py:498 | 		round 1: 5.715804020563762
+debug | INFO flwr 2024-07-10 05:07:28,067 | server.py:499 | 
+debug | INFO flwr 2024-07-10 05:10:00,580 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 05:10:02,503 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 19044202905.0, 'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0, 'memory': 38088405812.0}
+debug | INFO flwr 2024-07-10 05:10:02,503 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 05:10:02,503 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 05:10:02,508 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 05:10:02,509 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 05:10:02,509 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:10:09,984 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:10:09,985 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-10 05:10:09,985 | server.py:110 | 
+debug | INFO flwr 2024-07-10 05:10:09,985 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-10 05:10:09,985 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 05:11:33,598 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 05:11:33,780 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-10 05:11:34,089 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 05:11:39,324 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 05:11:39,324 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-10 05:11:39,327 | server.py:494 | 
+debug | INFO flwr 2024-07-10 05:11:39,327 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-07-10 05:11:39,327 | server.py:496 | Run finished 1 round(s) in 89.34s
+debug | INFO flwr 2024-07-10 05:11:39,327 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-07-10 05:11:39,327 | server.py:498 | 		round 1: 5.718878746032715
+debug | INFO flwr 2024-07-10 05:11:39,327 | server.py:499 | 
+debug | INFO flwr 2024-07-10 05:14:48,425 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 05:14:50,343 | app.py:228 | Flower VCE: Ray initialized with resources: {'accelerator_type:G': 1.0, 'GPU': 1.0, 'memory': 38070317876.0, 'node:__internal_head__': 1.0, 'object_store_memory': 19035158937.0, 'node:172.17.0.2': 1.0, 'CPU': 11.0}
+debug | INFO flwr 2024-07-10 05:14:50,343 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 05:14:50,343 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 05:14:50,348 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 05:14:50,348 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 05:14:50,348 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:15:40,533 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 05:15:42,425 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 19034711654.0, 'node:__internal_head__': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'memory': 38069423310.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-07-10 05:15:42,425 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 05:15:42,425 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 05:15:42,431 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 05:15:42,431 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 05:15:42,431 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:16:32,517 | app.py:193 | Starting Flower simulation, config: num_rounds=1, no round_timeout
+debug | INFO flwr 2024-07-10 05:16:34,422 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 19045056921.0, 'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'CPU': 11.0, 'node:172.17.0.2': 1.0, 'memory': 38090113844.0}
+debug | INFO flwr 2024-07-10 05:16:34,422 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-10 05:16:34,422 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-10 05:16:34,427 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-10 05:16:34,427 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-10 05:16:34,427 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:16:40,685 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-10 05:16:40,685 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-10 05:16:40,685 | server.py:110 | 
+debug | INFO flwr 2024-07-10 05:16:40,685 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-10 05:16:40,685 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 05:18:02,148 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 05:18:02,331 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-10 05:18:02,524 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-07-10 05:18:07,716 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-07-10 05:18:07,716 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-10 05:18:07,719 | server.py:494 | 
+debug | INFO flwr 2024-07-10 05:18:07,719 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-07-10 05:18:07,719 | server.py:496 | Run finished 1 round(s) in 87.03s
+debug | INFO flwr 2024-07-10 05:18:07,719 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-07-10 05:18:07,719 | server.py:498 | 		round 1: 5.741991678873698
+debug | INFO flwr 2024-07-10 05:18:07,719 | server.py:499 | 

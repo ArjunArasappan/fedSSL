@@ -11,7 +11,7 @@ from typing import Dict, Optional, Tuple, List, Union
 from collections import OrderedDict
 
 
-from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
+from model import SimCLR, SimCLRPredictor, NTXentLoss
 from utils import NUM_CLIENTS, NUM_CLASSES, NUM_ROUNDS, DEVICE, useResnet18, fineTuneEncoder, load_centralized_data
 from test import evaluate_gb_model 
 
@@ -37,7 +37,7 @@ parser.add_argument(
 
 centralized_finetune, centralized_test = load_centralized_data()
 
-gb_pred = GlobalPredictor(fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = useResnet18)
+# gb_pred = GlobalPredictor(fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = useResnet18)
 gb_simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
 
 
@@ -61,13 +61,11 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
             gb_simclr.load_state_dict(state_dict, strict=True)
 
             # Save the model
-            torch.save(gb_simclr.state_dict(), f"model_round_{server_round}.pth")
+            torch.save(gb_simclr.state_dict(), f"./model_weights/model_round_{server_round}.pth")
 
         return aggregated_parameters, aggregated_metrics
 
-strategy = SaveModelStrategy(
-    # evaluate_fn = gb_pred.get_evaluate_fn(),
-)
+strategy = SaveModelStrategy()
 
 
 # strategy = FedAvg(
@@ -88,18 +86,20 @@ if __name__ == "__main__":
         "num_gpus": args.num_gpus,
     }
 
-    fl.simulation.start_simulation(
-        client_fn=client_fn,
-        num_clients=NUM_CLIENTS,
-        config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
-        client_resources=client_resources,
-        strategy=strategy
-    )
+    # fl.simulation.start_simulation(
+    #     client_fn=client_fn,
+    #     num_clients=NUM_CLIENTS,
+    #     config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
+    #     client_resources=client_resources,
+    #     strategy=strategy
+    # )
     
     loss, accuracy = evaluate_gb_model()
     
     print("FINAL GLOBAL MODEL RESULTS:")
     print("Loss:", loss)
+    print("Accuracy:", accuracy)
+    
     
     
     

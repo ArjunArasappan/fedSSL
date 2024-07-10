@@ -1,35 +1,47 @@
-
+import os
+import glob
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader
 from utils import load_centralized_data
-from model import SimCLRPredictor
+from model import SimCLR, SimCLRPredictor
+from utils import NUM_CLASSES, useResnet18, fineTuneEncoder, FINETUNE_EPOCHS, DEVICE
+import flwr as fl
 
-from utils import NUM_CLASSES, useResnet18, tune_encoder, FINETUNE_EPOCHS
-
-simclr_predictor = SimCLRPredictor(NUM_CLASSES, device, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(device)
-
+simclr_predictor = None
 
 def evaluate_gb_model():
+    global simclr_predictor
+    simclr_predictor = SimCLRPredictor(NUM_CLASSES, DEVICE, useResnet18=useResnet18, tune_encoder=fineTuneEncoder).to(DEVICE)
+    
     load_model()
     
     trainloader, testloader = load_centralized_data()
-    optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
+    optimizer = torch.optim.Adam(simclr_predictor.parameters(), lr=3e-4)
     criterion = nn.CrossEntropyLoss()
     
     fine_tune_predictor(trainloader, optimizer, criterion)
     
-    return evaluate(testloader, optimizer, criterion)
+    loss, accuracy = evaluate(testloader, criterion)
+    return loss, accuracy
 
-    
 def load_model():
     global simclr_predictor
     
-    list_of_files = [fname for fname in glob.glob("./model_round_*")]
+    simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
+
+    
+    list_of_files = [fname for fname in glob.glob("./model_weights/model_round_*")]
     latest_round_file = max(list_of_files, key=os.path.getctime)
-    print("Loading pre-trained model from: ", latest_round_file)
+    print("Loading pre-trained model from:", latest_round_file)
     state_dict = torch.load(latest_round_file)
     
-    simclr_predictor.load_state_dict(state_dict)
+    simclr.load_state_dict(state_dict)
     
-    return simclr_predictor
+    weights = [v.cpu().numpy() for v in simclr.state_dict().values()]
+    
+    simclr_predictor.set_encoder_parameters(weights)
 
 
 def fine_tune_predictor(trainloader, optimizer, criterion):
@@ -38,54 +50,49 @@ def fine_tune_predictor(trainloader, optimizer, criterion):
     for epoch in range(FINETUNE_EPOCHS):
         batch = 0
         num_batches = len(trainloader)
-    
 
         for item in trainloader:
             (x, x_i, x_j), labels = item['img'], item['label']
             x, labels = x.to(DEVICE), labels.to(DEVICE)
             
-            self.optimizer.zero_grad()
+            optimizer.zero_grad()
             
-            outputs = self.simclr_predictor(x)
-            loss = self.criterion(outputs, labels)
+            outputs = simclr_predictor(x)
+            loss = criterion(outputs, labels)
             
             loss.backward()
-            self.optimizer.step()
+            optimizer.step()
             
-            # if batch % (print_interval * num_batches) == 0:
             print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
-
-            
             batch += 1
-            
-            
-def evaluate(testloader, optimizer, criterion):
-    self.simclr_predictor.eval()
+
+def evaluate(testloader, criterion):
+    simclr_predictor.eval()
     
     total = 0
-
     correct = 0
     loss = 0
 
     batch = 0
-    num_batches = len(self.testloader)
+    num_batches = len(testloader)
 
     with torch.no_grad():
-        for item in self.testloader:
+        for item in testloader:
             (x, x_i, x_j), labels = item['img'], item['label']
-
             x, labels = x.to(DEVICE), labels.to(DEVICE)
             
-            logits = self.simclr_predictor(x)
+            logits = simclr_predictor(x)
             values, predicted = torch.max(logits, 1)  
             
             total += labels.size(0)
-            loss += self.criterion(logits, labels)
+            loss += criterion(logits, labels).item()
             correct += (predicted == labels).sum().item()
 
-            print(f"Epoch: {epoch} Predictor Test Batch: {batch} / {num_batches}")
-            
+            print(f"Test Batch: {batch} / {num_batches}")
             batch += 1
   
-        
     return loss / batch, correct / total
+
+if __name__ == "__main__":
+    loss, accuracy = evaluate_gb_model()
+    print(f"Loss: {loss}, Accuracy: {accuracy}")
