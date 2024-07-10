@@ -5,4 +5,3 @@ cifar-100-python/
 *.tar.gz
 *.pth
 .python-version
-model_weights/
