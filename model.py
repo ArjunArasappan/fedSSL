@@ -10,7 +10,7 @@ from torchvision.models import resnet18, ResNet18_Weights, resnet50, ResNet50_We
 from flwr.common.logger import log
 from logging import INFO, DEBUG
 from flwr.common import NDArrays, Scalar
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional, Tuple, List
 
 from utils import NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, DEVICE, BATCH_SIZE
 
@@ -20,7 +20,7 @@ from utils import NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, DEVICE, BATCH_SIZE
 
 
 class NTXentLoss(nn.Module):
-    def __init__(self, device, temperature=0.2, ):
+    def __init__(self, device, temperature=0.5, ):
         super(NTXentLoss, self).__init__()
         self.temperature = temperature
         self.device = device
@@ -169,7 +169,7 @@ class GlobalPredictor:
         self.trainloader = trainloader
         self.testloader = testloader
         
-        self.epochs = 30
+        self.epochs = 5
         self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
         

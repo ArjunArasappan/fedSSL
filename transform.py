@@ -20,9 +20,7 @@ class SimCLRTransform:
             transforms.RandomApply([color_jitter], p=0.8),
             transforms.RandomGrayscale(p=0.2)
         ]
-        
-        self.no_augment = [transforms.RandomResizedCrop(size=size), transforms.ToTensor()]
-        
+                
         if gaussian:
             self.base_transform.append(GaussianBlur(kernel_size=int(0.1 * size)))
             
@@ -31,15 +29,12 @@ class SimCLRTransform:
     def __call__(self, x):
         if isinstance(x, PIL.Image.Image):
             transform_list = self.base_transform
-            original = self.no_augment
         else:
             transform_list = [transforms.ToPILImage()] + self.base_transform
-            no_augment =  [transforms.ToPILImage()] + self.no_augment 
         
         transform = transforms.Compose(transform_list)
-        no_augment = transforms.Compose(original)
-        
-        
+        no_augment = self.test_transform()
+
         return (no_augment(x), transform(x), transform(x))
 
     def test_transform(self):
@@ -48,11 +43,6 @@ class SimCLRTransform:
             transforms.ToTensor()
         ])
 
-    def fine_tune_transform(self):
-        return transforms.Compose([
-            transforms.Resize(self.size),
-            transforms.ToTensor()
-        ])
 
 class GaussianBlur(object):
     """blur a single image on CPU"""
