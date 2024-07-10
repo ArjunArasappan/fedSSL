@@ -50,7 +50,7 @@ client2 = fl.client.ClientApp(
 strategy = SaveModelStrategy()
 
 # ServerApp for Flower-Next
-serverMain = fl.server.ServerApp(
+server = fl.server.ServerApp(
     config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
     strategy=strategy,
 )
