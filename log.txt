@@ -13183,3 +13183,505 @@ debug | INFO flwr 2024-07-11 01:20:20,454 | server.py:496 | Run finished 1 round
 debug | INFO flwr 2024-07-11 01:20:20,454 | server.py:498 | 	History (loss, distributed):
 debug | INFO flwr 2024-07-11 01:20:20,454 | server.py:498 | 		round 1: 6.184123134613037
 debug | INFO flwr 2024-07-11 01:20:20,454 | server.py:499 | 
+debug | INFO flwr 2024-07-11 17:29:57,475 | app.py:193 | Starting Flower simulation, config: num_rounds=8, no round_timeout
+debug | INFO flwr 2024-07-11 17:30:00,463 | app.py:228 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0, 'node:172.17.0.3': 1.0, 'GPU': 1.0, 'object_store_memory': 13365248409.0, 'CPU': 13.0, 'memory': 26730496820.0}
+debug | INFO flwr 2024-07-11 17:30:00,463 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-11 17:30:00,463 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-11 17:30:00,484 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-11 17:30:00,484 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-11 17:30:00,484 | server.py:279 | Requesting initial parameters from one random client
+debug | ERROR flwr 2024-07-11 17:30:06,424 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=26127, ip=172.17.0.3, actor_id=9cde74b7392e21f2ebf3203301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f7aa00fdff0>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 44, in load_partition
+    federated_dataset = FederatedDataset(dataset="cifar10", partitioners=IidPartitioner(NUM_CLIENTS))
+NameError: name 'IidPartitioner' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=26127, ip=172.17.0.3, actor_id=9cde74b7392e21f2ebf3203301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f7aa00fdff0>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'IidPartitioner' is not defined
+
+debug | ERROR flwr 2024-07-11 17:30:06,424 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=26127, ip=172.17.0.3, actor_id=9cde74b7392e21f2ebf3203301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f7aa00fdff0>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 44, in load_partition
+    federated_dataset = FederatedDataset(dataset="cifar10", partitioners=IidPartitioner(NUM_CLIENTS))
+NameError: name 'IidPartitioner' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=26127, ip=172.17.0.3, actor_id=9cde74b7392e21f2ebf3203301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f7aa00fdff0>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'IidPartitioner' is not defined
+debug | ERROR flwr 2024-07-11 17:30:06,424 | app.py:328 | [36mray::ClientAppActor.run()[39m (pid=26127, ip=172.17.0.3, actor_id=9cde74b7392e21f2ebf3203301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f7aa00fdff0>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 44, in load_partition
+    federated_dataset = FederatedDataset(dataset="cifar10", partitioners=IidPartitioner(NUM_CLIENTS))
+NameError: name 'IidPartitioner' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=26127, ip=172.17.0.3, actor_id=9cde74b7392e21f2ebf3203301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f7aa00fdff0>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'IidPartitioner' is not defined
+debug | ERROR flwr 2024-07-11 17:30:06,425 | app.py:329 | Traceback (most recent call last):
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 93, in fit
+    self.parameters = self._get_initial_parameters(server_round=0, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 282, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 148, in get_parameters
+    message_out = self._submit_job(message, timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 87, in _submit_job
+    raise ex
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=26127, ip=172.17.0.3, actor_id=9cde74b7392e21f2ebf3203301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f7aa00fdff0>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 44, in load_partition
+    federated_dataset = FederatedDataset(dataset="cifar10", partitioners=IidPartitioner(NUM_CLIENTS))
+NameError: name 'IidPartitioner' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=26127, ip=172.17.0.3, actor_id=9cde74b7392e21f2ebf3203301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f7aa00fdff0>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'IidPartitioner' is not defined
+
+debug | ERROR flwr 2024-07-11 17:30:06,426 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 1, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 1, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-07-11 17:35:27,628 | app.py:193 | Starting Flower simulation, config: num_rounds=8, no round_timeout
+debug | INFO flwr 2024-07-11 17:35:31,414 | app.py:228 | Flower VCE: Ray initialized with resources: {'CPU': 13.0, 'memory': 26766444135.0, 'node:__internal_head__': 1.0, 'object_store_memory': 13383222067.0, 'GPU': 1.0, 'node:172.17.0.3': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-07-11 17:35:31,414 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-11 17:35:31,414 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-11 17:35:31,433 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-11 17:35:31,433 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-11 17:35:31,433 | server.py:279 | Requesting initial parameters from one random client
+debug | ERROR flwr 2024-07-11 17:35:43,972 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=27818, ip=172.17.0.3, actor_id=5d8d777d8e9a7f50e465d1c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f19587f6050>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 48, in load_partition
+    partition = train_data.load_partition(partition_id)
+AttributeError: 'Dataset' object has no attribute 'load_partition'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=27818, ip=172.17.0.3, actor_id=5d8d777d8e9a7f50e465d1c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f19587f6050>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'Dataset' object has no attribute 'load_partition'
+
+debug | ERROR flwr 2024-07-11 17:35:43,972 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=27818, ip=172.17.0.3, actor_id=5d8d777d8e9a7f50e465d1c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f19587f6050>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 48, in load_partition
+    partition = train_data.load_partition(partition_id)
+AttributeError: 'Dataset' object has no attribute 'load_partition'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=27818, ip=172.17.0.3, actor_id=5d8d777d8e9a7f50e465d1c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f19587f6050>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'Dataset' object has no attribute 'load_partition'
+debug | ERROR flwr 2024-07-11 17:35:43,972 | app.py:328 | [36mray::ClientAppActor.run()[39m (pid=27818, ip=172.17.0.3, actor_id=5d8d777d8e9a7f50e465d1c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f19587f6050>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 48, in load_partition
+    partition = train_data.load_partition(partition_id)
+AttributeError: 'Dataset' object has no attribute 'load_partition'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=27818, ip=172.17.0.3, actor_id=5d8d777d8e9a7f50e465d1c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f19587f6050>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'Dataset' object has no attribute 'load_partition'
+debug | ERROR flwr 2024-07-11 17:35:43,973 | app.py:329 | Traceback (most recent call last):
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 93, in fit
+    self.parameters = self._get_initial_parameters(server_round=0, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 282, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 148, in get_parameters
+    message_out = self._submit_job(message, timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 87, in _submit_job
+    raise ex
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=27818, ip=172.17.0.3, actor_id=5d8d777d8e9a7f50e465d1c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f19587f6050>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 48, in load_partition
+    partition = train_data.load_partition(partition_id)
+AttributeError: 'Dataset' object has no attribute 'load_partition'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=27818, ip=172.17.0.3, actor_id=5d8d777d8e9a7f50e465d1c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f19587f6050>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'Dataset' object has no attribute 'load_partition'
+
+debug | ERROR flwr 2024-07-11 17:35:43,974 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 1, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 1, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-07-11 17:42:33,977 | app.py:193 | Starting Flower simulation, config: num_rounds=8, no round_timeout
+debug | INFO flwr 2024-07-11 17:42:37,732 | app.py:228 | Flower VCE: Ray initialized with resources: {'CPU': 13.0, 'memory': 26740553319.0, 'node:172.17.0.3': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'node:__internal_head__': 1.0, 'object_store_memory': 13370276659.0}
+debug | INFO flwr 2024-07-11 17:42:37,733 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-11 17:42:37,733 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-11 17:42:37,754 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-11 17:42:37,754 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-11 17:42:37,754 | server.py:279 | Requesting initial parameters from one random client
+debug | ERROR flwr 2024-07-11 17:42:50,934 | ray_client_proxy.py:85 | Traceback (most recent call last):
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=29422, ip=172.17.0.3, actor_id=a5b73e5f877de6c6895d647a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f051c015f30>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 50, in load_partition
+    partition = train_data.load_partition(partition_id)
+AttributeError: 'Dataset' object has no attribute 'load_partition'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=29422, ip=172.17.0.3, actor_id=a5b73e5f877de6c6895d647a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f051c015f30>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'Dataset' object has no attribute 'load_partition'
+
+debug | ERROR flwr 2024-07-11 17:42:50,934 | ray_client_proxy.py:86 | [36mray::ClientAppActor.run()[39m (pid=29422, ip=172.17.0.3, actor_id=a5b73e5f877de6c6895d647a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f051c015f30>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 50, in load_partition
+    partition = train_data.load_partition(partition_id)
+AttributeError: 'Dataset' object has no attribute 'load_partition'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=29422, ip=172.17.0.3, actor_id=a5b73e5f877de6c6895d647a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f051c015f30>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'Dataset' object has no attribute 'load_partition'
+debug | ERROR flwr 2024-07-11 17:42:50,935 | app.py:328 | [36mray::ClientAppActor.run()[39m (pid=29422, ip=172.17.0.3, actor_id=a5b73e5f877de6c6895d647a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f051c015f30>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 50, in load_partition
+    partition = train_data.load_partition(partition_id)
+AttributeError: 'Dataset' object has no attribute 'load_partition'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=29422, ip=172.17.0.3, actor_id=a5b73e5f877de6c6895d647a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f051c015f30>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'Dataset' object has no attribute 'load_partition'
+debug | ERROR flwr 2024-07-11 17:42:50,936 | app.py:329 | Traceback (most recent call last):
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 93, in fit
+    self.parameters = self._get_initial_parameters(server_round=0, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 282, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 148, in get_parameters
+    message_out = self._submit_job(message, timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 87, in _submit_job
+    raise ex
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=29422, ip=172.17.0.3, actor_id=a5b73e5f877de6c6895d647a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f051c015f30>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 98, in __call__
+    return self._call(message, context)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/client/message_handler/message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(str(message.metadata.partition_id))
+  File "/root/fedSSL/client.py", line 123, in client_fn
+    return CifarClient(clientID, simclr).to_client()
+  File "/root/fedSSL/client.py", line 94, in __init__
+    self.trainloader, self.testloader = load_partition(self.cid)
+  File "/root/fedSSL/utils.py", line 50, in load_partition
+    partition = train_data.load_partition(partition_id)
+AttributeError: 'Dataset' object has no attribute 'load_partition'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=29422, ip=172.17.0.3, actor_id=a5b73e5f877de6c6895d647a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f051c015f30>)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'Dataset' object has no attribute 'load_partition'
+
+debug | ERROR flwr 2024-07-11 17:42:50,936 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 1, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 1, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-07-11 17:43:24,347 | app.py:193 | Starting Flower simulation, config: num_rounds=8, no round_timeout
+debug | INFO flwr 2024-07-11 17:43:28,132 | app.py:228 | Flower VCE: Ray initialized with resources: {'CPU': 13.0, 'node:__internal_head__': 1.0, 'GPU': 1.0, 'node:172.17.0.3': 1.0, 'accelerator_type:G': 1.0, 'object_store_memory': 13382150553.0, 'memory': 26764301108.0}
+debug | INFO flwr 2024-07-11 17:43:28,132 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-11 17:43:28,133 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-11 17:43:28,151 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-11 17:43:28,151 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-11 17:43:28,151 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-11 17:43:43,587 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-11 17:43:43,588 | server.py:94 | Evaluating initial global parameters
+debug | ERROR flwr 2024-07-11 17:44:32,400 | app.py:328 | name 'csv' is not defined
+debug | ERROR flwr 2024-07-11 17:44:32,401 | app.py:329 | Traceback (most recent call last):
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/simulation/app.py", line 323, in start_simulation
+    hist = run_fl(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/flwr/server/strategy/fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "/root/fedSSL/model.py", line 193, in evaluate
+    writer = csv.writer(file)
+NameError: name 'csv' is not defined
+
+debug | ERROR flwr 2024-07-11 17:44:32,401 | app.py:330 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 1, 'num_gpus': 1.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 1, 'num_gpus': 1.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-07-11 17:53:26,229 | app.py:193 | Starting Flower simulation, config: num_rounds=8, no round_timeout
+debug | INFO flwr 2024-07-11 17:53:29,119 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 26671155611.0, 'object_store_memory': 13335577804.0, 'node:__internal_head__': 1.0, 'CPU': 13.0, 'GPU': 1.0, 'node:172.17.0.3': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-07-11 17:53:29,119 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-11 17:53:29,119 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-11 17:53:29,140 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-11 17:53:29,141 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-11 17:53:29,141 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-11 17:53:43,112 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-11 17:53:43,112 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-11 17:54:28,498 | server.py:97 | initial parameters (loss, other metrics): tensor(1.8363, device='cuda:0'), {'accuracy': 0.372}
+debug | INFO flwr 2024-07-11 17:54:28,500 | server.py:110 | 
+debug | INFO flwr 2024-07-11 17:54:28,500 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-11 17:54:28,500 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-11 17:58:07,651 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | WARNING flwr 2024-07-11 17:58:11,290 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-11 17:58:59,341 | server.py:129 | fit progress: (1, tensor(1.2786, device='cuda:0'), {'accuracy': 0.5588}, 270.84131529694423)
+debug | INFO flwr 2024-07-11 17:58:59,343 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-11 17:59:18,006 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | WARNING flwr 2024-07-11 17:59:18,007 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-11 17:59:18,007 | server.py:110 | 
+debug | INFO flwr 2024-07-11 17:59:18,007 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-07-11 17:59:18,007 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)

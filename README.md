@@ -34,7 +34,25 @@ Project dependencies are defined in `requirements.txt`. Install them with:
 pip install -r requirements.txt
 ```
 
+### Run with `start_simulation()`
 
+Ensure you have activated your environment then:
+
+```bash
+# and then run the example
+python sim.py
+```
+
+You can adjust the CPU/GPU resources you assign to each of your virtual clients. By default, your clients will only use 1xCPU core. For example:
+
+```bash
+# Will assign 2xCPUs to each client
+python sim.py --num_cpus=2
+
+# Will assign 2xCPUs and 25% of the GPU's VRAM to each client
+# This means that you can have 4 concurrent clients on each GPU
+# (assuming you have enough CPUs)
+python sim.py --num_cpus=2 --num_gpus=0.25
 
 ## Run with Flower Next (preview)
 

@@ -11,7 +11,7 @@ from typing import Dict, Optional, Tuple, List, Union
 from collections import OrderedDict
 
 
-from model import SimCLR, SimCLRPredictor, NTXentLoss
+from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
 from utils import NUM_CLIENTS, NUM_CLASSES, NUM_ROUNDS, DEVICE, useResnet18, fineTuneEncoder, load_centralized_data
 from test import evaluate_gb_model 
 
@@ -34,10 +34,31 @@ parser.add_argument(
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
+parser.add_argument(
+    "--num_clients",
+    type=float,
+    default=NUM_CLIENTS,
+    help="Ratio of GPU memory to assign to a virtual client",
+)
+
+parser.add_argument(
+    "--use_resnet18",
+    type=float,
+    default=use_resnet18,
+    help="Ratio of GPU memory to assign to a virtual client",
+)
+
+parser.add_argument(
+    "--num_rounds",
+    type=float,
+    default=NUM_ROUNDS,
+    help="Ratio of GPU memory to assign to a virtual client",
+)
+
 
 centralized_finetune, centralized_test = load_centralized_data()
 
-# gb_pred = GlobalPredictor(fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = useResnet18)
+gb_pred = GlobalPredictor(fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = useResnet18)
 gb_simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
 
 
@@ -65,12 +86,9 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
 
         return aggregated_parameters, aggregated_metrics
 
-strategy = SaveModelStrategy()
-
-
-# strategy = FedAvg(
-#     evaluate_fn = gb_pred.get_evaluate_fn(),
-# )
+strategy = SaveModelStrategy(
+    evaluate_fn = gb_pred.get_evaluate_fn()
+)
 
 if __name__ == "__main__":
     print("Cuda?:", torch.cuda.is_available())

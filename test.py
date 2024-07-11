@@ -9,6 +9,8 @@ from model import SimCLR, SimCLRPredictor
 from utils import NUM_CLASSES, useResnet18, fineTuneEncoder, FINETUNE_EPOCHS, DEVICE
 import flwr as fl
 
+import csv
+
 simclr_predictor = None
 
 def evaluate_gb_model():
@@ -24,7 +26,11 @@ def evaluate_gb_model():
     fine_tune_predictor(trainloader, optimizer, criterion)
     
     loss, accuracy = evaluate(testloader, criterion)
-    return loss, accuracy
+    
+
+
+    # Data to append
+
 
 def load_model():
     global simclr_predictor
