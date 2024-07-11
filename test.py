@@ -29,7 +29,7 @@ def evaluate_gb_model():
     
 
 
-    # Data to append
+    return los, accuracy
 
 
 def load_model():

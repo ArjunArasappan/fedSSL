@@ -8,13 +8,14 @@ from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10
 from torchvision.models import resnet18, ResNet18_Weights
 from torch.utils.data import Dataset
+import csv
 
 from collections import OrderedDict
 from typing import Dict, List, Optional, Tuple
 
 from transform import SimCLRTransform
 from model import SimCLR, NTXentLoss, SimCLRPredictor
-from utils import load_partition, load_centralized_data, BATCH_SIZE, NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, useResnet18, DEVICE
+from utils import load_partition, load_centralized_data, BATCH_SIZE, NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, useResnet18, DEVICE, datalog_path
 
 
 
@@ -23,7 +24,6 @@ from utils import load_partition, load_centralized_data, BATCH_SIZE, NUM_CLASSES
 
 def train(net, trainloader, optimizer, criterion, epochs):
     net.train()
-    
     num_batches = len(trainloader)
     batch = 0
     total_loss = 0
@@ -52,7 +52,9 @@ def train(net, trainloader, optimizer, criterion, epochs):
             
             batch += 1
             
-    return {'Avg Train Loss' : float(total_loss / batch)}
+
+            
+    return {'Loss' : float(total_loss / batch)}
                  
 
 def test(net, testloader, criterion):
@@ -90,7 +92,7 @@ class CifarClient(fl.client.NumPyClient):
         self.cid = cid
         self.simclr = simclr
         self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
-                
+        self.round = 0
         self.trainloader, self.testloader = load_partition(self.cid)
 
     def get_parameters(self, config):
@@ -103,17 +105,34 @@ class CifarClient(fl.client.NumPyClient):
         self.simclr.load_state_dict(state_dict, strict=True)
 
     def fit(self, parameters, config):
+        self.round += 1
         self.set_parameters(parameters)
+        self.simclr.setInference(False)
         results = train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+        
+        data = ["client train", (useResnet18), NUM_CLIENTS, self.round, results['Loss'], -1, self.cid]
+
+        # Open the file in append mode
+        with open(datalog_path, 'a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(data)
                 
         return self.get_parameters(config={}), len(self.trainloader), results
 
     def evaluate(self, parameters, config):
         self.set_parameters(parameters)
+        self.simclr.setInference(False)
         
         loss, accuracy = test(self.simclr, self.testloader, ntxent)
         
         print("Loss: ", float(loss), ', ', self.cid)
+        
+        data = ["client test", (useResnet18), NUM_CLIENTS, self.round, loss, -1, self.cid]
+
+        # Open the file in append mode
+        with open(datalog_path, 'a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(data)
 
         return float(loss), len(self.testloader), {"accuracy": accuracy}
 

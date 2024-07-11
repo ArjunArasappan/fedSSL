@@ -10,6 +10,8 @@ import numpy as np
 from typing import Dict, Optional, Tuple, List, Union
 from collections import OrderedDict
 
+import os
+
 
 from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
 from utils import NUM_CLIENTS, NUM_CLASSES, NUM_ROUNDS, DEVICE, useResnet18, fineTuneEncoder, load_centralized_data
@@ -17,14 +19,14 @@ from test import evaluate_gb_model
 
 
 
-fl.common.logger.configure(identifier="debug", filename="log.txt")
+fl.common.logger.configure(identifier="debug", filename="./log_files/log.txt")
 
 parser = argparse.ArgumentParser(description="Flower Simulation with PyTorch")
 
 parser.add_argument(
     "--num_cpus",
     type=int,
-    default=1,
+    default= 12,
     help="Number of CPUs to assign to a virtual client",
 )
 parser.add_argument(
@@ -36,21 +38,21 @@ parser.add_argument(
 
 parser.add_argument(
     "--num_clients",
-    type=float,
+    type=int,
     default=NUM_CLIENTS,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
 parser.add_argument(
     "--use_resnet18",
-    type=float,
-    default=use_resnet18,
+    type=bool,
+    default=useResnet18,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
 parser.add_argument(
     "--num_rounds",
-    type=float,
+    type=int,
     default=NUM_ROUNDS,
     help="Ratio of GPU memory to assign to a virtual client",
 )
@@ -103,6 +105,13 @@ if __name__ == "__main__":
         "num_cpus": args.num_cpus,
         "num_gpus": args.num_gpus,
     }
+    
+    NUM_CLIENTS = args.num_clients
+    NUM_ROUNDS = args.num_rounds
+    useResnet18 = args.use_resnet18
+    
+    print("Num Clients: ", NUM_CLIENTS)
+    print("Num Rounds: ", NUM_ROUNDS)
 
     fl.simulation.start_simulation(
         client_fn=client_fn,
@@ -112,11 +121,11 @@ if __name__ == "__main__":
         strategy=strategy
     )
     
-    loss, accuracy = evaluate_gb_model()
+    # loss, accuracy = evaluate_gb_model()
     
-    print("FINAL GLOBAL MODEL RESULTS:")
-    print("Loss:", loss)
-    print("Accuracy:", accuracy)
+    # print("FINAL GLOBAL MODEL RESULTS:")
+    # print("Loss:", loss)
+    # print("Accuracy:", accuracy)
     
     
     

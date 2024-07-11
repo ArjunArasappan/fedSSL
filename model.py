@@ -142,6 +142,7 @@ class SimCLRPredictor(nn.Module):
         
         self.simclr = SimCLR(device, useResnet18 = useResnet18).to(device)
         self.linear_predictor = nn.Linear(self.simclr.encoded_size, num_classes)
+        self.simclr.setInference(True)
         
         if not tune_encoder:
             for param in self.simclr.parameters():
@@ -188,7 +189,7 @@ class GlobalPredictor:
             loss, accuracy = self.evaluate()
             print("Global Model Accuracy: ", accuracy)
             
-            data = ["test", (useResnet18), NUM_CLIENTS, self.round, loss[0], accuracy]
+            data = ["test", (useResnet18), NUM_CLIENTS, self.round, loss.item(), accuracy, -1]
 
             # Open the file in append mode
             with open(datalog_path, 'a', newline='') as file:
