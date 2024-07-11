@@ -86,13 +86,13 @@ if __name__ == "__main__":
         "num_gpus": args.num_gpus,
     }
 
-    # fl.simulation.start_simulation(
-    #     client_fn=client_fn,
-    #     num_clients=NUM_CLIENTS,
-    #     config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
-    #     client_resources=client_resources,
-    #     strategy=strategy
-    # )
+    fl.simulation.start_simulation(
+        client_fn=client_fn,
+        num_clients=NUM_CLIENTS,
+        config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
+        client_resources=client_resources,
+        strategy=strategy
+    )
     
     loss, accuracy = evaluate_gb_model()
     

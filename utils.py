@@ -12,13 +12,16 @@ DRY_RUN = True
 
 NUM_CLIENTS = 5
 NUM_CLASSES = 10
-NUM_ROUNDS = 7
+NUM_ROUNDS = 1
 useResnet18 = False
 fineTuneEncoder = True
 addGausainBlur = True
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-centralized_fine_tune = 0.1
+
+centralized_finetune_split = 0.1
+centralized_test_split = 0.1
+
 client_train_split = 0.05
 
 FINETUNE_EPOCHS = 5
@@ -61,9 +64,14 @@ def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
     fds = FederatedDataset(dataset="cifar10", partitioners={"test": 1})
     centralized_train_data = fds.load_split("test")
     centralized_train_data = centralized_train_data.with_transform(apply_transforms)
+    
+    centralized_train_data = centralized_train_data.train_test_split(test_size=centralized_finetune_split, seed=42)['test']
 
     centralized_test_data = fds.load_split("train")
     centralized_test_data = centralized_test_data.with_transform(apply_transforms)
+    
+    centralized_test_data = centralized_test_data.train_test_split(test_size=centralized_test_split, seed=42)['test']
+
     
 
     trainloader = DataLoader(centralized_train_data, batch_size=batch_size)

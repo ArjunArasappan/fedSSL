@@ -10,7 +10,7 @@ from client import client_fn
 from dataset import get_tokenizer_and_data_collator_and_propt_formatting
 from client import gen_client_fn
 from utils import get_on_fit_config, fit_weighted_average
-from server import SaveModelStrategy
+from main import SaveModelStrategy
 
 
 warnings.filterwarnings("ignore", category=UserWarning)

@@ -6,3 +6,4 @@ cifar-100-python/
 *.pth
 .python-version
 venv/
+.pth
