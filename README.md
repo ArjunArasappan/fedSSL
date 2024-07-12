@@ -4,23 +4,11 @@ Self-supervised learning(SSL) is a learning paradigm that provides supervisory s
 
 Contrastive methods that employ data augmentations generate positive pairs of data by transforming each of their inputs to generate 'augmented' inputs that have different vector values but inherently convey the same information. Negative pairs can be  The contrastuve loss function encoourages similarity between model outputs of positive pairs and encourages dissimilarity between negative data pairs.
 
-In this example, we implement SimCLR: A Simple Framework for Contrastive Learning of Visual Representations. SimCLR makes use of image augmentations(random croppings, adding gausian noise, horizontal inversions, etc.) to generate positively paired augmented data, and negative pairs are made between augmented data with different source images. The nromalized temperatre-scaled cross entropy (NT-Xent) loss function below encourages similarity between positive pairs and disimilarity between negative pairs, where cosine similarity is used to compute similaroty between the representation latent vectors.  
+In this example, we implement SimCLR: A Simple Framework for Contrastive Learning of Visual Representations. SimCLR makes use of image augmentations(random croppings, adding gausian noise, horizontal inversions, etc.) to generate positively paired augmented data, and negative pairs are made between augmented data with different source images. The nromalized temperatre-scaled cross entropy (NT-Xent) loss function below encourages similarity between positive pairs and disimilarity between negative pairs, where cosine similarity is used to compute similaroty between the representation latent vectors. The NT-Xent loss is shown below:
 
-In short, SimCLR consists of an encoder network - in our case we use Resnet50 - and a projection head which projects latent encoder representations to a 
+![alt text](image.png)
 
-
-Self-supervised learning has gained popularity because of its ability to avoid the cost of annotating large-scale datasets. It is capable of adopting self-defined pseudolabels as supervision and use the learned representations for several downstream tasks. Specifically, contrastive learning has recently become a dominant component in self-supervised learning for computer vision, natural language processing (NLP), and other domains. It aims at embedding augmented versions of the same sample close to each other while trying to push away embeddings from different samples. This paper provides an extensive review of self-supervised methods that follow the contrastive approach. The work explains commonly used pretext tasks in a contrastive learning setup, followed by different architectures that have been proposed so far. Next, we present a performance comparison of different methods for multiple downstream tasks such as image classification, object detection, and action recognition. Finally, we conclude with the limitations of the current methods and the need for further techniques and future directions to make meaningful progress.
-
-
-
-Large language models (LLMs), which have been trained on vast amounts of publicly accessible data, have shown remarkable effectiveness in a wide range of areas.
-However, despite the fact that more data typically leads to improved performance, there is a concerning prospect that the supply of high-quality public data will deplete within a few years.
-Federated LLM training could unlock access to an endless pool of distributed private data by allowing multiple data owners to collaboratively train a shared model without the need to exchange raw data.
-
-This introductory example conducts federated instruction tuning with pretrained [LLama2](https://huggingface.co/openlm-research) models on [Alpaca-GPT4](https://huggingface.co/datasets/vicgalle/alpaca-gpt4) dataset.
-We implement LLM FlowerTune by integrating a bundle of techniques: 1) We use [Flower Datasets](https://flower.dev/docs/datasets/) to download, partition and preprocess the dataset. 2) The fine-tuning is done using the [🤗PEFT](https://huggingface.co/docs/peft/en/index) library. 3) We use Flower's Simulation Engine to simulate the LLM fine-tuning process in federated way,
-which allows users to perform the training on a single GPU.
-
+In short, SimCLR consists of an encoder network - in our case we use Resnet50 - and a projection head which projects encoded representations to a lower dimensional space where the contrastive loss is applied.
 
 
 

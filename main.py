@@ -32,7 +32,7 @@ parser.add_argument(
 parser.add_argument(
     "--num_gpus",
     type=float,
-    default=1.0,
+    default= 1,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
@@ -121,11 +121,11 @@ if __name__ == "__main__":
         strategy=strategy
     )
     
-    # loss, accuracy = evaluate_gb_model()
+    loss, accuracy = evaluate_gb_model()
     
-    # print("FINAL GLOBAL MODEL RESULTS:")
-    # print("Loss:", loss)
-    # print("Accuracy:", accuracy)
+    print("FINAL GLOBAL MODEL RESULTS:")
+    print("Loss:", loss)
+    print("Accuracy:", accuracy)
     
     
     

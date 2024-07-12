@@ -10,9 +10,9 @@ from flwr_datasets.partitioner import IidPartitioner
 
 
 
-NUM_CLIENTS = 5
+NUM_CLIENTS = 3
 NUM_CLASSES = 10
-NUM_ROUNDS = 7
+NUM_ROUNDS = 5
 useResnet18 = False
 fineTuneEncoder = True
 addGausainBlur = True
@@ -27,7 +27,7 @@ client_train_split = 0.05
 
 FINETUNE_EPOCHS = 15
 
-BATCH_SIZE = 512
+BATCH_SIZE = 128
 transform = SimCLRTransform(size=32, gaussian=addGausainBlur)
 
 client_fds = None
