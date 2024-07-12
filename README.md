@@ -6,7 +6,6 @@ Contrastive methods that employ data augmentations generate positive pairs of da
 
 In this example, we implement SimCLR: A Simple Framework for Contrastive Learning of Visual Representations. SimCLR makes use of image augmentations(random croppings, adding gausian noise, horizontal inversions, etc.) to generate positively paired augmented data, and negative pairs are made between augmented data with different source images. The nromalized temperatre-scaled cross entropy (NT-Xent) loss function below encourages similarity between positive pairs and disimilarity between negative pairs, where cosine similarity is used to compute similaroty between the representation latent vectors. The NT-Xent loss is shown below:
 
-![alt text]
 <p align="center">
   <img src="image.png" />
 </p>
