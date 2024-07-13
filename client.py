@@ -36,8 +36,10 @@ def train(net, trainloader, optimizer, criterion, epochs):
    
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
             optimizer.zero_grad()
+            
             z_i = net(x_i).to(DEVICE)
             z_j = net(x_j).to(DEVICE)
+            
             loss = criterion(z_i, z_j)
             total_loss += loss
             # print("training loss: ", loss)
@@ -93,7 +95,9 @@ class CifarClient(fl.client.NumPyClient):
         self.simclr = simclr
         self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
         self.round = 0
-        self.trainloader, self.testloader = load_partition(self.cid)
+        train, test = load_partition(self.cid)
+        self.trainloader = DataLoader(train, batch_size = BATCH_SIZE)
+        self.testloader = DataLoader(test, batch_size = BATCH_SIZE)
 
     def get_parameters(self, config):
         return [val.cpu().numpy() for _, val in self.simclr.state_dict().items()]

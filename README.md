@@ -10,7 +10,7 @@ In this example, we implement SimCLR: A Simple Framework for Contrastive Learnin
   <img src="images/image.png" />
 </p>
 
-In short, SimCLR consists of an encoder network - in our case we use Resnet50 - and a projection head which projects encoded representations to a lower dimensional space where the contrastive loss is applied.
+In short, SimCLR consists of an encoder network - in our case we use ResNet50/ResNet18 - and a projection head which projects encoded representations to a lower dimensional space where the contrastive loss is applied.
 
 
 

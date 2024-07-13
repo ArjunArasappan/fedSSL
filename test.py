@@ -19,7 +19,11 @@ def evaluate_gb_model():
     
     load_model()
     
-    trainloader, testloader = load_centralized_data()
+    train, test = load_centralized_data()
+    
+    trainloader = DataLoader(train, batch_size = BATCH_SIZE)
+    testloader = DataLoader(test, batch_size = BATCH_SIZE)   
+
     optimizer = torch.optim.Adam(simclr_predictor.parameters(), lr=3e-4)
     criterion = nn.CrossEntropyLoss()
     
