@@ -1,5 +1,5 @@
 import flwr as fl
-from client import client_fn, NUM_CLIENTS
+from client import client_fn
 from flwr.server.strategy import FedAvg
 from flwr.server.client_proxy import ClientProxy
 from flwr.common import FitRes
@@ -14,10 +14,10 @@ import os
 
 
 from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
-from utils import BATCH_SIZE, NUM_CLIENTS, NUM_CLASSES, NUM_ROUNDS, DEVICE, useResnet18, fineTuneEncoder, load_centralized_data
+import utils
 from test import evaluate_gb_model 
 
-
+DEVICE = utils.DEVICE
 
 fl.common.logger.configure(identifier="debug", filename="./log_files/log.txt")
 
@@ -39,29 +39,30 @@ parser.add_argument(
 parser.add_argument(
     "--num_clients",
     type=int,
-    default=NUM_CLIENTS,
+    default=utils.NUM_CLIENTS,
+    required= True,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
 parser.add_argument(
     "--use_resnet18",
     type=bool,
-    default=useResnet18,
+    default=utils.useResnet18,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
 parser.add_argument(
     "--num_rounds",
     type=int,
-    default=NUM_ROUNDS,
+    default=utils.NUM_ROUNDS,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
 
-centralized_finetune, centralized_test = load_centralized_data()
+centralized_finetune, centralized_test = utils.load_centralized_data()
 
-gb_pred = GlobalPredictor(fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = useResnet18)
-gb_simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
+gb_pred = GlobalPredictor(utils.fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = utils.useResnet18)
+gb_simclr = SimCLR(DEVICE, useResnet18=utils.useResnet18).to(DEVICE)
 
 
 
@@ -69,21 +70,18 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
     def aggregate_fit(self, server_round, results, failures):
         """Aggregate model weights using weighted average and store checkpoint"""
 
-        # Call aggregate_fit from base class (FedAvg) to aggregate parameters and metrics
+
         aggregated_parameters, aggregated_metrics = super().aggregate_fit(server_round, results, failures)
 
         if aggregated_parameters is not None:
             print(f"Saving round {server_round} aggregated_parameters...")
 
-            # Convert `Parameters` to `List[np.ndarray]`
             aggregated_ndarrays: List[np.ndarray] = fl.common.parameters_to_ndarrays(aggregated_parameters)
 
-            # Convert `List[np.ndarray]` to PyTorch`state_dict`
             params_dict = zip(gb_simclr.state_dict().keys(), aggregated_ndarrays)
             state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
             gb_simclr.load_state_dict(state_dict, strict=True)
 
-            # Save the model
             torch.save(gb_simclr.state_dict(), f"./model_weights/model_round_{server_round}.pth")
 
         return aggregated_parameters, aggregated_metrics
@@ -93,6 +91,7 @@ strategy = SaveModelStrategy(
 )
 
 if __name__ == "__main__":
+
     print("Cuda?:", torch.cuda.is_available())
     print("name:", torch.cuda.get_device_name(0))
     
@@ -106,20 +105,22 @@ if __name__ == "__main__":
         "num_gpus": args.num_gpus,
     }
     
-    NUM_CLIENTS = args.num_clients
-    NUM_ROUNDS = args.num_rounds
-    useResnet18 = args.use_resnet18
+    utils.NUM_CLIENTS = args.num_clients
+    utils.NUM_ROUNDS = args.num_rounds
+    utils.useResnet18 = args.use_resnet18
     
-    print("Num Clients: ", NUM_CLIENTS)
-    print("Num Rounds: ", NUM_ROUNDS)
+    print("Num Clients: ", utils.NUM_CLIENTS)
+    print("Num Rounds: ", utils.NUM_ROUNDS)
+    
+    utils.printClients()
 
-    # fl.simulation.start_simulation(
-    #     client_fn=client_fn,
-    #     num_clients=NUM_CLIENTS,
-    #     config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
-    #     client_resources=client_resources,
-    #     strategy=strategy
-    # )
+    fl.simulation.start_simulation(
+        client_fn=client_fn,
+        num_clients= utils.NUM_CLIENTS,
+        config=fl.server.ServerConfig(num_rounds= utils.NUM_ROUNDS),
+        client_resources=client_resources,
+        strategy=strategy
+    )
     
     loss, accuracy = evaluate_gb_model()
     

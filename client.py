@@ -15,12 +15,11 @@ from typing import Dict, List, Optional, Tuple
 
 from transform import SimCLRTransform
 from model import SimCLR, NTXentLoss, SimCLRPredictor
-from utils import load_partition, load_centralized_data, BATCH_SIZE, NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, useResnet18, DEVICE, datalog_path
+import utils
 
 
 
-
-
+DEVICE = utils.DEVICE
 
 def train(net, trainloader, optimizer, criterion, epochs):
     net.train()
@@ -88,16 +87,16 @@ def test(net, testloader, criterion):
 
 ntxent = NTXentLoss( device=DEVICE).to(DEVICE)
 
+round = 0
 
 class CifarClient(fl.client.NumPyClient):
     def __init__(self, cid, simclr):
         self.cid = cid
         self.simclr = simclr
         self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
-        self.round = 0
-        train, test = load_partition(self.cid)
-        self.trainloader = DataLoader(train, batch_size = BATCH_SIZE)
-        self.testloader = DataLoader(test, batch_size = BATCH_SIZE)
+        train, test = utils.load_partition(self.cid, utils.NUM_CLIENTS)
+        self.trainloader = DataLoader(train, batch_size = utils.BATCH_SIZE)
+        self.testloader = DataLoader(test, batch_size = utils.BATCH_SIZE)
 
     def get_parameters(self, config):
         return [val.cpu().numpy() for _, val in self.simclr.state_dict().items()]
@@ -109,21 +108,22 @@ class CifarClient(fl.client.NumPyClient):
         self.simclr.load_state_dict(state_dict, strict=True)
 
     def fit(self, parameters, config):
-        self.round += 1
+        global round
+        round += 1/utils.NUM_CLIENTS
         self.set_parameters(parameters)
         self.simclr.setInference(False)
         results = train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
         
-        data = ["client train", (useResnet18), NUM_CLIENTS, self.round, results['Loss'], -1, self.cid]
+        data = [(utils.useResnet18), utils.NUM_CLIENTS, int(round), "train", results['Loss'], -1, self.cid]
 
-        # Open the file in append mode
-        with open(datalog_path, 'a', newline='') as file:
+        with open(utils.datalog_path, 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(data)
                 
         return self.get_parameters(config={}), len(self.trainloader), results
 
     def evaluate(self, parameters, config):
+        global round
         self.set_parameters(parameters)
         self.simclr.setInference(False)
         
@@ -131,10 +131,9 @@ class CifarClient(fl.client.NumPyClient):
         
         print("Loss: ", float(loss), ', ', self.cid)
         
-        data = ["client test", (useResnet18), NUM_CLIENTS, self.round, loss, -1, self.cid]
+        data = [ (utils.useResnet18), utils.NUM_CLIENTS, int(round), "client test", loss, -1, self.cid]
 
-        # Open the file in append mode
-        with open(datalog_path, 'a', newline='') as file:
+        with open(utils.datalog_path, 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(data)
 
@@ -142,7 +141,7 @@ class CifarClient(fl.client.NumPyClient):
 
 def client_fn(cid):
     clientID = int(cid)
-    simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
+    simclr = SimCLR(DEVICE, useResnet18=utils.useResnet18).to(DEVICE)
     return CifarClient(clientID, simclr).to_client()
 
 

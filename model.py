@@ -14,8 +14,7 @@ from typing import Dict, Optional, Tuple, List
 
 import csv
 
-from utils import NUM_CLASSES, NUM_CLIENTS, NUM_ROUNDS, DEVICE, BATCH_SIZE, useResnet18, fineTuneEncoder, FINETUNE_EPOCHS, DEVICE, evaluateEveryRound, datalog_path
-
+import utils
 
 
 
@@ -164,37 +163,38 @@ class SimCLRPredictor(nn.Module):
     
 class GlobalPredictor:
     
-    def __init__(self, tune_encoder, trainloader, testloader, device, useResnet18 = True):
+    def __init__(self, tune_encoder, trainset, testset, device, useResnet18 = True):
         self.round = 0
         
-        self.simclr_predictor = SimCLRPredictor(NUM_CLASSES, device, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(device)
+        self.simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, device, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(device)
         
-        self.trainloader = trainloader
-        self.testloader = testloader
+        self.trainloader = DataLoader(trainset, batch_size = utils.BATCH_SIZE)
+        self.testloader = DataLoader(testset, batch_size = utils.BATCH_SIZE)
         
-        self.epochs = FINETUNE_EPOCHS
+        self.epochs = utils.FINETUNE_EPOCHS
         self.optimizer = torch.optim.Adam(self.simclr_predictor.parameters(), lr=3e-4)
         self.criterion = nn.CrossEntropyLoss()
         
     def get_evaluate_fn(self):
         
         def evaluate(server_round: int, parameters, config: Dict[str, Scalar]) -> Optional[Tuple[float, Dict[str, Scalar]]]:
-            if not evaluateEveryRound:
+            if not utils.evaluateEveryRound:
                 self.round = self.round + 1
                 return -1, {"accuracy": -1}
-            
-            self.update_encoder(parameters)
-            
-            self.fine_tune_predictor()
-            loss, accuracy = self.evaluate()
-            print("Global Model Accuracy: ", accuracy)
-            
-            data = ["test", (useResnet18), NUM_CLIENTS, self.round, loss.item(), accuracy, -1]
 
-            # Open the file in append mode
-            with open(datalog_path, 'a', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow(data)
+            
+            # self.update_encoder(parameters)
+            
+            # self.fine_tune_predictor()
+            # loss, accuracy = self.evaluate()
+            # print("Global Model Accuracy: ", accuracy)
+            
+            # data = ["test", (useResnet18), NUM_CLIENTS, self.round, loss.item(), accuracy, -1]
+
+            # # Open the file in append mode
+            # with open(datalog_path, 'a', newline='') as file:
+            #     writer = csv.writer(file)
+            #     writer.writerow(data)
     
             
             return loss, {"accuracy": accuracy}
@@ -210,7 +210,10 @@ class GlobalPredictor:
         
 
             for item in self.trainloader:
+
                 (x, x_i, x_j), labels = item['img'], item['label']
+                # print(labels)
+                # print(type(labels))
                 x, labels = x.to(DEVICE), labels.to(DEVICE)
                 
                 self.optimizer.zero_grad()
@@ -226,6 +229,10 @@ class GlobalPredictor:
 
                 
                 batch += 1
+                
+                
+
+
                 
     def evaluate(self):
         self.simclr_predictor.eval()

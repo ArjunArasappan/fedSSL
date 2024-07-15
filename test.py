@@ -6,23 +6,25 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from utils import load_centralized_data
 from model import SimCLR, SimCLRPredictor
-from utils import BATCH_SIZE, NUM_CLASSES, useResnet18, fineTuneEncoder, FINETUNE_EPOCHS, DEVICE
+import utils
 import flwr as fl
 
 import csv
 
 simclr_predictor = None
 
+DEVICE = utils.DEVICE
+
 def evaluate_gb_model():
     global simclr_predictor
-    simclr_predictor = SimCLRPredictor(NUM_CLASSES, DEVICE, useResnet18=useResnet18, tune_encoder=fineTuneEncoder).to(DEVICE)
+    simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, DEVICE, useResnet18=utils.useResnet18, tune_encoder=utils.fineTuneEncoder).to(DEVICE)
     
     load_model()
     
-    train, test = load_centralized_data()
+    train, test = utils.load_centralized_data()
     
-    trainloader = DataLoader(train, batch_size = BATCH_SIZE)
-    testloader = DataLoader(test, batch_size = BATCH_SIZE)   
+    trainloader = DataLoader(train, batch_size = utils.BATCH_SIZE)
+    testloader = DataLoader(test, batch_size = utils.BATCH_SIZE)   
 
     optimizer = torch.optim.Adam(simclr_predictor.parameters(), lr=3e-4)
     criterion = nn.CrossEntropyLoss()
