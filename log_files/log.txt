@@ -15492,3 +15492,207 @@ debug | INFO flwr 2024-07-13 01:01:06,131 | server.py:97 | initial parameters (l
 debug | INFO flwr 2024-07-13 01:01:06,131 | server.py:110 | 
 debug | INFO flwr 2024-07-13 01:01:06,131 | server.py:111 | [ROUND 1]
 debug | INFO flwr 2024-07-13 01:01:06,131 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:28:16,495 | app.py:193 | Starting Flower simulation, config: num_rounds=7, no round_timeout
+debug | INFO flwr 2024-07-13 04:28:20,280 | app.py:228 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'memory': 26734738638.0, 'CPU': 13.0, 'object_store_memory': 13367369318.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'node:172.17.0.3': 1.0}
+debug | INFO flwr 2024-07-13 04:28:20,281 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-13 04:28:20,281 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-07-13 04:28:20,297 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-13 04:28:20,298 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-13 04:28:20,298 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-13 04:28:33,503 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-13 04:28:33,503 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-13 04:28:33,627 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': -1}
+debug | INFO flwr 2024-07-13 04:28:33,628 | server.py:110 | 
+debug | INFO flwr 2024-07-13 04:28:33,628 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-13 04:28:33,628 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:33:02,389 | server.py:238 | aggregate_fit: received 3 results and 0 failures
+debug | WARNING flwr 2024-07-13 04:33:02,952 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-13 04:33:03,483 | server.py:129 | fit progress: (1, -1, {'accuracy': -1}, 269.8550378372893)
+debug | INFO flwr 2024-07-13 04:33:03,483 | server.py:176 | configure_evaluate: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:33:20,056 | server.py:190 | aggregate_evaluate: received 3 results and 0 failures
+debug | WARNING flwr 2024-07-13 04:33:20,056 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-13 04:33:20,056 | server.py:110 | 
+debug | INFO flwr 2024-07-13 04:33:20,056 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-07-13 04:33:20,056 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:37:48,071 | server.py:238 | aggregate_fit: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:37:49,258 | server.py:129 | fit progress: (2, -1, {'accuracy': -1}, 555.6305902772583)
+debug | INFO flwr 2024-07-13 04:37:49,259 | server.py:176 | configure_evaluate: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:38:07,958 | server.py:190 | aggregate_evaluate: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:38:07,958 | server.py:110 | 
+debug | INFO flwr 2024-07-13 04:38:07,958 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-07-13 04:38:07,958 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:42:43,711 | server.py:238 | aggregate_fit: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:42:44,878 | server.py:129 | fit progress: (3, -1, {'accuracy': -1}, 851.2508945651352)
+debug | INFO flwr 2024-07-13 04:42:44,879 | server.py:176 | configure_evaluate: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:43:00,958 | server.py:190 | aggregate_evaluate: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:43:00,958 | server.py:110 | 
+debug | INFO flwr 2024-07-13 04:43:00,958 | server.py:111 | [ROUND 4]
+debug | INFO flwr 2024-07-13 04:43:00,959 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:47:36,103 | server.py:238 | aggregate_fit: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:47:37,192 | server.py:129 | fit progress: (4, -1, {'accuracy': -1}, 1143.564160977956)
+debug | INFO flwr 2024-07-13 04:47:37,192 | server.py:176 | configure_evaluate: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:47:53,991 | server.py:190 | aggregate_evaluate: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:47:53,991 | server.py:110 | 
+debug | INFO flwr 2024-07-13 04:47:53,991 | server.py:111 | [ROUND 5]
+debug | INFO flwr 2024-07-13 04:47:53,991 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:52:30,779 | server.py:238 | aggregate_fit: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:52:31,880 | server.py:129 | fit progress: (5, -1, {'accuracy': -1}, 1438.2524669822305)
+debug | INFO flwr 2024-07-13 04:52:31,880 | server.py:176 | configure_evaluate: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:52:51,406 | server.py:190 | aggregate_evaluate: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:52:51,406 | server.py:110 | 
+debug | INFO flwr 2024-07-13 04:52:51,406 | server.py:111 | [ROUND 6]
+debug | INFO flwr 2024-07-13 04:52:51,407 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:57:28,785 | server.py:238 | aggregate_fit: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:57:29,861 | server.py:129 | fit progress: (6, -1, {'accuracy': -1}, 1736.2330941422842)
+debug | INFO flwr 2024-07-13 04:57:29,861 | server.py:176 | configure_evaluate: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 04:57:45,763 | server.py:190 | aggregate_evaluate: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 04:57:45,763 | server.py:110 | 
+debug | INFO flwr 2024-07-13 04:57:45,763 | server.py:111 | [ROUND 7]
+debug | INFO flwr 2024-07-13 04:57:45,763 | server.py:224 | configure_fit: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 05:02:21,974 | server.py:238 | aggregate_fit: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 05:02:23,071 | server.py:129 | fit progress: (7, -1, {'accuracy': -1}, 2029.4430221612565)
+debug | INFO flwr 2024-07-13 05:02:23,071 | server.py:176 | configure_evaluate: strategy sampled 3 clients (out of 3)
+debug | INFO flwr 2024-07-13 05:02:38,815 | server.py:190 | aggregate_evaluate: received 3 results and 0 failures
+debug | INFO flwr 2024-07-13 05:02:38,839 | server.py:494 | 
+debug | INFO flwr 2024-07-13 05:02:38,839 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-07-13 05:02:38,839 | server.py:496 | Run finished 7 round(s) in 2045.19s
+debug | INFO flwr 2024-07-13 05:02:38,839 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-07-13 05:02:38,840 | server.py:498 | 		round 1: 5.836464961369832
+debug | INFO flwr 2024-07-13 05:02:38,840 | server.py:498 | 		round 2: 5.660664955774943
+debug | INFO flwr 2024-07-13 05:02:38,840 | server.py:498 | 		round 3: 5.59738564491272
+debug | INFO flwr 2024-07-13 05:02:38,840 | server.py:498 | 		round 4: 5.558961550394694
+debug | INFO flwr 2024-07-13 05:02:38,840 | server.py:498 | 		round 5: 5.519684632619222
+debug | INFO flwr 2024-07-13 05:02:38,840 | server.py:498 | 		round 6: 5.522773424784343
+debug | INFO flwr 2024-07-13 05:02:38,840 | server.py:498 | 		round 7: 5.503352006276448
+debug | INFO flwr 2024-07-13 05:02:38,840 | server.py:498 | 	History (loss, centralized):
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 		round 0: -1
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 		round 1: -1
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 		round 2: -1
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 		round 3: -1
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 		round 4: -1
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 		round 5: -1
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 		round 6: -1
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 		round 7: -1
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 	History (metrics, centralized):
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 	{'accuracy': [(0, -1),
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 	              (1, -1),
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 	              (2, -1),
+debug | INFO flwr 2024-07-13 05:02:38,841 | server.py:498 | 	              (3, -1),
+debug | INFO flwr 2024-07-13 05:02:38,842 | server.py:498 | 	              (4, -1),
+debug | INFO flwr 2024-07-13 05:02:38,842 | server.py:498 | 	              (5, -1),
+debug | INFO flwr 2024-07-13 05:02:38,842 | server.py:498 | 	              (6, -1),
+debug | INFO flwr 2024-07-13 05:02:38,842 | server.py:498 | 	              (7, -1)]}
+debug | INFO flwr 2024-07-13 05:02:38,842 | server.py:499 | 
+debug | INFO flwr 2024-07-13 05:39:23,381 | app.py:193 | Starting Flower simulation, config: num_rounds=7, no round_timeout
+debug | INFO flwr 2024-07-13 05:39:27,190 | app.py:228 | Flower VCE: Ray initialized with resources: {'CPU': 13.0, 'memory': 26740211712.0, 'node:__internal_head__': 1.0, 'object_store_memory': 13370105856.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:172.17.0.3': 1.0}
+debug | INFO flwr 2024-07-13 05:39:27,191 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-13 05:39:27,191 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-07-13 05:39:27,209 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-13 05:39:27,209 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-13 05:39:27,209 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-13 05:39:40,910 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-13 05:39:40,910 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-13 05:39:41,015 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': -1}
+debug | INFO flwr 2024-07-13 05:39:41,016 | server.py:110 | 
+debug | INFO flwr 2024-07-13 05:39:41,016 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-13 05:39:41,016 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:43:36,596 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | WARNING flwr 2024-07-13 05:43:37,490 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-13 05:43:37,996 | server.py:129 | fit progress: (1, -1, {'accuracy': -1}, 236.98001163825393)
+debug | INFO flwr 2024-07-13 05:43:37,996 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:43:55,648 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | WARNING flwr 2024-07-13 05:43:55,648 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-13 05:43:55,648 | server.py:110 | 
+debug | INFO flwr 2024-07-13 05:43:55,648 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-07-13 05:43:55,648 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:44:36,572 | app.py:193 | Starting Flower simulation, config: num_rounds=7, no round_timeout
+debug | INFO flwr 2024-07-13 05:44:40,516 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 26739671040.0, 'CPU': 13.0, 'object_store_memory': 13369835520.0, 'node:__internal_head__': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:172.17.0.3': 1.0}
+debug | INFO flwr 2024-07-13 05:44:40,517 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-13 05:44:40,517 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-07-13 05:44:40,535 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-13 05:44:40,536 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-13 05:44:40,536 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-13 05:44:54,015 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-13 05:44:54,015 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-13 05:44:54,128 | server.py:97 | initial parameters (loss, other metrics): -1, {'accuracy': -1}
+debug | INFO flwr 2024-07-13 05:44:54,128 | server.py:110 | 
+debug | INFO flwr 2024-07-13 05:44:54,128 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-13 05:44:54,128 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:49:14,220 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | WARNING flwr 2024-07-13 05:49:15,127 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-13 05:49:15,671 | server.py:129 | fit progress: (1, -1, {'accuracy': -1}, 261.5431470479816)
+debug | INFO flwr 2024-07-13 05:49:15,671 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:49:32,675 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | WARNING flwr 2024-07-13 05:49:32,676 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-13 05:49:32,676 | server.py:110 | 
+debug | INFO flwr 2024-07-13 05:49:32,676 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-07-13 05:49:32,676 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:53:55,506 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 05:53:56,948 | server.py:129 | fit progress: (2, -1, {'accuracy': -1}, 542.8202213142067)
+debug | INFO flwr 2024-07-13 05:53:56,949 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:54:14,730 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 05:54:14,730 | server.py:110 | 
+debug | INFO flwr 2024-07-13 05:54:14,730 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-07-13 05:54:14,731 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:58:47,793 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 05:58:49,391 | server.py:129 | fit progress: (3, -1, {'accuracy': -1}, 835.263063817285)
+debug | INFO flwr 2024-07-13 05:58:49,391 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 05:59:08,750 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 05:59:08,750 | server.py:110 | 
+debug | INFO flwr 2024-07-13 05:59:08,750 | server.py:111 | [ROUND 4]
+debug | INFO flwr 2024-07-13 05:59:08,750 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 06:03:42,133 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 06:03:43,571 | server.py:129 | fit progress: (4, -1, {'accuracy': -1}, 1129.4431360689923)
+debug | INFO flwr 2024-07-13 06:03:43,571 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 06:04:02,890 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 06:04:02,890 | server.py:110 | 
+debug | INFO flwr 2024-07-13 06:04:02,890 | server.py:111 | [ROUND 5]
+debug | INFO flwr 2024-07-13 06:04:02,890 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 06:08:30,652 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 06:08:32,072 | server.py:129 | fit progress: (5, -1, {'accuracy': -1}, 1417.9442945639603)
+debug | INFO flwr 2024-07-13 06:08:32,073 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 06:08:52,224 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 06:08:52,224 | server.py:110 | 
+debug | INFO flwr 2024-07-13 06:08:52,224 | server.py:111 | [ROUND 6]
+debug | INFO flwr 2024-07-13 06:08:52,225 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 06:13:22,484 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 06:13:23,941 | server.py:129 | fit progress: (6, -1, {'accuracy': -1}, 1709.8130192579702)
+debug | INFO flwr 2024-07-13 06:13:23,941 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 06:13:41,893 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 06:13:41,893 | server.py:110 | 
+debug | INFO flwr 2024-07-13 06:13:41,893 | server.py:111 | [ROUND 7]
+debug | INFO flwr 2024-07-13 06:13:41,893 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 06:18:14,487 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 06:18:15,936 | server.py:129 | fit progress: (7, -1, {'accuracy': -1}, 2001.8083878229372)
+debug | INFO flwr 2024-07-13 06:18:15,937 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 06:18:33,839 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 06:18:33,870 | server.py:494 | 
+debug | INFO flwr 2024-07-13 06:18:33,870 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-07-13 06:18:33,870 | server.py:496 | Run finished 7 round(s) in 2019.71s
+debug | INFO flwr 2024-07-13 06:18:33,870 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 		round 1: 6.216854381561279
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 		round 2: 5.989967632293701
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 		round 3: 5.87343168258667
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 		round 4: 5.82603702545166
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 		round 5: 5.804916572570801
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 		round 6: 5.786214351654053
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 		round 7: 5.757119274139404
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 	History (loss, centralized):
+debug | INFO flwr 2024-07-13 06:18:33,871 | server.py:498 | 		round 0: -1
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 		round 1: -1
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 		round 2: -1
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 		round 3: -1
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 		round 4: -1
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 		round 5: -1
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 		round 6: -1
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 		round 7: -1
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 	History (metrics, centralized):
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 	{'accuracy': [(0, -1),
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 	              (1, -1),
+debug | INFO flwr 2024-07-13 06:18:33,872 | server.py:498 | 	              (2, -1),
+debug | INFO flwr 2024-07-13 06:18:33,873 | server.py:498 | 	              (3, -1),
+debug | INFO flwr 2024-07-13 06:18:33,873 | server.py:498 | 	              (4, -1),
+debug | INFO flwr 2024-07-13 06:18:33,873 | server.py:498 | 	              (5, -1),
+debug | INFO flwr 2024-07-13 06:18:33,873 | server.py:498 | 	              (6, -1),
+debug | INFO flwr 2024-07-13 06:18:33,873 | server.py:498 | 	              (7, -1)]}
+debug | INFO flwr 2024-07-13 06:18:33,873 | server.py:499 | 

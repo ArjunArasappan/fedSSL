@@ -14,7 +14,7 @@ import os
 
 
 from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
-from utils import NUM_CLIENTS, NUM_CLASSES, NUM_ROUNDS, DEVICE, useResnet18, fineTuneEncoder, load_centralized_data
+from utils import BATCH_SIZE, NUM_CLIENTS, NUM_CLASSES, NUM_ROUNDS, DEVICE, useResnet18, fineTuneEncoder, load_centralized_data
 from test import evaluate_gb_model 
 
 
@@ -113,13 +113,13 @@ if __name__ == "__main__":
     print("Num Clients: ", NUM_CLIENTS)
     print("Num Rounds: ", NUM_ROUNDS)
 
-    fl.simulation.start_simulation(
-        client_fn=client_fn,
-        num_clients=NUM_CLIENTS,
-        config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
-        client_resources=client_resources,
-        strategy=strategy
-    )
+    # fl.simulation.start_simulation(
+    #     client_fn=client_fn,
+    #     num_clients=NUM_CLIENTS,
+    #     config=fl.server.ServerConfig(num_rounds=NUM_ROUNDS),
+    #     client_resources=client_resources,
+    #     strategy=strategy
+    # )
     
     loss, accuracy = evaluate_gb_model()
     

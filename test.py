@@ -6,7 +6,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from utils import load_centralized_data
 from model import SimCLR, SimCLRPredictor
-from utils import NUM_CLASSES, useResnet18, fineTuneEncoder, FINETUNE_EPOCHS, DEVICE
+from utils import BATCH_SIZE, NUM_CLASSES, useResnet18, fineTuneEncoder, FINETUNE_EPOCHS, DEVICE
 import flwr as fl
 
 import csv
