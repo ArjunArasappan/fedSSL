@@ -14,7 +14,7 @@ global NUM_CLIENTS
 NUM_CLIENTS = 2
 
 NUM_CLASSES = 10
-NUM_ROUNDS = 7
+NUM_ROUNDS = 10
 useResnet18 = False
 fineTuneEncoder = True
 addGausainBlur = True
@@ -49,26 +49,21 @@ def apply_transforms(batch):
     # batch['label'] = [transform(img) for label in batch["img"]]
     return batch
 
+def get_fds(partitions):
+    print(partitions)
+    client_fds = FederatedDataset(dataset="cifar10", partitioners={'train': IidPartitioner(partitions)})
+    return client_fds
 
-def load_partition(partition_id, partitions, image_size=32):
+
+def load_partition(fds, partition_id):
     global client_fds, client_dict, calls, NUM_CLIENTS
     
+    partition = fds.load_partition(partition_id, "train")
 
-    if partition_id not in client_dict.keys():
-        client_dict = {}
-        if client_fds is None:
-            print('NUM CLIENTS WHEN NONE', partitions)
-            printClients()
-            client_fds = FederatedDataset(dataset="cifar10", partitioners={'train': IidPartitioner(partitions)})
-
-        partition = client_fds.load_partition(partition_id, "train")
-        print("Partition Size",partition)
-        partition = partition.with_transform(apply_transforms)
-        partition = partition.train_test_split(test_size=client_train_split)
+    partition = partition.with_transform(apply_transforms)
+    partition = partition.train_test_split(test_size=client_train_split)
         
-        client_dict[partition_id] = partition["train"], partition["test"]
-            
-    return client_dict[partition_id]
+    return partition["train"], partition["test"]
 
 fds = None
 
@@ -92,4 +87,3 @@ def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
     print('Test Len', len(centralized_test_data))
     
     return centralized_train_data, centralized_test_data
-

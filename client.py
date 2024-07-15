@@ -90,11 +90,15 @@ ntxent = NTXentLoss( device=DEVICE).to(DEVICE)
 round = 0
 
 class CifarClient(fl.client.NumPyClient):
-    def __init__(self, cid, simclr):
+    def __init__(self, cid, simclr, fds, useResnet18, num_clients):
         self.cid = cid
         self.simclr = simclr
         self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
-        train, test = utils.load_partition(self.cid, utils.NUM_CLIENTS)
+        
+        self.useResnet18 = useResnet18
+        self.num_clients = num_clients
+        
+        train, test = utils.load_partition(fds, self.cid)
         self.trainloader = DataLoader(train, batch_size = utils.BATCH_SIZE)
         self.testloader = DataLoader(test, batch_size = utils.BATCH_SIZE)
 
@@ -109,12 +113,12 @@ class CifarClient(fl.client.NumPyClient):
 
     def fit(self, parameters, config):
         global round
-        round += 1/utils.NUM_CLIENTS
+        
         self.set_parameters(parameters)
         self.simclr.setInference(False)
         results = train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
         
-        data = [(utils.useResnet18), utils.NUM_CLIENTS, int(round), "train", results['Loss'], -1, self.cid]
+        data = [self.useResnet18, self.num_clients, (round), "train", results['Loss'], -1, self.cid]
 
         with open(utils.datalog_path, 'a', newline='') as file:
             writer = csv.writer(file)
@@ -131,17 +135,23 @@ class CifarClient(fl.client.NumPyClient):
         
         print("Loss: ", float(loss), ', ', self.cid)
         
-        data = [ (utils.useResnet18), utils.NUM_CLIENTS, int(round), "client test", loss, -1, self.cid]
+        data = [self.useResnet18, self.num_clients, int(round), "client test", loss, -1, self.cid]
 
         with open(utils.datalog_path, 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(data)
+            
+        round += 1 / self.num_clients
 
         return float(loss), len(self.testloader), {"accuracy": accuracy}
 
-def client_fn(cid):
-    clientID = int(cid)
-    simclr = SimCLR(DEVICE, useResnet18=utils.useResnet18).to(DEVICE)
-    return CifarClient(clientID, simclr).to_client()
+def get_client_fn(fds, useResnet18, num_clients):
+
+    def client_fn(cid):
+        clientID = int(cid)
+        simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
+        return CifarClient(clientID, simclr, fds, useResnet18, num_clients).to_client()
+    
+    return client_fn
 
 

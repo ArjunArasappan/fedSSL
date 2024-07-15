@@ -1,5 +1,5 @@
 import flwr as fl
-from client import client_fn
+
 from flwr.server.strategy import FedAvg
 from flwr.server.client_proxy import ClientProxy
 from flwr.common import FitRes
@@ -13,11 +13,18 @@ from collections import OrderedDict
 import os
 
 
+
+import client
 from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
 import utils
 from test import evaluate_gb_model 
 
 DEVICE = utils.DEVICE
+
+global gb_pred, gb_simclr
+
+
+
 
 fl.common.logger.configure(identifier="debug", filename="./log_files/log.txt")
 
@@ -61,12 +68,12 @@ parser.add_argument(
 
 centralized_finetune, centralized_test = utils.load_centralized_data()
 
-gb_pred = GlobalPredictor(utils.fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = utils.useResnet18)
-gb_simclr = SimCLR(DEVICE, useResnet18=utils.useResnet18).to(DEVICE)
+
 
 
 
 class SaveModelStrategy(fl.server.strategy.FedAvg):
+    global gb_simclr
     def aggregate_fit(self, server_round, results, failures):
         """Aggregate model weights using weighted average and store checkpoint"""
 
@@ -87,10 +94,11 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
         return aggregated_parameters, aggregated_metrics
 
 strategy = SaveModelStrategy(
-    evaluate_fn = gb_pred.get_evaluate_fn()
+    # evaluate_fn = gb_pred.get_evaluate_fn()
 )
 
 if __name__ == "__main__":
+    global gb_pred, gb_simclr
 
     print("Cuda?:", torch.cuda.is_available())
     print("name:", torch.cuda.get_device_name(0))
@@ -111,11 +119,17 @@ if __name__ == "__main__":
     
     print("Num Clients: ", utils.NUM_CLIENTS)
     print("Num Rounds: ", utils.NUM_ROUNDS)
+    print("Resnet18", utils.useResnet18)
     
     utils.printClients()
+    
+    fds = utils.get_fds(utils.NUM_CLIENTS)
+    
+    gb_pred = GlobalPredictor(utils.fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = utils.useResnet18)
+    gb_simclr = SimCLR(DEVICE, useResnet18=utils.useResnet18).to(DEVICE)
 
     fl.simulation.start_simulation(
-        client_fn=client_fn,
+        client_fn=client.get_client_fn(fds, utils.useResnet18, utils.NUM_CLIENTS),
         num_clients= utils.NUM_CLIENTS,
         config=fl.server.ServerConfig(num_rounds= utils.NUM_ROUNDS),
         client_resources=client_resources,
