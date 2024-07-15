@@ -136,11 +136,11 @@ if __name__ == "__main__":
         strategy=strategy
     )
     
-    loss, accuracy = evaluate_gb_model()
+    # loss, accuracy = evaluate_gb_model(utils.useResnet18)
     
-    print("FINAL GLOBAL MODEL RESULTS:")
-    print("Loss:", loss)
-    print("Accuracy:", accuracy)
+    # print("FINAL GLOBAL MODEL RESULTS:")
+    # print("Loss:", loss)
+    # print("Accuracy:", accuracy)
     
     
     

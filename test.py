@@ -15,11 +15,11 @@ simclr_predictor = None
 
 DEVICE = utils.DEVICE
 
-def evaluate_gb_model():
+def evaluate_gb_model(useResnet18):
     global simclr_predictor
     simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, DEVICE, useResnet18=utils.useResnet18, tune_encoder=utils.fineTuneEncoder).to(DEVICE)
     
-    load_model()
+    load_model(useResnet18)
     
     train, test = utils.load_centralized_data()
     
@@ -38,7 +38,7 @@ def evaluate_gb_model():
     return loss, accuracy
 
 
-def load_model():
+def load_model(useResnet18):
     global simclr_predictor
     
     simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)

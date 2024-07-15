@@ -51,7 +51,7 @@ Ensure you have activated your environment then:
 
 ```bash
 # and then run the example
-python sim.py
+python main.py
 ```
 
 You can adjust the CPU/GPU resources you assign to each of your virtual clients. By default, your clients will only use 1xCPU core. For example:
@@ -64,6 +64,9 @@ python main.py --num_cpus=2
 # This means that you can have 4 concurrent clients on each GPU
 # (assuming you have enough CPUs)
 python main.py --num_cpus=2 --num_gpus=0.25
+
+# Will assign 2xCPUs and 25% of the GPU's VRAM to each client 
+python main.py --num_cpus=2 --num_gpus=0.25 --num_clients=5
 
 ## Run with Flower Next (preview)
 
