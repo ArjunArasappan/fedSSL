@@ -95,7 +95,7 @@ Please follow the steps below:
 ## Expected Results
 
 <p align="center">
-  <img src="images/image.png" />
+  <img src="images/loss_graph.png" />
 </p>
 
 
