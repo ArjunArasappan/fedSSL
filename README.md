@@ -95,10 +95,9 @@ Please follow the steps below:
 ## Expected Results
 
 <p align="center">
-  <img src="images/loss_graph.png" />
+  <img src="images/image.png" />
 </p>
 
-![alt text](image.png)
 
 *Will Add to the results, explain manner in which SSL encoder was trained with projection head, and will explain supervised finetuning after FL rounds* 
 
