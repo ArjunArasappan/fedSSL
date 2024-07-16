@@ -101,3 +101,5 @@ Please follow the steps below:
 *Will Add to the results, explain manner in which SSL encoder was trained with projection head, and will explain supervised finetuning after FL rounds* 
 
 The graphs above show average client loss values over rounds during local training and evaluation. A classiifcation accuracy of 76.8% was achieved when training the SimCLR encoder model for 7 rounds over 5 clients in a self-supervised manner, after which a linear predictor was stacked upon the encoder and fine-tuned for 20 epochs on 10 percent of the training dataset in a supervised manner.
+
+![alt text](image.png)
