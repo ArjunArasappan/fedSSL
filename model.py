@@ -101,10 +101,7 @@ class SimCLR(nn.Module):
         self.encoded_size = self.encoder.fc.in_features
         self.encoder.fc = nn.Identity()
         
-        self.projected_size = projection_size
-
-
-                
+        self.projected_size = projection_size                
         self.proj_head = None
         
         if num_layer == 1:
