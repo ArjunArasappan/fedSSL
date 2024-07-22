@@ -9,12 +9,8 @@ from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
 
 
-global NUM_CLIENTS
-
-NUM_CLIENTS = 2
-
 NUM_CLASSES = 10
-NUM_ROUNDS = 10
+
 useResnet18 = False
 fineTuneEncoder = True
 addGausainBlur = True
@@ -25,65 +21,48 @@ DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 centralized_finetune_split = 0.1
 centralized_test_split = 0.2
 
-client_train_split = 0.05
 
 FINETUNE_EPOCHS = 10
 
 BATCH_SIZE = 512
 transform = SimCLRTransform(size=32, gaussian=addGausainBlur)
 
-client_fds, server_fds = None, None
-
-client_dict, server_dict = {}, {}
-
 
 datalog_path = './log_files/datalog.csv'
 
-
-def printClients():
-    global NUM_CLIENTS
-    print(NUM_CLIENTS)
     
 def apply_transforms(batch):
     batch["img"] = [transform(img) for img in batch["img"]]
-    # batch['label'] = [transform(img) for label in batch["img"]]
     return batch
 
 def get_fds(partitions):
-    print(partitions)
     client_fds = FederatedDataset(dataset="cifar10", partitioners={'train': IidPartitioner(partitions)})
     return client_fds
 
-
-def load_partition(fds, partition_id):
-    global client_fds, client_dict, calls, NUM_CLIENTS
+def load_partition(fds, partition_id, client_test_split = 0):
     
     partition = fds.load_partition(partition_id, "train")
 
     partition = partition.with_transform(apply_transforms)
-    partition = partition.train_test_split(test_size=client_train_split)
-        
-    return partition["train"], partition["test"]
+    
+    if client_test_split != 0:
+        partition = partition.train_test_split(test_size=client_test_split)
+        return partition["train"], partition["test"]
+    
+    return partition, None
 
-fds = None
 
 def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
-    global fds
-    if fds is None:
-        fds = FederatedDataset(dataset="cifar10", partitioners = {'train' : 1, 'test' : 1})
+    fds = FederatedDataset(dataset="cifar10", partitioners = {'train' : 1, 'test' : 1})
         
     centralized_train_data = fds.load_split("train")
     centralized_train_data = centralized_train_data.with_transform(apply_transforms)
     
     centralized_train_data = centralized_train_data.train_test_split(test_size=centralized_finetune_split, shuffle = True, seed=42)['test']
 
-    print('Train Len', len(centralized_train_data))
-
     centralized_test_data = fds.load_split("test")
     centralized_test_data = centralized_test_data.with_transform(apply_transforms)
     
     centralized_test_data = centralized_test_data.train_test_split(test_size=centralized_test_split, shuffle = True, seed=42)['test']
-
-    print('Test Len', len(centralized_test_data))
     
     return centralized_train_data, centralized_test_data

@@ -59,10 +59,17 @@ def train(net, trainloader, optimizer, criterion, epochs):
                  
 
 def test(net, testloader, criterion):
+    
+    if testloader == None:
+        return -1, -1
+    
+    
     net.eval()
     loss_epoch = 0
     batch = 0
     num_batches = len(testloader)
+    
+    
     
     with torch.no_grad():
         for item in testloader:
@@ -98,9 +105,13 @@ class CifarClient(fl.client.NumPyClient):
         self.useResnet18 = useResnet18
         self.num_clients = num_clients
         
-        train, test = utils.load_partition(fds, self.cid)
+
         self.trainloader = DataLoader(trainset, batch_size = utils.BATCH_SIZE)
-        self.testloader = DataLoader(testset, batch_size = utils.BATCH_SIZE)
+        
+        if testset == None:
+            self.testloader = None
+        else:
+            self.testloader = DataLoader(testset, batch_size = utils.BATCH_SIZE)
 
     def get_parameters(self, config):
         return [val.cpu().numpy() for _, val in self.simclr.state_dict().items()]
@@ -113,7 +124,8 @@ class CifarClient(fl.client.NumPyClient):
 
     def fit(self, parameters, config):
         global round
-        
+
+
         self.set_parameters(parameters)
         self.simclr.setInference(False)
         results = train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
@@ -123,6 +135,8 @@ class CifarClient(fl.client.NumPyClient):
         with open(utils.datalog_path, 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(data)
+            
+
                 
         return self.get_parameters(config={}), len(self.trainloader), results
 
@@ -135,23 +149,28 @@ class CifarClient(fl.client.NumPyClient):
         
         print("Loss: ", float(loss), ', ', self.cid)
         
-        data = [self.useResnet18, self.num_clients, int(round), "client test", loss, -1, self.cid]
+        # data = [self.useResnet18, self.num_clients, int(round), "client test", loss, -1, self.cid]
 
-        with open(utils.datalog_path, 'a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(data)
+        # with open(utils.datalog_path, 'a', newline='') as file:
+        #     writer = csv.writer(file)
+        #     writer.writerow(data)
             
+        # round += 1 / self.num_clients
+        
         round += 1 / self.num_clients
 
-        return float(loss), len(self.testloader), {"accuracy": accuracy}
+        return float(loss), 1, {"accuracy": accuracy}
 
 def get_client_fn(fds, useResnet18, num_clients):
     
-    train, test = utils.load_partition(fds, self.cid)
+    
 
     def client_fn(cid):
         clientID = int(cid)
+        
+        train, test = utils.load_partition(fds, clientID, client_test_split = 0)
         simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
+        
         return CifarClient(clientID, simclr, train, test, useResnet18, num_clients).to_client()
     
     return client_fn

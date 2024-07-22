@@ -17,71 +17,48 @@ import csv
 import utils
 
 
-
-
-
 class NTXentLoss(nn.Module):
     def __init__(self, device, temperature=0.5, ):
         super(NTXentLoss, self).__init__()
         self.temperature = temperature
         self.device = device
         self.batch_size = None
-        self.criterion = nn.CrossEntropyLoss(reduction="mean",)
-        
-    def testBatch(self):
-        batchSize = 2
-        random1Tensor = torch.randn((batchSize, 5))
-        random2Tensor = torch.randn((batchSize, 5))
-        
-        return random1Tensor, random2Tensor
+        self.criterion = nn.CrossEntropyLoss(reduction="mean")
         
 
     def forward(self, z_i, z_j):
 
         self.batch_size = z_i.size(0)
-        feature_dim = z_i.size(1)
         
         z_i = F.normalize(z_i).to(self.device)
         z_j = F.normalize(z_j).to(self.device)
         
         z = torch.cat((z_i, z_j), dim=0).to(self.device)
         
-        # print(z)
 
         sim_matrix = torch.matmul(z, z.T).to(self.device) / self.temperature
         sim_matrix.fill_diagonal_(-float('inf'))
         
-        # print(sim_matrix)
 
         labels = torch.arange(self.batch_size, 2 * self.batch_size, device=self.device)
         labels = torch.cat((labels, labels - self.batch_size))  
         
-        # print(labels)
-
         loss = self.criterion(sim_matrix, labels)
         return loss
 
 
 class MLP(nn.Module):
-    def __init__(self, dim, projection_size, hidden_size=4096, num_layer=2):
+    def __init__(self, dim, projection_size, hidden_size=4096):
         super().__init__()
         self.in_features = dim
         self.out_features = projection_size
         
-        
-        if num_layer == 1:
-            self.net = nn.Sequential(
-                nn.Linear(dim, projection_size),
-            )
-        elif num_layer == 2:
-            self.net = nn.Sequential(
-                nn.Linear(dim, hidden_size),
-                nn.BatchNorm1d(hidden_size),
-                nn.ReLU(inplace=True),
-                nn.Linear(hidden_size, projection_size),
-            )
-        else:
-            raise NotImplementedError(f"Not defined MLP: {num_layer}")
+        self.net = nn.Sequential(
+            nn.Linear(dim, hidden_size),
+            nn.BatchNorm1d(hidden_size),
+            nn.ReLU(inplace=True),
+            nn.Linear(hidden_size, projection_size),
+        )
 
     def forward(self, x):
         return self.net(x)
@@ -92,30 +69,16 @@ class SimCLR(nn.Module):
         
         if useResnet18:
             self.encoder = resnet18(weights=ResNet18_Weights.IMAGENET1K_V1).to(device)
-            print("Using ResNet 18 Encoder")
         else:
             self.encoder = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1).to(device)
-            print("Using ResNet 50 Encoder")
 
 
         self.encoded_size = self.encoder.fc.in_features
         self.encoder.fc = nn.Identity()
         
         self.projected_size = projection_size                
-        self.proj_head = None
-        
-        if num_layer == 1:
-            self.proj_head = nn.Sequential(
-                nn.Linear(self.encoded_size, projection_size),
-            )
-        elif num_layer == 2:
-            self.proj_head = nn.Sequential(
-                nn.Linear(self.encoded_size, projection_hidden_size),
-                nn.BatchNorm1d(projection_hidden_size),
-                nn.ReLU(inplace=True),
-                nn.Linear(projection_hidden_size, projection_size),
-            )
-        
+        self.proj_head = MLP(self.encoded_size, projection_size, projection_hidden_size)
+
         
         self.isInference = False
         
@@ -128,14 +91,10 @@ class SimCLR(nn.Module):
             return e1
         return self.proj_head(e1)
 
-   
-    
 class SimCLRPredictor(nn.Module):
     def __init__(self, num_classes, device, useResnet18 = True, tune_encoder = False):
         super(SimCLRPredictor, self).__init__()
-        
-        print("New Predictor Created!")
-        
+                
         self.simclr = SimCLR(device, useResnet18 = useResnet18).to(device)
         self.linear_predictor = nn.Linear(self.simclr.encoded_size, num_classes)
         self.simclr.setInference(True)
@@ -160,10 +119,10 @@ class SimCLRPredictor(nn.Module):
     
 class GlobalPredictor:
     
-    def __init__(self, tune_encoder, trainset, testset, device, useResnet18 = True):
+    def __init__(self, num_classes, tune_encoder, trainset, testset, device, useResnet18 = True):
         self.round = 0
         
-        self.simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, device, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(device)
+        self.simclr_predictor = SimCLRPredictor(num_classes, device, useResnet18 = useResnet18, tune_encoder = tune_encoder).to(device)
         
         self.trainloader = DataLoader(trainset, batch_size = utils.BATCH_SIZE)
         self.testloader = DataLoader(testset, batch_size = utils.BATCH_SIZE)

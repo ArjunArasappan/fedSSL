@@ -46,22 +46,21 @@ parser.add_argument(
 parser.add_argument(
     "--num_clients",
     type=int,
-    default=utils.NUM_CLIENTS,
-    required= True,
+    default=5,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
 parser.add_argument(
     "--use_resnet18",
     type=bool,
-    default=utils.useResnet18,
+    default=False,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
 parser.add_argument(
     "--num_rounds",
     type=int,
-    default=utils.NUM_ROUNDS,
+    default=7,
     help="Ratio of GPU memory to assign to a virtual client",
 )
 
@@ -113,35 +112,39 @@ if __name__ == "__main__":
         "num_gpus": args.num_gpus,
     }
     
-    utils.NUM_CLIENTS = args.num_clients
-    utils.NUM_ROUNDS = args.num_rounds
-    utils.useResnet18 = args.use_resnet18
+    NUM_CLIENTS = args.num_clients
+    NUM_ROUNDS = args.num_rounds
+    useResnet18 = args.use_resnet18
     
-    print("Num Clients: ", utils.NUM_CLIENTS)
-    print("Num Rounds: ", utils.NUM_ROUNDS)
-    print("Resnet18", utils.useResnet18)
+    print("Num Clients: ", NUM_CLIENTS)
+    print("Num Rounds: ", NUM_ROUNDS)
+    print("Resnet18", useResnet18)
+        
+    fds = utils.get_fds(NUM_CLIENTS)
     
-    utils.printClients()
-    
-    fds = utils.get_fds(utils.NUM_CLIENTS)
-    
-    gb_pred = GlobalPredictor(utils.fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = utils.useResnet18)
-    gb_simclr = SimCLR(DEVICE, useResnet18=utils.useResnet18).to(DEVICE)
+    gb_pred = GlobalPredictor(utils.NUM_CLASSES, utils.fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = useResnet18)
+    gb_simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
 
     fl.simulation.start_simulation(
-        client_fn=client.get_client_fn(fds, utils.useResnet18, utils.NUM_CLIENTS),
-        num_clients= utils.NUM_CLIENTS,
-        config=fl.server.ServerConfig(num_rounds= utils.NUM_ROUNDS),
+        client_fn=client.get_client_fn(fds, useResnet18, NUM_CLIENTS),
+        num_clients= NUM_CLIENTS,
+        config=fl.server.ServerConfig(num_rounds= NUM_ROUNDS),
         client_resources=client_resources,
         strategy=strategy
     )
     
-    # loss, accuracy = evaluate_gb_model(utils.useResnet18)
+    loss, accuracy = evaluate_gb_model(utils.useResnet18)
     
-    # print("FINAL GLOBAL MODEL RESULTS:")
-    # print("Loss:", loss)
-    # print("Accuracy:", accuracy)
+    print("FINAL GLOBAL MODEL RESULTS:")
+    print("Loss:", loss)
+    print("Accuracy:", accuracy)
     
+    
+    data = [useResnet18, NUM_CLIENTS, -1, "finetune", loss, accuracy, -1]
+
+    with open(utils.datalog_path, 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(data)
     
     
     

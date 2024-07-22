@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the range for num_clients and useResnet18 values
-num_clients_values=(8 10)
+num_clients_values=(2 4 6 8 10)
 
 echo -n > filename
 
