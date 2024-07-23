@@ -21,12 +21,10 @@ DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 centralized_finetune_split = 0.1
 centralized_test_split = 0.2
 
-
 FINETUNE_EPOCHS = 10
+BATCH_SIZE = 128
 
-BATCH_SIZE = 512
 transform = SimCLRTransform(size=32, gaussian=addGausainBlur)
-
 
 datalog_path = './log_files/datalog.csv'
 
@@ -42,7 +40,6 @@ def get_fds(partitions):
 def load_partition(fds, partition_id, client_test_split = 0):
     
     partition = fds.load_partition(partition_id, "train")
-
     partition = partition.with_transform(apply_transforms)
     
     if client_test_split != 0:
