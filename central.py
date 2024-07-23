@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader
 from utils import load_centralized_data
 from model import SimCLR, SimCLRPredictor
 from flwr_datasets import FederatedDataset
+from flwr_datasets.partitioner import IidPartitioner
 
 import utils
 import flwr as fl
@@ -20,13 +21,13 @@ DEVICE = utils.DEVICE
 EPOCHS = 1
 count = 0
 
-logpath = "./log_files/central_log.csv"
+log_path = "./log_files/central_log.csv"
 
 
 
 
 def load_data():
-    fds = FederatedDataset(dataset="cifar10", partitioners = {'train' : 1, 'test' : 1})
+    fds = FederatedDataset(dataset="cifar10", partitioners = {'train' : IidPartitioner(1), 'test' : IidPartitioner(1)})
         
     train_data = fds.load_split("train")
     train_data = train_data.with_transform(utils.apply_transforms)
@@ -35,7 +36,7 @@ def load_data():
     test_data = fds.load_split("test")
     test_data = test_data.with_transform(utils.apply_transforms)
     
-    test_data = test_data.train_test_split(test_size=0.1, shuffle = True, seed=42)
+    test_data = test_data.train_test_split(test_size=0.5, shuffle = True, seed=42)
     
     val_data = test_data['test']
     test_data = test_data['train']
@@ -50,8 +51,8 @@ def centralized_train(useResnet18):
     
     train, val, test = load_data()
     
-    trainloader = DataLoader(train, batch_size = utils.BATCH_SIZE)
-    testloader = DataLoader(test, batch_size = utils.BATCH_SIZE)   
+    trainloader = DataLoader(train, batch_size = utils.BATCH_SIZE, shuffle = True)
+    testloader = DataLoader(test, batch_size = utils.BATCH_SIZE, shuffle = True)   
 
     optimizer = torch.optim.Adam(simclr_predictor.parameters(), lr=3e-4)
     
@@ -95,7 +96,7 @@ def train_predictor(trainloader, testloader, optimizer, criterion):
             
             for item in trainloader:
                 (x, x_i, x_j), labels = item['img'], item['label']
-                x, labels = x_i.to(DEVICE), labels.to(DEVICE)
+                x, labels = x.to(DEVICE), labels.to(DEVICE)
                 
                 optimizer.zero_grad()
                 
@@ -129,13 +130,13 @@ def train_predictor(trainloader, testloader, optimizer, criterion):
         _, accuracy = evaluate(testloader, criterion)
         print("Test Accuracy:", accuracy)
         
-        data = [total_epochs, "test accuracy", int(correct/total * 10000) / 10000]
+        data = [total_epochs, "test accuracy", accuracy]
 
         with open(log_path, 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(data)
         
-        save_model(int(accuracy * 10000)/10000)
+        save_model(accuracy)
 
 def evaluate(testloader, criterion):
     simclr_predictor.eval()
@@ -168,7 +169,7 @@ def evaluate(testloader, criterion):
 
 def save_model(acc):
     global count
-    torch.save(simclr_predictor.state_dict(), f"./centralized_weights/centralized_model_{count}_{acc}.pth")
+    torch.save(simclr_predictor.state_dict(), f"./centralized_weights/centralized_model_t_{count}_{acc}.pth")
     count += 1
 
 if __name__ == "__main__":

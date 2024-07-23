@@ -21,8 +21,6 @@ from test import evaluate_gb_model
 
 DEVICE = utils.DEVICE
 
-global gb_pred, gb_simclr
-
 
 
 
@@ -34,56 +32,50 @@ parser.add_argument(
     "--num_cpus",
     type=int,
     default= 12,
-    help="Number of CPUs to assign to a virtual client",
+    help="Number of CPUs to use during simulation",
 )
 parser.add_argument(
     "--num_gpus",
     type=float,
     default= 1,
-    help="Ratio of GPU memory to assign to a virtual client",
+    help="Number of GPUs to use during simulation",
 )
 
 parser.add_argument(
     "--num_clients",
     type=int,
     default=5,
-    help="Ratio of GPU memory to assign to a virtual client",
+    help="Number of clients",
 )
 
 parser.add_argument(
     "--use_resnet18",
     type=bool,
     default=False,
-    help="Ratio of GPU memory to assign to a virtual client",
+    help="Use Resnet18 over Resnet50",
 )
 
 parser.add_argument(
     "--num_rounds",
     type=int,
     default=7,
-    help="Ratio of GPU memory to assign to a virtual client",
+    help="Number of FL training rounds",
 )
 
 
 centralized_finetune, centralized_test = utils.load_centralized_data()
 
-
-
-
-
 class SaveModelStrategy(fl.server.strategy.FedAvg):
-    global gb_simclr
     def aggregate_fit(self, server_round, results, failures):
-        """Aggregate model weights using weighted average and store checkpoint"""
-
 
         aggregated_parameters, aggregated_metrics = super().aggregate_fit(server_round, results, failures)
 
         if aggregated_parameters is not None:
             print(f"Saving round {server_round} aggregated_parameters...")
+            
+            gb_simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
 
             aggregated_ndarrays: List[np.ndarray] = fl.common.parameters_to_ndarrays(aggregated_parameters)
-
             params_dict = zip(gb_simclr.state_dict().keys(), aggregated_ndarrays)
             state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
             gb_simclr.load_state_dict(state_dict, strict=True)
@@ -92,12 +84,9 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
 
         return aggregated_parameters, aggregated_metrics
 
-strategy = SaveModelStrategy(
-    # evaluate_fn = gb_pred.get_evaluate_fn()
-)
+strategy = SaveModelStrategy()
 
 if __name__ == "__main__":
-    global gb_pred, gb_simclr
 
     print("Cuda?:", torch.cuda.is_available())
     print("name:", torch.cuda.get_device_name(0))
@@ -122,9 +111,6 @@ if __name__ == "__main__":
         
     fds = utils.get_fds(NUM_CLIENTS)
     
-    gb_pred = GlobalPredictor(utils.NUM_CLASSES, utils.fineTuneEncoder, centralized_finetune, centralized_test, DEVICE, useResnet18 = useResnet18)
-    gb_simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
-
     fl.simulation.start_simulation(
         client_fn=client.get_client_fn(fds, useResnet18, NUM_CLIENTS),
         num_clients= NUM_CLIENTS,

@@ -29,7 +29,6 @@ def train(net, trainloader, optimizer, criterion, epochs):
     
     for epoch in range(epochs):
 
-        
         for item in trainloader:
             x, x_i, x_j = item['img']
    
@@ -41,19 +40,13 @@ def train(net, trainloader, optimizer, criterion, epochs):
             
             loss = criterion(z_i, z_j)
             total_loss += loss
-            # print("training loss: ", loss)
 
             loss.backward()
             optimizer.step()
 
-
-            # if(batch % (print_interval * num_batches) == 0):
             print("Client Train Batch:", batch, "/", num_batches)
             
-            
             batch += 1
-            
-
             
     return {'Loss' : float(total_loss / batch)}
                  
@@ -63,18 +56,14 @@ def test(net, testloader, criterion):
     if testloader == None:
         return -1, -1
     
-    
     net.eval()
     loss_epoch = 0
     batch = 0
     num_batches = len(testloader)
     
-    
-    
     with torch.no_grad():
         for item in testloader:
             x, x_i, x_j = item['img']
-            
             
             x, x_i, x_j = x.to(DEVICE), x_i.to(DEVICE), x_j.to(DEVICE)
             
@@ -84,23 +73,18 @@ def test(net, testloader, criterion):
             
             loss_epoch += loss.item()
             
-            # if(batch % (print_interval * num_batches) == 0):
             print("Client Train Batch:", batch, "/", num_batches)
             
             batch += 1
     return loss_epoch / (batch), -1
 
 
-
-ntxent = NTXentLoss( device=DEVICE).to(DEVICE)
-
-round = 0
-
 class CifarClient(fl.client.NumPyClient):
-    def __init__(self, cid, simclr, trainset, testset, useResnet18, num_clients):
+    def __init__(self, cid, simclr, trainset, testset, useResnet18, num_clients, loss):
         self.cid = cid
         self.simclr = simclr
         self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
+        self.loss = loss
         
         self.useResnet18 = useResnet18
         self.num_clients = num_clients
@@ -123,45 +107,24 @@ class CifarClient(fl.client.NumPyClient):
         self.simclr.load_state_dict(state_dict, strict=True)
 
     def fit(self, parameters, config):
-        global round
-
 
         self.set_parameters(parameters)
         self.simclr.setInference(False)
-        results = train(self.simclr, self.trainloader, self.optimizer, ntxent, epochs=1)
+        results = train(self.simclr, self.trainloader, self.optimizer, self.loss, epochs=1)
         
-        data = [self.useResnet18, self.num_clients, (round), "train", results['Loss'], -1, self.cid]
-
-        with open(utils.datalog_path, 'a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(data)
-            
-
-                
         return self.get_parameters(config={}), len(self.trainloader), results
 
     def evaluate(self, parameters, config):
-        global round
         self.set_parameters(parameters)
         self.simclr.setInference(False)
         
-        loss, accuracy = test(self.simclr, self.testloader, ntxent)
-        
-        print("Loss: ", float(loss), ', ', self.cid)
-        
-        # data = [self.useResnet18, self.num_clients, int(round), "client test", loss, -1, self.cid]
-
-        # with open(utils.datalog_path, 'a', newline='') as file:
-        #     writer = csv.writer(file)
-        #     writer.writerow(data)
-            
-        # round += 1 / self.num_clients
-        
-        round += 1 / self.num_clients
+        loss, accuracy = test(self.simclr, self.testloader, self.loss)
 
         return float(loss), 1, {"accuracy": accuracy}
 
 def get_client_fn(fds, useResnet18, num_clients):
+    
+    ntxent = NTXentLoss( device=DEVICE).to(DEVICE)
     
     
 
@@ -171,7 +134,7 @@ def get_client_fn(fds, useResnet18, num_clients):
         train, test = utils.load_partition(fds, clientID, client_test_split = 0)
         simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
         
-        return CifarClient(clientID, simclr, train, test, useResnet18, num_clients).to_client()
+        return CifarClient(clientID, simclr, train, test, useResnet18, num_clients, ntxent).to_client()
     
     return client_fn
 
