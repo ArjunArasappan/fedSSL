@@ -1,25 +1,20 @@
-import os
-import glob
+import flwr as fl
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from utils import load_centralized_data
-from model import SimCLR, SimCLRPredictor
 import utils
-import flwr as fl
+from model import SimCLR, SimCLRPredictor
+import os, glob
 
-import csv
-
-simclr_predictor = None
 
 DEVICE = utils.DEVICE
 
+
 def evaluate_gb_model(useResnet18):
-    global simclr_predictor
     simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, DEVICE, useResnet18=utils.useResnet18, tune_encoder=utils.fineTuneEncoder).to(DEVICE)
     
-    load_model(useResnet18)
+    load_model(useResnet18, simclr_predictor)
     
     train, test = utils.load_centralized_data()
     
@@ -29,18 +24,16 @@ def evaluate_gb_model(useResnet18):
     optimizer = torch.optim.Adam(simclr_predictor.parameters(), lr=3e-4)
     criterion = nn.CrossEntropyLoss()
     
-    fine_tune_predictor(trainloader, optimizer, criterion)
+    fine_tune_predictor(simclr_predictor, trainloader, optimizer, criterion)
     
-    loss, accuracy = evaluate(testloader, criterion)
+    loss, accuracy = evaluate(simclr_predictor, testloader, criterion)
     
 
 
     return loss, accuracy
 
 
-def load_model(useResnet18):
-    global simclr_predictor
-    
+def load_model(useResnet18, simclr_predictor):
     simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
 
     
@@ -56,7 +49,7 @@ def load_model(useResnet18):
     simclr_predictor.set_encoder_parameters(weights)
 
 
-def fine_tune_predictor(trainloader, optimizer, criterion):
+def fine_tune_predictor(simclr_predictor, trainloader, optimizer, criterion):
     simclr_predictor.train()
 
     for epoch in range(utils.FINETUNE_EPOCHS):
@@ -64,7 +57,7 @@ def fine_tune_predictor(trainloader, optimizer, criterion):
         num_batches = len(trainloader)
 
         for item in trainloader:
-            (x, x_i, x_j), labels = item['img'], item['label']
+            x , labels = item['img'], item['label']
             x, labels = x.to(DEVICE), labels.to(DEVICE)
             
             optimizer.zero_grad()
@@ -78,7 +71,7 @@ def fine_tune_predictor(trainloader, optimizer, criterion):
             print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
             batch += 1
 
-def evaluate(testloader, criterion):
+def evaluate(simclr_predictor, testloader, criterion):
     simclr_predictor.eval()
     
     total = 0
@@ -90,7 +83,7 @@ def evaluate(testloader, criterion):
 
     with torch.no_grad():
         for item in testloader:
-            (x, x_i, x_j), labels = item['img'], item['label']
+            x , labels = item['img'], item['label']
             x, labels = x.to(DEVICE), labels.to(DEVICE)
             
             logits = simclr_predictor(x)

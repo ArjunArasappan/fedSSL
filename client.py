@@ -1,20 +1,10 @@
 import flwr as fl
-from collections import OrderedDict
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
-from torchvision.datasets import CIFAR10
-from torchvision.models import resnet18, ResNet18_Weights
-from torch.utils.data import Dataset
-import csv
-
 from collections import OrderedDict
-from typing import Dict, List, Optional, Tuple
 
 from transform import SimCLRTransform
-from model import SimCLR, NTXentLoss, SimCLRPredictor
+from model import SimCLR, NTXentLoss
 import utils
 
 
@@ -30,7 +20,7 @@ def train(net, trainloader, optimizer, criterion, epochs):
     for epoch in range(epochs):
 
         for item in trainloader:
-            x, x_i, x_j = item['img']
+            x_i, x_j = item['img']
    
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
             optimizer.zero_grad()
@@ -63,9 +53,9 @@ def test(net, testloader, criterion):
     
     with torch.no_grad():
         for item in testloader:
-            x, x_i, x_j = item['img']
+            x_i, x_j = item['img']
             
-            x, x_i, x_j = x.to(DEVICE), x_i.to(DEVICE), x_j.to(DEVICE)
+            x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
             
             z_i = net(x_i).to(DEVICE)
             z_j = net(x_j).to(DEVICE)

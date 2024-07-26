@@ -1,23 +1,19 @@
 import flwr as fl
-from flwr.server.strategy import FedAvg
 import torch
-import torch.nn as nn
 import numpy as np
-from typing import Dict, Optional, Tuple, List, Union
+from typing import List
 from collections import OrderedDict
 import argparse
 
-import client
-from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
+from client import get_client_fn
+from model import SimCLR, SimCLRPredictor, NTXentLoss
 import utils
 from test import evaluate_gb_model 
 
 DEVICE = utils.DEVICE
 
 
-
-
-fl.common.logger.configure(identifier="debug", filename="./log_files/log.txt")
+fl.common.logger.configure(identifier="debug", filename="./log.txt")
 
 parser = argparse.ArgumentParser(description="Flower Simulation with PyTorch")
 
@@ -69,9 +65,8 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
             aggregated_ndarrays: List[np.ndarray] = fl.common.parameters_to_ndarrays(aggregated_parameters)
             params_dict = zip(gb_simclr.state_dict().keys(), aggregated_ndarrays)
             state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
-            gb_simclr.load_state_dict(state_dict, strict=True)
 
-            torch.save(gb_simclr.state_dict(), f"./model_weights/model_round_{server_round}.pth")
+            torch.save(state_dict, f"./model_weights/model_round_{server_round}.pth")
 
         return aggregated_parameters, aggregated_metrics
 
@@ -102,26 +97,19 @@ if __name__ == "__main__":
         
     fds = utils.get_fds(NUM_CLIENTS)
     
-    fl.simulation.start_simulation(
-        client_fn=client.get_client_fn(fds, useResnet18, NUM_CLIENTS),
-        num_clients= NUM_CLIENTS,
-        config=fl.server.ServerConfig(num_rounds= NUM_ROUNDS),
-        client_resources=client_resources,
-        strategy=strategy
-    )
+    # fl.simulation.start_simulation(
+    #     client_fn=get_client_fn(fds, useResnet18, NUM_CLIENTS),
+    #     num_clients= NUM_CLIENTS,
+    #     config=fl.server.ServerConfig(num_rounds= NUM_ROUNDS),
+    #     client_resources=client_resources,
+    #     strategy=strategy
+    # )
     
     loss, accuracy = evaluate_gb_model(utils.useResnet18)
     
     print("FINAL GLOBAL MODEL RESULTS:")
     print("Loss:", loss)
     print("Accuracy:", accuracy)
-    
-    
-    data = [useResnet18, NUM_CLIENTS, -1, "finetune", loss, accuracy, -1]
-
-    with open(utils.datalog_path, 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(data)
     
     
     
