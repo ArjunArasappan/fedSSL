@@ -21,9 +21,6 @@ class SimCLRTransform:
             transforms.RandomGrayscale(p=0.2)
         ]
                 
-        if gaussian:
-            self.base_transform.append(GaussianBlur(kernel_size=int(0.1 * size)))
-            
         self.base_transform.append(transforms.ToTensor())
 
     def __call__(self, x):

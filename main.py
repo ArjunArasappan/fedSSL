@@ -1,18 +1,11 @@
 import flwr as fl
-
 from flwr.server.strategy import FedAvg
-from flwr.server.client_proxy import ClientProxy
-from flwr.common import FitRes
 import torch
-import argparse
 import torch.nn as nn
 import numpy as np
 from typing import Dict, Optional, Tuple, List, Union
 from collections import OrderedDict
-
-import os
-
-
+import argparse
 
 import client
 from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
@@ -67,11 +60,9 @@ centralized_finetune, centralized_test = utils.load_centralized_data()
 
 class SaveModelStrategy(fl.server.strategy.FedAvg):
     def aggregate_fit(self, server_round, results, failures):
-
         aggregated_parameters, aggregated_metrics = super().aggregate_fit(server_round, results, failures)
 
         if aggregated_parameters is not None:
-            print(f"Saving round {server_round} aggregated_parameters...")
             
             gb_simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
 
