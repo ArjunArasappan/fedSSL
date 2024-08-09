@@ -47,7 +47,7 @@ parser.add_argument(
 parser.add_argument(
     "--num_rounds",
     type=int,
-    default=7,
+    default=15,
     help="Number of FL training rounds",
 )
 

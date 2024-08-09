@@ -3,6 +3,7 @@ from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
 
 from transform import SimCLRTransform
+import csv
 
 
 NUM_CLASSES = 10
@@ -61,3 +62,8 @@ def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
     centralized_test_data = centralized_test_data.train_test_split(test_size=centralized_test_split, shuffle = True, seed=42)['test']
     
     return centralized_train_data, centralized_test_data
+
+def sim_log(data, path = './sim_log.txt'):
+    with open('path', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(data)
