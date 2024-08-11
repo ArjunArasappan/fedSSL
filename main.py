@@ -51,7 +51,7 @@ parser.add_argument(
 parser.add_argument(
     "--num_rounds",
     type=int,
-    default=7,
+    default=30,
     help="Number of FL training rounds",
 )
 
@@ -117,12 +117,9 @@ if __name__ == "__main__":
     print("Accuracy:", accuracy)
     
     
-    data = [useResnet18, NUM_CLIENTS, -1, "finetune", loss, accuracy, -1]
+    data = ['fine_tune', useResnet18, NUM_CLIENTS, loss, accuracy]
 
-    with open(utils.datalog_path, 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(data)
-    
+    utils.sim_log(data)
     
     
     

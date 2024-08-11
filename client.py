@@ -79,6 +79,7 @@ def test(net, testloader, criterion):
     return loss_epoch / (batch), -1
 
 
+round = 0
 class CifarClient(fl.client.NumPyClient):
     def __init__(self, cid, simclr, trainset, testset, useResnet18, num_clients, loss):
         self.cid = cid
@@ -107,10 +108,15 @@ class CifarClient(fl.client.NumPyClient):
         self.simclr.load_state_dict(state_dict, strict=True)
 
     def fit(self, parameters, config):
-
+        global round
+        
         self.set_parameters(parameters)
         self.simclr.setInference(False)
         results = train(self.simclr, self.trainloader, self.optimizer, self.loss, epochs=1)
+        
+        data = ['client train', int(round), self.useResnet18, self.num_clients, self.cid, results['Loss']]
+        round += 1/self.num_clients
+        utils.sim_log(data)
         
         return self.get_parameters(config={}), len(self.trainloader), results
 

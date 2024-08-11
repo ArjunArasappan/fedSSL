@@ -8,7 +8,7 @@ import torch
 from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
 
-
+import csv
 NUM_CLASSES = 10
 
 useResnet18 = False
@@ -21,12 +21,15 @@ DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 centralized_finetune_split = 0.1
 centralized_test_split = 0.2
 
-FINETUNE_EPOCHS = 10
-BATCH_SIZE = 128
+FINETUNE_EPOCHS = 20
+BATCH_SIZE = 512
 
 transform = SimCLRTransform(size=32, gaussian=addGausainBlur)
 
-datalog_path = './log_files/datalog.csv'
+def sim_log(data, path = './log_files/datalog.csv'):
+    with open(path, 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(data)
 
     
 def apply_transforms(batch):

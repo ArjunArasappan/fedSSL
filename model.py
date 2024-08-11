@@ -68,9 +68,9 @@ class SimCLR(nn.Module):
         super(SimCLR, self).__init__()
         
         if useResnet18:
-            self.encoder = resnet18(weights=ResNet18_Weights.IMAGENET1K_V1).to(device)
+            self.encoder = resnet18(weights=None).to(device)
         else:
-            self.encoder = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1).to(device)
+            self.encoder = resnet50(weights=None).to(device)
 
 
         self.encoded_size = self.encoder.fc.in_features
