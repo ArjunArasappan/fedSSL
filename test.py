@@ -10,16 +10,17 @@ import utils
 import flwr as fl
 
 import csv
+import os
 
 simclr_predictor = None
 
 DEVICE = utils.DEVICE
 
-def evaluate_gb_model(useResnet18):
+def evaluate_gb_model(useResnet18, num_clients):
     global simclr_predictor
     simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, DEVICE, useResnet18=utils.useResnet18, tune_encoder=utils.fineTuneEncoder).to(DEVICE)
     
-    load_model(useResnet18)
+    load_model(useResnet18, num_clients)
     
     train, test = utils.load_centralized_data()
     
@@ -38,13 +39,17 @@ def evaluate_gb_model(useResnet18):
     return loss, accuracy
 
 
-def load_model(useResnet18):
+def load_model(useResnet18, num_clients):
     global simclr_predictor
     
     simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
+    
+    path = f"./fl_checkpoints/num_clients_{num_clients}/"
+    file = f"checkpoint_round_*.pth"
+    
 
     
-    list_of_files = [fname for fname in glob.glob("./model_weights/model_round_*")]
+    list_of_files = [fname for fname in glob.glob(path + file)]
     latest_round_file = max(list_of_files, key=os.path.getctime)
     print("Loading pre-trained model from:", latest_round_file)
     state_dict = torch.load(latest_round_file)

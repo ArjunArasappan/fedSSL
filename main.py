@@ -11,6 +11,7 @@ import client
 from model import SimCLR, SimCLRPredictor, NTXentLoss, GlobalPredictor
 import utils
 from test import evaluate_gb_model 
+import os 
 
 DEVICE = utils.DEVICE
 
@@ -51,7 +52,7 @@ parser.add_argument(
 parser.add_argument(
     "--num_rounds",
     type=int,
-    default=30,
+    default=200,
     help="Number of FL training rounds",
 )
 
@@ -70,8 +71,16 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
             params_dict = zip(gb_simclr.state_dict().keys(), aggregated_ndarrays)
             state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
             gb_simclr.load_state_dict(state_dict, strict=True)
-
-            torch.save(gb_simclr.state_dict(), f"./model_weights/model_round_{server_round}.pth")
+            
+            args = parser.parse_args()
+            
+            path = f"./fl_checkpoints/num_clients_{args.num_clients}/"
+            file = f"checkpoint_round_{server_round}.pth"
+            
+            if not os.path.exists(path):
+                os.makedirs(path)
+            
+            torch.save(gb_simclr.state_dict(), path + file)
 
         return aggregated_parameters, aggregated_metrics
 
@@ -101,6 +110,8 @@ if __name__ == "__main__":
     print("Resnet18", useResnet18)
         
     fds = utils.get_fds(NUM_CLIENTS)
+    # fds = utils.get_fds(20)
+
     
     fl.simulation.start_simulation(
         client_fn=client.get_client_fn(fds, useResnet18, NUM_CLIENTS),
@@ -110,14 +121,14 @@ if __name__ == "__main__":
         strategy=strategy
     )
     
-    loss, accuracy = evaluate_gb_model(utils.useResnet18)
+    loss, accuracy = evaluate_gb_model(utils.useResnet18, NUM_CLIENTS)
     
     print("FINAL GLOBAL MODEL RESULTS:")
     print("Loss:", loss)
     print("Accuracy:", accuracy)
     
     
-    data = ['fine_tune', useResnet18, NUM_CLIENTS, loss, accuracy]
+    data = ['fine_tune', utils.fineTuneEncoder, useResnet18, NUM_CLIENTS, loss, accuracy]
 
     utils.sim_log(data)
     

@@ -12,19 +12,19 @@ import csv
 NUM_CLASSES = 10
 
 useResnet18 = False
-fineTuneEncoder = True
+fineTuneEncoder = False
 addGausainBlur = True
 evaluateEveryRound = False
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-centralized_finetune_split = 0.1
-centralized_test_split = 0.2
+centralized_finetune_split = 1
+centralized_test_split = 0.25
 
-FINETUNE_EPOCHS = 20
+FINETUNE_EPOCHS = 1
 BATCH_SIZE = 512
 
-transform = SimCLRTransform(size=32, gaussian=addGausainBlur)
+transform = SimCLRTransform(size=32)
 
 def sim_log(data, path = './log_files/datalog.csv'):
     with open(path, 'a', newline='') as file:
@@ -58,7 +58,8 @@ def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
     centralized_train_data = fds.load_split("train")
     centralized_train_data = centralized_train_data.with_transform(apply_transforms)
     
-    centralized_train_data = centralized_train_data.train_test_split(test_size=centralized_finetune_split, shuffle = True, seed=42)['test']
+    if centralized_finetune_split != 1:
+        centralized_train_data = centralized_train_data.train_test_split(test_size=centralized_finetune_split, shuffle = True, seed=42)['test']
 
     centralized_test_data = fds.load_split("test")
     centralized_test_data = centralized_test_data.with_transform(apply_transforms)
