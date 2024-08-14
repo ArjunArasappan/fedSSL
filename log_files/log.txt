@@ -35735,3 +35735,707 @@ debug | INFO flwr 2024-08-14 02:52:15,624 | server.py:94 | Evaluating initial gl
 debug | INFO flwr 2024-08-14 02:52:15,625 | server.py:110 | 
 debug | INFO flwr 2024-08-14 02:52:15,625 | server.py:111 | [ROUND 1]
 debug | INFO flwr 2024-08-14 02:52:15,625 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 02:56:29,113 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | WARNING flwr 2024-08-14 02:56:29,561 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-14 02:56:30,730 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 02:56:41,865 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | WARNING flwr 2024-08-14 02:56:41,866 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-14 02:56:41,866 | server.py:110 | 
+debug | INFO flwr 2024-08-14 02:56:41,866 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-08-14 02:56:41,866 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:01:01,688 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:01:03,026 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:01:17,411 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:01:17,411 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:01:17,412 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-08-14 03:01:17,412 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:05:48,874 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:05:50,143 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:06:02,353 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:06:02,354 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:06:02,354 | server.py:111 | [ROUND 4]
+debug | INFO flwr 2024-08-14 03:06:02,354 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:10:25,536 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:10:26,816 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:10:38,108 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:10:38,108 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:10:38,108 | server.py:111 | [ROUND 5]
+debug | INFO flwr 2024-08-14 03:10:38,109 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:15:07,601 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:15:08,918 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:15:21,787 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:15:21,787 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:15:21,787 | server.py:111 | [ROUND 6]
+debug | INFO flwr 2024-08-14 03:15:21,788 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:19:46,593 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:19:47,926 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:20:00,426 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:20:00,426 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:20:00,426 | server.py:111 | [ROUND 7]
+debug | INFO flwr 2024-08-14 03:20:00,427 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:24:26,373 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:24:27,706 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:24:41,851 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:24:41,851 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:24:41,851 | server.py:111 | [ROUND 8]
+debug | INFO flwr 2024-08-14 03:24:41,852 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:29:07,192 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:29:08,524 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:29:19,772 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:29:19,773 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:29:19,773 | server.py:111 | [ROUND 9]
+debug | INFO flwr 2024-08-14 03:29:19,773 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:33:42,785 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:33:44,133 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:33:55,201 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:33:55,201 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:33:55,201 | server.py:111 | [ROUND 10]
+debug | INFO flwr 2024-08-14 03:33:55,201 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:38:13,267 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:38:14,596 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:38:25,851 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:38:25,851 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:38:25,851 | server.py:111 | [ROUND 11]
+debug | INFO flwr 2024-08-14 03:38:25,852 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:42:47,718 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:42:49,057 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:43:00,196 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:43:00,196 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:43:00,197 | server.py:111 | [ROUND 12]
+debug | INFO flwr 2024-08-14 03:43:00,197 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:47:30,634 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:47:31,947 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:47:43,281 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:47:43,281 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:47:43,281 | server.py:111 | [ROUND 13]
+debug | INFO flwr 2024-08-14 03:47:43,281 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:52:09,081 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:52:10,565 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:52:22,150 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:52:22,151 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:52:22,151 | server.py:111 | [ROUND 14]
+debug | INFO flwr 2024-08-14 03:52:22,151 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:56:43,364 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:56:44,535 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 03:56:56,477 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 03:56:56,478 | server.py:110 | 
+debug | INFO flwr 2024-08-14 03:56:56,478 | server.py:111 | [ROUND 15]
+debug | INFO flwr 2024-08-14 03:56:56,478 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:01:20,204 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:01:21,430 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:01:33,214 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:01:33,215 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:01:33,215 | server.py:111 | [ROUND 16]
+debug | INFO flwr 2024-08-14 04:01:33,215 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:06:03,218 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:06:04,432 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:06:15,901 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:06:15,902 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:06:15,902 | server.py:111 | [ROUND 17]
+debug | INFO flwr 2024-08-14 04:06:15,902 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:10:44,364 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:10:45,691 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:10:58,280 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:10:58,280 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:10:58,280 | server.py:111 | [ROUND 18]
+debug | INFO flwr 2024-08-14 04:10:58,280 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:15:22,779 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:15:24,094 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:15:50,905 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:15:50,905 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:15:50,905 | server.py:111 | [ROUND 19]
+debug | INFO flwr 2024-08-14 04:15:50,906 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:20:12,456 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:20:13,778 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:20:27,755 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:20:27,756 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:20:27,756 | server.py:111 | [ROUND 20]
+debug | INFO flwr 2024-08-14 04:20:27,756 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:24:50,822 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:24:52,007 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:25:03,685 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:25:03,685 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:25:03,685 | server.py:111 | [ROUND 21]
+debug | INFO flwr 2024-08-14 04:25:03,685 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:29:28,704 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:29:29,916 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:29:41,667 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:29:41,668 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:29:41,668 | server.py:111 | [ROUND 22]
+debug | INFO flwr 2024-08-14 04:29:41,668 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:34:03,610 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:34:04,822 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:34:16,852 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:34:16,853 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:34:16,853 | server.py:111 | [ROUND 23]
+debug | INFO flwr 2024-08-14 04:34:16,853 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:38:45,864 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:38:47,030 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:38:58,449 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:38:58,449 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:38:58,449 | server.py:111 | [ROUND 24]
+debug | INFO flwr 2024-08-14 04:38:58,450 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:43:22,554 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:43:23,735 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:43:35,489 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:43:35,490 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:43:35,490 | server.py:111 | [ROUND 25]
+debug | INFO flwr 2024-08-14 04:43:35,490 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:48:04,642 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:48:05,813 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:48:17,309 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:48:17,309 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:48:17,310 | server.py:111 | [ROUND 26]
+debug | INFO flwr 2024-08-14 04:48:17,310 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:52:46,083 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:52:47,340 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:53:00,550 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:53:00,550 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:53:00,550 | server.py:111 | [ROUND 27]
+debug | INFO flwr 2024-08-14 04:53:00,550 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:57:27,614 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:57:28,904 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 04:57:40,375 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 04:57:40,375 | server.py:110 | 
+debug | INFO flwr 2024-08-14 04:57:40,376 | server.py:111 | [ROUND 28]
+debug | INFO flwr 2024-08-14 04:57:40,376 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:02:07,161 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:02:08,462 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:02:20,200 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:02:20,201 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:02:20,201 | server.py:111 | [ROUND 29]
+debug | INFO flwr 2024-08-14 05:02:20,201 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:06:46,099 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:06:47,453 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:06:59,701 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:06:59,701 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:06:59,701 | server.py:111 | [ROUND 30]
+debug | INFO flwr 2024-08-14 05:06:59,702 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:11:28,276 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:11:29,641 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:11:42,279 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:11:42,280 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:11:42,280 | server.py:111 | [ROUND 31]
+debug | INFO flwr 2024-08-14 05:11:42,280 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:16:06,897 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:16:08,290 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:16:19,607 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:16:19,608 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:16:19,608 | server.py:111 | [ROUND 32]
+debug | INFO flwr 2024-08-14 05:16:19,608 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:20:51,500 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:20:52,871 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:21:05,177 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:21:05,177 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:21:05,177 | server.py:111 | [ROUND 33]
+debug | INFO flwr 2024-08-14 05:21:05,177 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:25:35,121 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:25:36,483 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:25:48,235 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:25:48,236 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:25:48,236 | server.py:111 | [ROUND 34]
+debug | INFO flwr 2024-08-14 05:25:48,236 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:30:14,345 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:30:15,663 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:30:28,305 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:30:28,306 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:30:28,306 | server.py:111 | [ROUND 35]
+debug | INFO flwr 2024-08-14 05:30:28,306 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:35:01,942 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:35:03,296 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:35:21,310 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:35:21,310 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:35:21,311 | server.py:111 | [ROUND 36]
+debug | INFO flwr 2024-08-14 05:35:21,311 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:39:50,756 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:39:52,128 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:40:03,694 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:40:03,694 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:40:03,694 | server.py:111 | [ROUND 37]
+debug | INFO flwr 2024-08-14 05:40:03,694 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:44:31,008 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:44:32,224 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:44:43,863 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:44:43,864 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:44:43,864 | server.py:111 | [ROUND 38]
+debug | INFO flwr 2024-08-14 05:44:43,864 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:49:10,051 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:49:11,247 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:49:22,444 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:49:22,444 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:49:22,445 | server.py:111 | [ROUND 39]
+debug | INFO flwr 2024-08-14 05:49:22,445 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:53:56,818 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:53:58,030 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:54:09,476 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:54:09,476 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:54:09,477 | server.py:111 | [ROUND 40]
+debug | INFO flwr 2024-08-14 05:54:09,477 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:58:42,903 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:58:44,110 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 05:58:55,930 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 05:58:55,930 | server.py:110 | 
+debug | INFO flwr 2024-08-14 05:58:55,930 | server.py:111 | [ROUND 41]
+debug | INFO flwr 2024-08-14 05:58:55,930 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:03:22,274 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:03:23,463 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:03:35,842 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:03:35,843 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:03:35,843 | server.py:111 | [ROUND 42]
+debug | INFO flwr 2024-08-14 06:03:35,843 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:08:00,241 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:08:01,434 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:08:13,553 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:08:13,553 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:08:13,553 | server.py:111 | [ROUND 43]
+debug | INFO flwr 2024-08-14 06:08:13,554 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:12:38,055 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:12:39,265 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:12:51,668 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:12:51,669 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:12:51,669 | server.py:111 | [ROUND 44]
+debug | INFO flwr 2024-08-14 06:12:51,669 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:17:24,751 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:17:25,945 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:17:37,186 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:17:37,186 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:17:37,186 | server.py:111 | [ROUND 45]
+debug | INFO flwr 2024-08-14 06:17:37,186 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:22:11,873 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:22:13,110 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:22:24,580 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:22:24,580 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:22:24,580 | server.py:111 | [ROUND 46]
+debug | INFO flwr 2024-08-14 06:22:24,581 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:27:02,012 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:27:03,241 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:27:15,162 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:27:15,163 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:27:15,163 | server.py:111 | [ROUND 47]
+debug | INFO flwr 2024-08-14 06:27:15,163 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:31:57,250 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:31:58,459 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:32:09,947 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:32:09,947 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:32:09,948 | server.py:111 | [ROUND 48]
+debug | INFO flwr 2024-08-14 06:32:09,948 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:36:40,212 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:36:41,408 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:37:00,072 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:37:00,072 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:37:00,072 | server.py:111 | [ROUND 49]
+debug | INFO flwr 2024-08-14 06:37:00,073 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:41:29,443 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:41:30,662 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:41:41,900 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:41:41,900 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:41:41,900 | server.py:111 | [ROUND 50]
+debug | INFO flwr 2024-08-14 06:41:41,901 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:46:12,559 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:46:13,799 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:46:32,338 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:46:32,339 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:46:32,339 | server.py:111 | [ROUND 51]
+debug | INFO flwr 2024-08-14 06:46:32,339 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:51:22,368 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:51:23,604 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:51:34,950 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:51:34,951 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:51:34,951 | server.py:111 | [ROUND 52]
+debug | INFO flwr 2024-08-14 06:51:34,951 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:56:17,036 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:56:18,333 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 06:56:30,715 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 06:56:30,716 | server.py:110 | 
+debug | INFO flwr 2024-08-14 06:56:30,716 | server.py:111 | [ROUND 53]
+debug | INFO flwr 2024-08-14 06:56:30,716 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:01:03,655 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:01:04,983 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:01:16,649 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:01:16,649 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:01:16,650 | server.py:111 | [ROUND 54]
+debug | INFO flwr 2024-08-14 07:01:16,650 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:05:39,608 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:05:40,938 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:05:52,208 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:05:52,208 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:05:52,208 | server.py:111 | [ROUND 55]
+debug | INFO flwr 2024-08-14 07:05:52,208 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:10:19,218 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:10:20,548 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:10:32,644 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:10:32,645 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:10:32,645 | server.py:111 | [ROUND 56]
+debug | INFO flwr 2024-08-14 07:10:32,645 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:15:00,917 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:15:02,278 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:15:14,212 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:15:14,212 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:15:14,212 | server.py:111 | [ROUND 57]
+debug | INFO flwr 2024-08-14 07:15:14,212 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:19:39,441 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:19:40,634 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:19:51,921 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:19:51,922 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:19:51,922 | server.py:111 | [ROUND 58]
+debug | INFO flwr 2024-08-14 07:19:51,922 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:24:17,392 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:24:18,597 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:24:32,122 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:24:32,122 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:24:32,122 | server.py:111 | [ROUND 59]
+debug | INFO flwr 2024-08-14 07:24:32,122 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:28:56,354 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:28:57,559 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:29:09,147 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:29:09,148 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:29:09,148 | server.py:111 | [ROUND 60]
+debug | INFO flwr 2024-08-14 07:29:09,148 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:33:27,278 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:33:28,500 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:33:40,660 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:33:40,661 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:33:40,661 | server.py:111 | [ROUND 61]
+debug | INFO flwr 2024-08-14 07:33:40,661 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:38:07,504 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:38:08,679 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:38:27,049 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:38:27,050 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:38:27,050 | server.py:111 | [ROUND 62]
+debug | INFO flwr 2024-08-14 07:38:27,050 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:42:55,880 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:42:57,062 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:43:08,438 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:43:08,439 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:43:08,439 | server.py:111 | [ROUND 63]
+debug | INFO flwr 2024-08-14 07:43:08,439 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:47:28,242 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:47:29,437 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:47:40,674 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:47:40,674 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:47:40,674 | server.py:111 | [ROUND 64]
+debug | INFO flwr 2024-08-14 07:47:40,674 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:52:00,584 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:52:01,762 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:52:15,575 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:52:15,576 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:52:15,576 | server.py:111 | [ROUND 65]
+debug | INFO flwr 2024-08-14 07:52:15,576 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:56:36,305 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:56:37,511 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 07:56:48,936 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 07:56:48,937 | server.py:110 | 
+debug | INFO flwr 2024-08-14 07:56:48,937 | server.py:111 | [ROUND 66]
+debug | INFO flwr 2024-08-14 07:56:48,937 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:01:07,147 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:01:08,335 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:01:19,729 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:01:19,729 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:01:19,729 | server.py:111 | [ROUND 67]
+debug | INFO flwr 2024-08-14 08:01:19,729 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:05:45,193 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:05:46,395 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:05:57,807 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:05:57,807 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:05:57,808 | server.py:111 | [ROUND 68]
+debug | INFO flwr 2024-08-14 08:05:57,808 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:10:20,720 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:10:21,948 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:10:33,572 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:10:33,573 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:10:33,573 | server.py:111 | [ROUND 69]
+debug | INFO flwr 2024-08-14 08:10:33,573 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:15:01,040 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:15:02,220 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:15:13,657 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:15:13,657 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:15:13,657 | server.py:111 | [ROUND 70]
+debug | INFO flwr 2024-08-14 08:15:13,658 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:19:36,717 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:19:37,946 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:19:49,819 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:19:49,820 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:19:49,820 | server.py:111 | [ROUND 71]
+debug | INFO flwr 2024-08-14 08:19:49,820 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:24:13,576 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:24:14,845 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:24:26,188 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:24:26,189 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:24:26,189 | server.py:111 | [ROUND 72]
+debug | INFO flwr 2024-08-14 08:24:26,189 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:28:45,904 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:28:47,207 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:28:58,981 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:28:58,981 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:28:58,981 | server.py:111 | [ROUND 73]
+debug | INFO flwr 2024-08-14 08:28:58,981 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:33:13,342 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:33:14,661 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:33:26,365 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:33:26,366 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:33:26,366 | server.py:111 | [ROUND 74]
+debug | INFO flwr 2024-08-14 08:33:26,366 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:37:47,368 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:37:48,679 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:37:59,896 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:37:59,897 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:37:59,897 | server.py:111 | [ROUND 75]
+debug | INFO flwr 2024-08-14 08:37:59,897 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:42:22,237 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:42:23,542 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:42:35,491 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:42:35,491 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:42:35,491 | server.py:111 | [ROUND 76]
+debug | INFO flwr 2024-08-14 08:42:35,491 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:46:52,225 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:46:54,100 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:47:07,334 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:47:07,334 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:47:07,334 | server.py:111 | [ROUND 77]
+debug | INFO flwr 2024-08-14 08:47:07,335 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:55:21,993 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:55:24,291 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 08:55:39,531 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 08:55:39,531 | server.py:110 | 
+debug | INFO flwr 2024-08-14 08:55:39,531 | server.py:111 | [ROUND 78]
+debug | INFO flwr 2024-08-14 08:55:39,531 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:03:13,190 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:03:15,015 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:03:28,444 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:03:28,444 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:03:28,445 | server.py:111 | [ROUND 79]
+debug | INFO flwr 2024-08-14 09:03:28,445 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:10:17,405 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:10:19,619 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:10:32,228 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:10:32,228 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:10:32,228 | server.py:111 | [ROUND 80]
+debug | INFO flwr 2024-08-14 09:10:32,228 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:17:36,379 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:17:37,808 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:17:49,445 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:17:49,445 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:17:49,445 | server.py:111 | [ROUND 81]
+debug | INFO flwr 2024-08-14 09:17:49,446 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:23:22,359 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:23:23,971 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:23:35,818 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:23:35,819 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:23:35,819 | server.py:111 | [ROUND 82]
+debug | INFO flwr 2024-08-14 09:23:35,819 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:29:00,352 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:29:01,975 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:29:13,976 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:29:13,976 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:29:13,976 | server.py:111 | [ROUND 83]
+debug | INFO flwr 2024-08-14 09:29:13,977 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:34:07,869 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:34:09,155 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:34:20,281 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:34:20,281 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:34:20,282 | server.py:111 | [ROUND 84]
+debug | INFO flwr 2024-08-14 09:34:20,282 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:38:40,472 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:38:41,761 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:38:53,623 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:38:53,623 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:38:53,624 | server.py:111 | [ROUND 85]
+debug | INFO flwr 2024-08-14 09:38:53,624 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:43:16,411 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:43:17,692 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:43:28,904 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:43:28,904 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:43:28,905 | server.py:111 | [ROUND 86]
+debug | INFO flwr 2024-08-14 09:43:28,905 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:47:50,774 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:47:51,911 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:48:03,122 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:48:03,122 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:48:03,122 | server.py:111 | [ROUND 87]
+debug | INFO flwr 2024-08-14 09:48:03,122 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:52:24,178 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:52:25,475 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:52:37,443 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:52:37,443 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:52:37,443 | server.py:111 | [ROUND 88]
+debug | INFO flwr 2024-08-14 09:52:37,444 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:56:59,210 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:57:00,511 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 09:57:11,708 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 09:57:11,708 | server.py:110 | 
+debug | INFO flwr 2024-08-14 09:57:11,709 | server.py:111 | [ROUND 89]
+debug | INFO flwr 2024-08-14 09:57:11,709 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:01:28,399 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:01:29,682 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:01:40,941 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:01:40,941 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:01:40,941 | server.py:111 | [ROUND 90]
+debug | INFO flwr 2024-08-14 10:01:40,942 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:05:52,458 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:05:53,742 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:06:05,029 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:06:05,029 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:06:05,029 | server.py:111 | [ROUND 91]
+debug | INFO flwr 2024-08-14 10:06:05,029 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:10:20,416 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:10:21,702 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:10:33,457 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:10:33,457 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:10:33,458 | server.py:111 | [ROUND 92]
+debug | INFO flwr 2024-08-14 10:10:33,458 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:14:53,213 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:14:54,389 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:15:05,889 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:15:05,889 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:15:05,889 | server.py:111 | [ROUND 93]
+debug | INFO flwr 2024-08-14 10:15:05,889 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:20:24,038 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:20:25,231 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:20:36,827 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:20:36,827 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:20:36,828 | server.py:111 | [ROUND 94]
+debug | INFO flwr 2024-08-14 10:20:36,828 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:27:15,418 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:27:17,621 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:27:32,082 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:27:32,083 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:27:32,083 | server.py:111 | [ROUND 95]
+debug | INFO flwr 2024-08-14 10:27:32,083 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:35:43,554 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:35:45,233 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:35:58,522 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:35:58,523 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:35:58,523 | server.py:111 | [ROUND 96]
+debug | INFO flwr 2024-08-14 10:35:58,523 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:44:02,811 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:44:04,142 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:44:16,998 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:44:16,998 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:44:16,998 | server.py:111 | [ROUND 97]
+debug | INFO flwr 2024-08-14 10:44:16,998 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:52:26,896 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:52:29,146 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 10:52:45,853 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 10:52:45,853 | server.py:110 | 
+debug | INFO flwr 2024-08-14 10:52:45,853 | server.py:111 | [ROUND 98]
+debug | INFO flwr 2024-08-14 10:52:45,853 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:00:52,428 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:00:54,735 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:01:08,178 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:01:08,178 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:01:08,178 | server.py:111 | [ROUND 99]
+debug | INFO flwr 2024-08-14 11:01:08,178 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:09:13,463 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:09:15,213 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:09:28,293 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:09:28,294 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:09:28,294 | server.py:111 | [ROUND 100]
+debug | INFO flwr 2024-08-14 11:09:28,294 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:16:51,058 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:16:52,211 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:17:03,469 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:17:03,469 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:17:03,470 | server.py:111 | [ROUND 101]
+debug | INFO flwr 2024-08-14 11:17:03,470 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:21:18,038 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:21:19,202 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:21:30,616 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:21:30,616 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:21:30,616 | server.py:111 | [ROUND 102]
+debug | INFO flwr 2024-08-14 11:21:30,616 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:25:43,405 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:25:44,546 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:25:57,160 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:25:57,161 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:25:57,161 | server.py:111 | [ROUND 103]
+debug | INFO flwr 2024-08-14 11:25:57,161 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:31:35,573 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:31:37,531 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:31:50,015 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:31:50,015 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:31:50,016 | server.py:111 | [ROUND 104]
+debug | INFO flwr 2024-08-14 11:31:50,016 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:39:41,791 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:39:43,892 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:39:56,480 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:39:56,480 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:39:56,480 | server.py:111 | [ROUND 105]
+debug | INFO flwr 2024-08-14 11:39:56,481 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:48:01,035 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:48:03,381 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:48:16,991 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:48:16,992 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:48:16,992 | server.py:111 | [ROUND 106]
+debug | INFO flwr 2024-08-14 11:48:16,992 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:55:56,498 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:55:58,330 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 11:56:13,247 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 11:56:13,247 | server.py:110 | 
+debug | INFO flwr 2024-08-14 11:56:13,247 | server.py:111 | [ROUND 107]
+debug | INFO flwr 2024-08-14 11:56:13,247 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:03:57,256 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:03:59,594 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:04:12,346 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:04:12,346 | server.py:110 | 
+debug | INFO flwr 2024-08-14 12:04:12,346 | server.py:111 | [ROUND 108]
+debug | INFO flwr 2024-08-14 12:04:12,346 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:11:37,973 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:11:39,724 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:11:52,455 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:11:52,455 | server.py:110 | 
+debug | INFO flwr 2024-08-14 12:11:52,455 | server.py:111 | [ROUND 109]
+debug | INFO flwr 2024-08-14 12:11:52,455 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:19:36,413 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:19:38,105 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:19:51,187 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:19:51,188 | server.py:110 | 
+debug | INFO flwr 2024-08-14 12:19:51,188 | server.py:111 | [ROUND 110]
+debug | INFO flwr 2024-08-14 12:19:51,188 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:27:49,717 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:27:51,385 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:28:03,714 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:28:03,715 | server.py:110 | 
+debug | INFO flwr 2024-08-14 12:28:03,715 | server.py:111 | [ROUND 111]
+debug | INFO flwr 2024-08-14 12:28:03,715 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:36:02,559 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:36:04,639 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:36:27,578 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:36:27,579 | server.py:110 | 
+debug | INFO flwr 2024-08-14 12:36:27,579 | server.py:111 | [ROUND 112]
+debug | INFO flwr 2024-08-14 12:36:27,579 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:44:14,149 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:44:16,102 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:44:29,497 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:44:29,497 | server.py:110 | 
+debug | INFO flwr 2024-08-14 12:44:29,497 | server.py:111 | [ROUND 113]
+debug | INFO flwr 2024-08-14 12:44:29,497 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:52:29,731 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:52:31,455 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 12:52:44,260 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 12:52:44,260 | server.py:110 | 
+debug | INFO flwr 2024-08-14 12:52:44,261 | server.py:111 | [ROUND 114]
+debug | INFO flwr 2024-08-14 12:52:44,261 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 13:00:50,393 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 13:00:52,687 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 13:01:06,275 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 13:01:06,275 | server.py:110 | 
+debug | INFO flwr 2024-08-14 13:01:06,275 | server.py:111 | [ROUND 115]
+debug | INFO flwr 2024-08-14 13:01:06,276 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 13:09:03,329 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 13:09:05,433 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 13:09:18,892 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 13:09:18,893 | server.py:110 | 
+debug | INFO flwr 2024-08-14 13:09:18,893 | server.py:111 | [ROUND 116]
+debug | INFO flwr 2024-08-14 13:09:18,893 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 13:17:42,393 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 13:17:44,618 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 13:17:57,493 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 13:17:57,494 | server.py:110 | 
+debug | INFO flwr 2024-08-14 13:17:57,494 | server.py:111 | [ROUND 117]
+debug | INFO flwr 2024-08-14 13:17:57,494 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 13:25:53,855 | server.py:238 | aggregate_fit: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 13:25:55,604 | server.py:176 | configure_evaluate: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 13:26:08,703 | server.py:190 | aggregate_evaluate: received 2 results and 0 failures
+debug | INFO flwr 2024-08-14 13:26:08,703 | server.py:110 | 
+debug | INFO flwr 2024-08-14 13:26:08,703 | server.py:111 | [ROUND 118]
+debug | INFO flwr 2024-08-14 13:26:08,704 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
