@@ -36439,3 +36439,69 @@ debug | INFO flwr 2024-08-14 13:26:08,703 | server.py:190 | aggregate_evaluate: 
 debug | INFO flwr 2024-08-14 13:26:08,703 | server.py:110 | 
 debug | INFO flwr 2024-08-14 13:26:08,703 | server.py:111 | [ROUND 118]
 debug | INFO flwr 2024-08-14 13:26:08,704 | server.py:224 | configure_fit: strategy sampled 2 clients (out of 2)
+debug | INFO flwr 2024-08-14 15:23:34,262 | app.py:193 | Starting Flower simulation, config: num_rounds=200, no round_timeout
+debug | INFO flwr 2024-08-14 15:23:37,600 | app.py:228 | Flower VCE: Ray initialized with resources: {'object_store_memory': 15300817100.0, 'CPU': 7.0, 'memory': 65597968179.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:172.17.0.9': 1.0, 'node:__internal_head__': 1.0}
+debug | INFO flwr 2024-08-14 15:23:37,601 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-14 15:23:37,601 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 2, 'num_gpus': 0.2}
+debug | INFO flwr 2024-08-14 15:23:37,613 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 3 actors
+debug | INFO flwr 2024-08-14 15:23:37,613 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-14 15:23:37,613 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-14 15:24:00,041 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-14 15:24:00,041 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-14 15:24:00,041 | server.py:110 | 
+debug | INFO flwr 2024-08-14 15:24:00,041 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-14 15:24:00,042 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:25:17,679 | server.py:238 | aggregate_fit: received 10 results and 0 failures
+debug | WARNING flwr 2024-08-14 15:25:19,089 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-14 15:25:20,016 | server.py:176 | configure_evaluate: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:25:48,536 | server.py:190 | aggregate_evaluate: received 10 results and 0 failures
+debug | WARNING flwr 2024-08-14 15:25:48,537 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-14 15:25:48,537 | server.py:110 | 
+debug | INFO flwr 2024-08-14 15:25:48,537 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-08-14 15:25:48,537 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:26:54,172 | server.py:238 | aggregate_fit: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:26:56,395 | server.py:176 | configure_evaluate: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:27:24,204 | server.py:190 | aggregate_evaluate: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:27:24,205 | server.py:110 | 
+debug | INFO flwr 2024-08-14 15:27:24,205 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-08-14 15:27:24,205 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:28:29,315 | server.py:238 | aggregate_fit: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:28:31,391 | server.py:176 | configure_evaluate: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:28:59,723 | server.py:190 | aggregate_evaluate: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:28:59,723 | server.py:110 | 
+debug | INFO flwr 2024-08-14 15:28:59,723 | server.py:111 | [ROUND 4]
+debug | INFO flwr 2024-08-14 15:28:59,724 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:29:56,149 | server.py:238 | aggregate_fit: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:29:58,279 | server.py:176 | configure_evaluate: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:30:31,981 | server.py:190 | aggregate_evaluate: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:30:31,981 | server.py:110 | 
+debug | INFO flwr 2024-08-14 15:30:31,981 | server.py:111 | [ROUND 5]
+debug | INFO flwr 2024-08-14 15:30:31,982 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:31:44,204 | server.py:238 | aggregate_fit: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:31:46,285 | server.py:176 | configure_evaluate: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:34:31,905 | app.py:193 | Starting Flower simulation, config: num_rounds=200, no round_timeout
+debug | INFO flwr 2024-08-14 15:34:35,281 | app.py:228 | Flower VCE: Ray initialized with resources: {'memory': 65590617498.0, 'node:__internal_head__': 1.0, 'CPU': 7.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'node:172.17.0.9': 1.0, 'object_store_memory': 15300817100.0}
+debug | INFO flwr 2024-08-14 15:34:35,281 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-14 15:34:35,281 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 2, 'num_gpus': 0.2}
+debug | INFO flwr 2024-08-14 15:34:35,293 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 3 actors
+debug | INFO flwr 2024-08-14 15:34:35,293 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-14 15:34:35,293 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-14 15:34:58,242 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-14 15:34:58,242 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-14 15:34:58,242 | server.py:110 | 
+debug | INFO flwr 2024-08-14 15:34:58,243 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-14 15:34:58,243 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:36:32,398 | server.py:238 | aggregate_fit: received 10 results and 0 failures
+debug | WARNING flwr 2024-08-14 15:36:33,699 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-14 15:36:34,861 | server.py:176 | configure_evaluate: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:36:58,641 | server.py:190 | aggregate_evaluate: received 10 results and 0 failures
+debug | WARNING flwr 2024-08-14 15:36:58,641 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-14 15:36:58,641 | server.py:110 | 
+debug | INFO flwr 2024-08-14 15:36:58,641 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-08-14 15:36:58,641 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:37:57,178 | server.py:238 | aggregate_fit: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:37:59,593 | server.py:176 | configure_evaluate: strategy sampled 10 clients (out of 10)
+debug | INFO flwr 2024-08-14 15:38:24,169 | server.py:190 | aggregate_evaluate: received 10 results and 0 failures
+debug | INFO flwr 2024-08-14 15:38:24,170 | server.py:110 | 
+debug | INFO flwr 2024-08-14 15:38:24,170 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-08-14 15:38:24,170 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)

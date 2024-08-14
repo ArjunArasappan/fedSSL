@@ -25,13 +25,13 @@ parser = argparse.ArgumentParser(description="Flower Simulation with PyTorch")
 parser.add_argument(
     "--num_cpus",
     type=int,
-    default= 12,
+    default= 2,
     help="Number of CPUs to use during simulation",
 )
 parser.add_argument(
     "--num_gpus",
     type=float,
-    default= 1,
+    default= 0.2,
     help="Number of GPUs to use during simulation",
 )
 
@@ -55,6 +55,11 @@ parser.add_argument(
     default=200,
     help="Number of FL training rounds",
 )
+
+def fit_config_fn(server_round: int):
+    fit_config = {}
+    fit_config["current_round"] = server_round
+    return fit_config
 
 
 centralized_finetune, centralized_test = utils.load_centralized_data()
@@ -118,7 +123,8 @@ if __name__ == "__main__":
         num_clients= NUM_CLIENTS,
         config=fl.server.ServerConfig(num_rounds= NUM_ROUNDS),
         client_resources=client_resources,
-        strategy=strategy
+        strategy=strategy,
+        on_fit_config_fn = fit_config_fn
     )
     
     loss, accuracy = evaluate_gb_model(utils.useResnet18, NUM_CLIENTS)

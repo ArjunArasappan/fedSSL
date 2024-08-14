@@ -114,8 +114,7 @@ class CifarClient(fl.client.NumPyClient):
         self.simclr.setInference(False)
         results = train(self.simclr, self.trainloader, self.optimizer, self.loss, epochs=1)
         
-        data = ['client train', int(round), self.useResnet18, self.num_clients, self.cid, results['Loss']]
-        round += 1/self.num_clients
+        data = ['client train', config['current_round'], self.useResnet18, self.num_clients, self.cid, results['Loss']]
         utils.sim_log(data)
         
         return self.get_parameters(config={}), len(self.trainloader), results
