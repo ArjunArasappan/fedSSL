@@ -100,15 +100,22 @@ if __name__ == "__main__":
     print(torch.version.cuda)
     
     args = parser.parse_args()
-
-    client_resources = {
-        "num_cpus": args.num_cpus,
-        "num_gpus": args.num_gpus,
-    }
     
     NUM_CLIENTS = args.num_clients
     NUM_ROUNDS = args.num_rounds
     useResnet18 = args.use_resnet18
+    
+    #client sim code
+    gpu_alloc = 0.2
+    cpu_alloc = 2
+    if NUM_CLIENTS < 5:
+        gpu_alloc = 1 / NUM_CLIENTS
+        cpu_alloc = int(12 / NUM_CLIENTS)
+    
+    client_resources = {
+        "num_cpus": cpu_alloc,
+        "num_gpus": gpu_alloc
+    }
     
     print("Num Clients: ", NUM_CLIENTS)
     print("Num Rounds: ", NUM_ROUNDS)
