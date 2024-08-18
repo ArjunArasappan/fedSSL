@@ -52,7 +52,7 @@ parser.add_argument(
 parser.add_argument(
     "--num_rounds",
     type=int,
-    default=200,
+    default=1000,
     help="Number of FL training rounds",
 )
 
@@ -85,11 +85,12 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
             if not os.path.exists(path):
                 os.makedirs(path)
             
-            torch.save(gb_simclr.state_dict(), path + file)
+            if server_round % 5 == 0 or server_round == 1:
+                torch.save(gb_simclr.state_dict(), path + file)
 
         return aggregated_parameters, aggregated_metrics
 
-strategy = SaveModelStrategy()
+strategy = SaveModelStrategy(on_fit_config_fn = fit_config_fn)
 
 if __name__ == "__main__":
 
@@ -109,8 +110,11 @@ if __name__ == "__main__":
     gpu_alloc = 0.2
     cpu_alloc = 2
     if NUM_CLIENTS < 5:
-        gpu_alloc = 1 / NUM_CLIENTS
+        gpu_alloc = float(1) / float(NUM_CLIENTS)
         cpu_alloc = int(12 / NUM_CLIENTS)
+    
+    print('GPU ALLOC:', gpu_alloc)
+    print('CPU ALLOC:', cpu_alloc)
     
     client_resources = {
         "num_cpus": cpu_alloc,
@@ -131,7 +135,6 @@ if __name__ == "__main__":
         config=fl.server.ServerConfig(num_rounds= NUM_ROUNDS),
         client_resources=client_resources,
         strategy=strategy,
-        on_fit_config_fn = fit_config_fn
     )
     
     loss, accuracy = evaluate_gb_model(utils.useResnet18, NUM_CLIENTS)

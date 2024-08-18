@@ -7,7 +7,7 @@ while kill -0 479311 2> /dev/null; do
 done
 
 
-num_clients_values=(10 8 6)
+num_clients_values=(2 4 6 8 10)
 
 echo -n > filename
 

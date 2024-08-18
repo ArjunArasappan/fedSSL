@@ -63,7 +63,8 @@ def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
 
     centralized_test_data = fds.load_split("test")
     centralized_test_data = centralized_test_data.with_transform(apply_transforms)
-    
-    centralized_test_data = centralized_test_data.train_test_split(test_size=centralized_test_split, shuffle = True, seed=42)['test']
+
+    if centralized_test_split != 1:
+        centralized_test_data = centralized_test_data.train_test_split(test_size=centralized_test_split, shuffle = True, seed=42)['test']
     
     return centralized_train_data, centralized_test_data
