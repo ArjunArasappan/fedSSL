@@ -9,6 +9,7 @@ from client import get_client_fn
 from model import SimCLR, SimCLRPredictor, NTXentLoss
 import utils
 from test import evaluate_gb_model 
+import os
 
 DEVICE = utils.DEVICE
 
@@ -47,7 +48,7 @@ parser.add_argument(
 parser.add_argument(
     "--num_rounds",
     type=int,
-    default=15,
+    default=5,
     help="Number of FL training rounds",
 )
 
@@ -65,6 +66,10 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
             aggregated_ndarrays: List[np.ndarray] = fl.common.parameters_to_ndarrays(aggregated_parameters)
             params_dict = zip(gb_simclr.state_dict().keys(), aggregated_ndarrays)
             state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+            
+            dir = './model_weights/'
+            if not os.path.exists(dir):
+                os.makedirs(dir)
 
             torch.save(state_dict, f"./model_weights/model_round_{server_round}.pth")
 
@@ -97,13 +102,13 @@ if __name__ == "__main__":
         
     fds = utils.get_fds(NUM_CLIENTS)
     
-    # fl.simulation.start_simulation(
-    #     client_fn=get_client_fn(fds, useResnet18, NUM_CLIENTS),
-    #     num_clients= NUM_CLIENTS,
-    #     config=fl.server.ServerConfig(num_rounds= NUM_ROUNDS),
-    #     client_resources=client_resources,
-    #     strategy=strategy
-    # )
+    fl.simulation.start_simulation(
+        client_fn=get_client_fn(fds, useResnet18, NUM_CLIENTS),
+        num_clients= NUM_CLIENTS,
+        config=fl.server.ServerConfig(num_rounds= NUM_ROUNDS),
+        client_resources=client_resources,
+        strategy=strategy
+    )
     
     loss, accuracy = evaluate_gb_model(utils.useResnet18)
     
