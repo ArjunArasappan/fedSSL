@@ -1,7 +1,11 @@
 import flwr as fl
+from flwr.common import Context
+from flwr.client import ClientApp
+
 import torch
 from torch.utils.data import DataLoader
 from collections import OrderedDict
+from tqdm import tqdm
 
 from transform import SimCLRTransform
 from model import SimCLR, NTXentLoss
@@ -11,15 +15,16 @@ import utils
 
 DEVICE = utils.DEVICE
 
-def train(net, trainloader, optimizer, criterion, epochs):
+def train(net, trainloader, optimizer, criterion, cid, epochs = 1):
     net.train()
     num_batches = len(trainloader)
     batch = 0
     total_loss = 0
     
+    print(f'Client {cid} Training...')
     for epoch in range(epochs):
 
-        for item in trainloader:
+        for item in tqdm(trainloader):
             x_i, x_j = item['img']
    
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
@@ -34,14 +39,14 @@ def train(net, trainloader, optimizer, criterion, epochs):
             loss.backward()
             optimizer.step()
 
-            print("Client Train Batch:", batch, "/", num_batches)
+            # print("Client Train Batch:", batch, "/", num_batches)
             
             batch += 1
             
     return {'Loss' : float(total_loss / batch)}
                  
 
-def test(net, testloader, criterion):
+def test(net, testloader, criterion, cid):
     
     if testloader == None:
         return -1, -1
@@ -52,7 +57,8 @@ def test(net, testloader, criterion):
     num_batches = len(testloader)
     
     with torch.no_grad():
-        for item in testloader:
+        print(f'Client {cid} Local Evaluation...')
+        for item in tqdm(testloader):
             x_i, x_j = item['img']
             
             x_i, x_j = x_i.to(DEVICE), x_j.to(DEVICE)
@@ -63,7 +69,7 @@ def test(net, testloader, criterion):
             
             loss_epoch += loss.item()
             
-            print("Client Train Batch:", batch, "/", num_batches)
+            # print("Client Train Batch:", batch, "/", num_batches)
             
             batch += 1
     return loss_epoch / (batch), -1
@@ -100,7 +106,7 @@ class CifarClient(fl.client.NumPyClient):
 
         self.set_parameters(parameters)
         self.simclr.setInference(False)
-        results = train(self.simclr, self.trainloader, self.optimizer, self.loss, epochs=1)
+        results = train(self.simclr, self.trainloader, self.optimizer, self.loss, self.cid)
         
         return self.get_parameters(config={}), len(self.trainloader), results
 
@@ -108,20 +114,20 @@ class CifarClient(fl.client.NumPyClient):
         self.set_parameters(parameters)
         self.simclr.setInference(False)
         
-        loss, accuracy = test(self.simclr, self.testloader, self.loss)
+        loss, accuracy = test(self.simclr, self.testloader, self.loss, self.cid)
 
         return float(loss), 1, {"accuracy": accuracy}
 
-def get_client_fn(fds, useResnet18, num_clients):
+def get_client_fn():
     
     ntxent = NTXentLoss( device=DEVICE).to(DEVICE)
     
-    
-
-    def client_fn(cid):
-        clientID = int(cid)
+    def client_fn(Context):
+        clientID = context.node_config["partition-id"]
+        num_clients = context.node_config["num-partitions"]
+        useResnet18 = context.node_config['use-resnet18']
         
-        train, test = utils.load_partition(fds, clientID, client_test_split = 0)
+        train, test = utils.load_partition(fds, clientID, client_test_split = context.node_config['local-eval-fraction'])
         simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
         
         return CifarClient(clientID, simclr, train, test, useResnet18, num_clients, ntxent).to_client()
@@ -129,3 +135,7 @@ def get_client_fn(fds, useResnet18, num_clients):
     return client_fn
 
 
+
+
+
+app = ClientApp(get_client_fn())

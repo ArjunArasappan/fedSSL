@@ -1,0 +1,542 @@
+debug | INFO flwr 2024-07-13 02:15:04,230 | app.py:193 | Starting Flower simulation, config: num_rounds=7, no round_timeout
+debug | INFO flwr 2024-07-13 02:15:08,008 | app.py:228 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'CPU': 13.0, 'object_store_memory': 13377972633.0, 'memory': 26755945268.0, 'node:172.17.0.3': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+debug | INFO flwr 2024-07-13 02:15:08,008 | app.py:234 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-07-13 02:15:08,008 | app.py:257 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 1.0}
+debug | INFO flwr 2024-07-13 02:15:08,026 | app.py:303 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-07-13 02:15:08,026 | server.py:92 | [INIT]
+debug | INFO flwr 2024-07-13 02:15:08,026 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-07-13 02:15:24,891 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-07-13 02:15:24,891 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-07-13 02:15:24,891 | server.py:110 | 
+debug | INFO flwr 2024-07-13 02:15:24,891 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-07-13 02:15:24,891 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:19:01,768 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | WARNING flwr 2024-07-13 02:19:02,747 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-13 02:19:03,182 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:19:19,234 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | WARNING flwr 2024-07-13 02:19:19,234 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-07-13 02:19:19,235 | server.py:110 | 
+debug | INFO flwr 2024-07-13 02:19:19,235 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-07-13 02:19:19,235 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:22:51,788 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:22:53,108 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:23:10,220 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:23:10,220 | server.py:110 | 
+debug | INFO flwr 2024-07-13 02:23:10,220 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-07-13 02:23:10,220 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:26:43,382 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:26:44,755 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:27:00,511 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:27:00,511 | server.py:110 | 
+debug | INFO flwr 2024-07-13 02:27:00,511 | server.py:111 | [ROUND 4]
+debug | INFO flwr 2024-07-13 02:27:00,511 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:30:33,343 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:30:34,814 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:30:51,788 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:30:51,788 | server.py:110 | 
+debug | INFO flwr 2024-07-13 02:30:51,788 | server.py:111 | [ROUND 5]
+debug | INFO flwr 2024-07-13 02:30:51,788 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:34:24,050 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:34:25,434 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:34:40,993 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:34:40,994 | server.py:110 | 
+debug | INFO flwr 2024-07-13 02:34:40,994 | server.py:111 | [ROUND 6]
+debug | INFO flwr 2024-07-13 02:34:40,994 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:38:15,347 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:38:16,967 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:38:32,638 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:38:32,639 | server.py:110 | 
+debug | INFO flwr 2024-07-13 02:38:32,639 | server.py:111 | [ROUND 7]
+debug | INFO flwr 2024-07-13 02:38:32,639 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:42:05,448 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:42:06,807 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-07-13 02:42:22,405 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-07-13 02:42:22,440 | server.py:494 | 
+debug | INFO flwr 2024-07-13 02:42:22,440 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-07-13 02:42:22,440 | server.py:496 | Run finished 7 round(s) in 1617.51s
+debug | INFO flwr 2024-07-13 02:42:22,440 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-07-13 02:42:22,440 | server.py:498 | 		round 1: 6.198715496063232
+debug | INFO flwr 2024-07-13 02:42:22,441 | server.py:498 | 		round 2: 5.969318962097168
+debug | INFO flwr 2024-07-13 02:42:22,441 | server.py:498 | 		round 3: 5.866032600402832
+debug | INFO flwr 2024-07-13 02:42:22,441 | server.py:498 | 		round 4: 5.820975017547608
+debug | INFO flwr 2024-07-13 02:42:22,441 | server.py:498 | 		round 5: 5.780938720703125
+debug | INFO flwr 2024-07-13 02:42:22,441 | server.py:498 | 		round 6: 5.760835838317871
+debug | INFO flwr 2024-07-13 02:42:22,441 | server.py:498 | 		round 7: 5.752380275726319
+debug | INFO flwr 2024-07-13 02:42:22,441 | server.py:499 | 
+debug | INFO flwr 2024-08-18 23:28:03,840 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-18 23:28:07,783 | app.py:242 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'object_store_memory': 13282418688.0, 'CPU': 13.0, 'node:172.17.0.2': 1.0, 'memory': 26564837376.0, 'accelerator_type:G': 1.0, 'GPU': 1.0}
+debug | INFO flwr 2024-08-18 23:28:07,784 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-18 23:28:07,785 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-18 23:28:07,803 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-18 23:28:07,803 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-18 23:28:07,803 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-18 23:28:20,442 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-18 23:28:20,442 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-18 23:28:20,442 | server.py:110 | 
+debug | INFO flwr 2024-08-18 23:28:20,442 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-18 23:28:20,443 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-18 23:31:07,048 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | WARNING flwr 2024-08-18 23:31:08,024 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-18 23:31:08,984 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-18 23:31:37,759 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | WARNING flwr 2024-08-18 23:31:37,760 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-18 23:31:37,760 | server.py:110 | 
+debug | INFO flwr 2024-08-18 23:31:37,760 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-08-18 23:31:37,760 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-18 23:34:20,996 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-08-18 23:34:22,731 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-18 23:34:52,351 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-08-18 23:34:52,351 | server.py:110 | 
+debug | INFO flwr 2024-08-18 23:34:52,351 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-08-18 23:34:52,352 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-18 23:37:33,837 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-08-18 23:37:35,543 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-18 23:38:05,453 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-08-18 23:38:05,453 | server.py:110 | 
+debug | INFO flwr 2024-08-18 23:38:05,454 | server.py:111 | [ROUND 4]
+debug | INFO flwr 2024-08-18 23:38:05,454 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-18 23:40:03,962 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-18 23:40:06,932 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 13273716326.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'memory': 26547432654.0, 'node:__internal_head__': 1.0, 'CPU': 13.0, 'node:172.17.0.2': 1.0}
+debug | INFO flwr 2024-08-18 23:40:06,932 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-18 23:40:06,933 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-18 23:40:06,951 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-18 23:40:06,952 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-18 23:40:06,952 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-18 23:40:19,349 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-18 23:40:19,349 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-18 23:40:19,349 | server.py:110 | 
+debug | INFO flwr 2024-08-18 23:40:19,350 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-18 23:40:19,350 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-18 23:41:35,039 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-18 23:41:38,921 | app.py:242 | Flower VCE: Ray initialized with resources: {'memory': 26207345051.0, 'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'object_store_memory': 13103672524.0, 'CPU': 13.0, 'node:172.17.0.2': 1.0}
+debug | INFO flwr 2024-08-18 23:41:38,922 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-18 23:41:38,922 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-18 23:41:38,939 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-18 23:41:38,939 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-18 23:41:38,939 | server.py:279 | Requesting initial parameters from one random client
+debug | ERROR flwr 2024-08-18 23:41:43,642 | ray_client_proxy.py:106 | Traceback (most recent call last):
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=806596, ip=172.17.0.2, actor_id=370d8b05a78c4bf50f4f2cb101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ffacc04ded0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 64, in _load_app
+    return ClientApp(client_fn=client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 120, in __init__
+    client_fn = _inspect_maybe_adapt_client_fn_signature(client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 47, in _inspect_maybe_adapt_client_fn_signature
+    _alert_erroneous_client_fn()
+  File "/root/flower/src/py/flwr/client/client_app.py", line 34, in _alert_erroneous_client_fn
+    raise ValueError(
+ValueError: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=806596, ip=172.17.0.2, actor_id=370d8b05a78c4bf50f4f2cb101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ffacc04ded0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+debug | ERROR flwr 2024-08-18 23:41:43,643 | ray_client_proxy.py:107 | [36mray::ClientAppActor.run()[39m (pid=806596, ip=172.17.0.2, actor_id=370d8b05a78c4bf50f4f2cb101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ffacc04ded0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 64, in _load_app
+    return ClientApp(client_fn=client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 120, in __init__
+    client_fn = _inspect_maybe_adapt_client_fn_signature(client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 47, in _inspect_maybe_adapt_client_fn_signature
+    _alert_erroneous_client_fn()
+  File "/root/flower/src/py/flwr/client/client_app.py", line 34, in _alert_erroneous_client_fn
+    raise ValueError(
+ValueError: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=806596, ip=172.17.0.2, actor_id=370d8b05a78c4bf50f4f2cb101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ffacc04ded0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+debug | ERROR flwr 2024-08-18 23:41:43,643 | app.py:344 | [36mray::ClientAppActor.run()[39m (pid=806596, ip=172.17.0.2, actor_id=370d8b05a78c4bf50f4f2cb101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ffacc04ded0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 64, in _load_app
+    return ClientApp(client_fn=client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 120, in __init__
+    client_fn = _inspect_maybe_adapt_client_fn_signature(client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 47, in _inspect_maybe_adapt_client_fn_signature
+    _alert_erroneous_client_fn()
+  File "/root/flower/src/py/flwr/client/client_app.py", line 34, in _alert_erroneous_client_fn
+    raise ValueError(
+ValueError: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=806596, ip=172.17.0.2, actor_id=370d8b05a78c4bf50f4f2cb101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ffacc04ded0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+debug | ERROR flwr 2024-08-18 23:41:43,644 | app.py:345 | Traceback (most recent call last):
+  File "/root/flower/src/py/flwr/simulation/app.py", line 339, in start_simulation
+    hist = run_fl(
+  File "/root/flower/src/py/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/flower/src/py/flwr/server/server.py", line 93, in fit
+    self.parameters = self._get_initial_parameters(server_round=0, timeout=timeout)
+  File "/root/flower/src/py/flwr/server/server.py", line 282, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 168, in get_parameters
+    message_out = self._submit_job(message, timeout)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 108, in _submit_job
+    raise ex
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=806596, ip=172.17.0.2, actor_id=370d8b05a78c4bf50f4f2cb101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ffacc04ded0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 64, in _load_app
+    return ClientApp(client_fn=client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 120, in __init__
+    client_fn = _inspect_maybe_adapt_client_fn_signature(client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 47, in _inspect_maybe_adapt_client_fn_signature
+    _alert_erroneous_client_fn()
+  File "/root/flower/src/py/flwr/client/client_app.py", line 34, in _alert_erroneous_client_fn
+    raise ValueError(
+ValueError: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=806596, ip=172.17.0.2, actor_id=370d8b05a78c4bf50f4f2cb101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7ffacc04ded0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+debug | ERROR flwr 2024-08-18 23:41:43,644 | app.py:346 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 12, 'num_gpus': 1} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 12, 'num_gpus': 1}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-08-19 02:14:05,786 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 02:14:08,774 | app.py:242 | Flower VCE: Ray initialized with resources: {'memory': 26437174887.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'node:__internal_head__': 1.0, 'object_store_memory': 13218587443.0, 'node:172.17.0.2': 1.0, 'CPU': 13.0}
+debug | INFO flwr 2024-08-19 02:14:08,775 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 02:14:08,775 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 02:14:08,790 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 02:14:08,790 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 02:14:08,790 | server.py:279 | Requesting initial parameters from one random client
+debug | ERROR flwr 2024-08-19 02:14:13,577 | ray_client_proxy.py:106 | Traceback (most recent call last):
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=810490, ip=172.17.0.2, actor_id=e91411fb69883a0e63c4d89a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f6564145ed0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 64, in _load_app
+    return ClientApp(client_fn=client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 120, in __init__
+    client_fn = _inspect_maybe_adapt_client_fn_signature(client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 47, in _inspect_maybe_adapt_client_fn_signature
+    _alert_erroneous_client_fn()
+  File "/root/flower/src/py/flwr/client/client_app.py", line 34, in _alert_erroneous_client_fn
+    raise ValueError(
+ValueError: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=810490, ip=172.17.0.2, actor_id=e91411fb69883a0e63c4d89a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f6564145ed0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+debug | ERROR flwr 2024-08-19 02:14:13,577 | ray_client_proxy.py:107 | [36mray::ClientAppActor.run()[39m (pid=810490, ip=172.17.0.2, actor_id=e91411fb69883a0e63c4d89a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f6564145ed0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 64, in _load_app
+    return ClientApp(client_fn=client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 120, in __init__
+    client_fn = _inspect_maybe_adapt_client_fn_signature(client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 47, in _inspect_maybe_adapt_client_fn_signature
+    _alert_erroneous_client_fn()
+  File "/root/flower/src/py/flwr/client/client_app.py", line 34, in _alert_erroneous_client_fn
+    raise ValueError(
+ValueError: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=810490, ip=172.17.0.2, actor_id=e91411fb69883a0e63c4d89a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f6564145ed0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+debug | ERROR flwr 2024-08-19 02:14:13,577 | app.py:344 | [36mray::ClientAppActor.run()[39m (pid=810490, ip=172.17.0.2, actor_id=e91411fb69883a0e63c4d89a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f6564145ed0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 64, in _load_app
+    return ClientApp(client_fn=client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 120, in __init__
+    client_fn = _inspect_maybe_adapt_client_fn_signature(client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 47, in _inspect_maybe_adapt_client_fn_signature
+    _alert_erroneous_client_fn()
+  File "/root/flower/src/py/flwr/client/client_app.py", line 34, in _alert_erroneous_client_fn
+    raise ValueError(
+ValueError: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=810490, ip=172.17.0.2, actor_id=e91411fb69883a0e63c4d89a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f6564145ed0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+debug | ERROR flwr 2024-08-19 02:14:13,578 | app.py:345 | Traceback (most recent call last):
+  File "/root/flower/src/py/flwr/simulation/app.py", line 339, in start_simulation
+    hist = run_fl(
+  File "/root/flower/src/py/flwr/server/server.py", line 490, in run_fl
+    hist, elapsed_time = server.fit(
+  File "/root/flower/src/py/flwr/server/server.py", line 93, in fit
+    self.parameters = self._get_initial_parameters(server_round=0, timeout=timeout)
+  File "/root/flower/src/py/flwr/server/server.py", line 282, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 168, in get_parameters
+    message_out = self._submit_job(message, timeout)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 108, in _submit_job
+    raise ex
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/root/fedSSL/venv/lib/python3.10/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=810490, ip=172.17.0.2, actor_id=e91411fb69883a0e63c4d89a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f6564145ed0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_client_proxy.py", line 64, in _load_app
+    return ClientApp(client_fn=client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 120, in __init__
+    client_fn = _inspect_maybe_adapt_client_fn_signature(client_fn)
+  File "/root/flower/src/py/flwr/client/client_app.py", line 47, in _inspect_maybe_adapt_client_fn_signature
+    _alert_erroneous_client_fn()
+  File "/root/flower/src/py/flwr/client/client_app.py", line 34, in _alert_erroneous_client_fn
+    raise ValueError(
+ValueError: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=810490, ip=172.17.0.2, actor_id=e91411fb69883a0e63c4d89a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x7f6564145ed0>)
+  File "/root/flower/src/py/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: A `ClientApp` cannot make use of a `client_fn` that does not have a signature in the form: `def client_fn(context: Context)`. You can import the `Context` like this: `from flwr.common import Context`
+
+debug | ERROR flwr 2024-08-19 02:14:13,578 | app.py:346 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 12, 'num_gpus': 1} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 12, 'num_gpus': 1}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+debug | INFO flwr 2024-08-19 03:33:41,735 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 03:33:44,685 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 13281372979.0, 'memory': 26562745959.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:__internal_head__': 1.0, 'node:172.17.0.2': 1.0, 'CPU': 13.0}
+debug | INFO flwr 2024-08-19 03:33:44,685 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 03:33:44,685 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 03:33:44,705 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 03:33:44,705 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 03:33:44,705 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:33:57,513 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:33:57,513 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 03:33:57,513 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:33:57,513 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 03:33:57,514 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:36:43,428 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | WARNING flwr 2024-08-19 03:36:44,365 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-19 03:36:45,332 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:37:14,073 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | WARNING flwr 2024-08-19 03:37:14,073 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-19 03:37:14,073 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:37:14,073 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-08-19 03:37:14,074 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:39:54,639 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 03:39:56,411 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:40:24,988 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 03:40:24,988 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:40:24,989 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-08-19 03:40:24,989 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:43:04,117 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 03:43:05,845 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:43:34,076 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 03:43:34,076 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:43:34,076 | server.py:111 | [ROUND 4]
+debug | INFO flwr 2024-08-19 03:43:34,076 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:45:05,119 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 03:45:08,963 | app.py:242 | Flower VCE: Ray initialized with resources: {'memory': 26561689191.0, 'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'object_store_memory': 13280844595.0, 'node:172.17.0.2': 1.0, 'CPU': 13.0}
+debug | INFO flwr 2024-08-19 03:45:08,963 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 03:45:08,964 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 03:45:08,983 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 03:45:08,983 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 03:45:08,983 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:45:21,192 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:45:21,192 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 03:45:21,192 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:45:21,193 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 03:45:21,193 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:49:11,977 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 03:49:15,889 | app.py:242 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'memory': 26561726055.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'CPU': 13.0, 'node:172.17.0.2': 1.0, 'object_store_memory': 13280863027.0}
+debug | INFO flwr 2024-08-19 03:49:15,889 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 03:49:15,889 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 03:49:15,906 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 03:49:15,906 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 03:49:15,906 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:49:28,552 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:49:28,552 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 03:49:28,552 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:49:28,552 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 03:49:28,553 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:52:54,955 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 03:52:58,748 | app.py:242 | Flower VCE: Ray initialized with resources: {'memory': 26562310964.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:__internal_head__': 1.0, 'node:172.17.0.2': 1.0, 'CPU': 13.0, 'object_store_memory': 13281155481.0}
+debug | INFO flwr 2024-08-19 03:52:58,749 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 03:52:58,749 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 03:52:58,769 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 03:52:58,770 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 03:52:58,770 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:53:11,498 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:53:11,499 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 03:53:11,499 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:53:11,499 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 03:53:11,499 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:54:49,499 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 03:54:52,483 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 13110344908.0, 'accelerator_type:G': 1.0, 'GPU': 1.0, 'memory': 26220689819.0, 'node:__internal_head__': 1.0, 'CPU': 13.0, 'node:172.17.0.2': 1.0}
+debug | INFO flwr 2024-08-19 03:54:52,483 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 03:54:52,483 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 03:54:52,502 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 03:54:52,502 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 03:54:52,502 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:55:04,770 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:55:04,770 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 03:55:04,770 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:55:04,770 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 03:55:04,771 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:55:37,183 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 03:55:41,016 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 13121663385.0, 'node:172.17.0.2': 1.0, 'CPU': 13.0, 'memory': 26243326772.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'node:__internal_head__': 1.0}
+debug | INFO flwr 2024-08-19 03:55:41,016 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 03:55:41,016 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 03:55:41,033 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 03:55:41,033 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 03:55:41,033 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:55:53,199 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:55:53,200 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 03:55:53,200 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:55:53,200 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 03:55:53,200 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 03:58:51,943 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 03:58:55,779 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 13279786598.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'CPU': 13.0, 'node:172.17.0.2': 1.0, 'node:__internal_head__': 1.0, 'memory': 26559573198.0}
+debug | INFO flwr 2024-08-19 03:58:55,780 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 03:58:55,780 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 03:58:55,796 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 03:58:55,797 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 03:58:55,797 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:59:08,196 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 03:59:08,197 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 03:59:08,197 | server.py:110 | 
+debug | INFO flwr 2024-08-19 03:59:08,197 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 03:59:08,197 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:00:02,505 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 04:00:06,370 | app.py:242 | Flower VCE: Ray initialized with resources: {'memory': 26317629851.0, 'node:__internal_head__': 1.0, 'object_store_memory': 13158814924.0, 'GPU': 1.0, 'accelerator_type:G': 1.0, 'CPU': 13.0, 'node:172.17.0.2': 1.0}
+debug | INFO flwr 2024-08-19 04:00:06,370 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 04:00:06,370 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 04:00:06,385 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 04:00:06,385 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 04:00:06,385 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 04:00:18,721 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 04:00:18,722 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 04:00:18,722 | server.py:110 | 
+debug | INFO flwr 2024-08-19 04:00:18,722 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 04:00:18,722 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:03:05,512 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | WARNING flwr 2024-08-19 04:03:06,424 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-19 04:03:07,390 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:03:44,533 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | WARNING flwr 2024-08-19 04:03:44,533 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+debug | INFO flwr 2024-08-19 04:03:44,533 | server.py:110 | 
+debug | INFO flwr 2024-08-19 04:03:44,533 | server.py:111 | [ROUND 2]
+debug | INFO flwr 2024-08-19 04:03:44,533 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:06:26,131 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 04:06:27,845 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:06:59,000 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 04:06:59,000 | server.py:110 | 
+debug | INFO flwr 2024-08-19 04:06:59,000 | server.py:111 | [ROUND 3]
+debug | INFO flwr 2024-08-19 04:06:59,000 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:09:42,576 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 04:09:44,237 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:10:13,358 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 04:10:13,358 | server.py:110 | 
+debug | INFO flwr 2024-08-19 04:10:13,359 | server.py:111 | [ROUND 4]
+debug | INFO flwr 2024-08-19 04:10:13,359 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:12:54,352 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 04:12:56,047 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:13:24,141 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 04:13:24,142 | server.py:110 | 
+debug | INFO flwr 2024-08-19 04:13:24,142 | server.py:111 | [ROUND 5]
+debug | INFO flwr 2024-08-19 04:13:24,142 | server.py:224 | configure_fit: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:16:05,333 | server.py:238 | aggregate_fit: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 04:16:07,029 | server.py:176 | configure_evaluate: strategy sampled 5 clients (out of 5)
+debug | INFO flwr 2024-08-19 04:16:35,897 | server.py:190 | aggregate_evaluate: received 5 results and 0 failures
+debug | INFO flwr 2024-08-19 04:16:35,934 | server.py:494 | 
+debug | INFO flwr 2024-08-19 04:16:35,934 | server.py:495 | [SUMMARY]
+debug | INFO flwr 2024-08-19 04:16:35,934 | server.py:496 | Run finished 5 round(s) in 977.18s
+debug | INFO flwr 2024-08-19 04:16:35,935 | server.py:498 | 	History (loss, distributed):
+debug | INFO flwr 2024-08-19 04:16:35,935 | server.py:498 | 		round 1: -1.0
+debug | INFO flwr 2024-08-19 04:16:35,935 | server.py:498 | 		round 2: -1.0
+debug | INFO flwr 2024-08-19 04:16:35,935 | server.py:498 | 		round 3: -1.0
+debug | INFO flwr 2024-08-19 04:16:35,935 | server.py:498 | 		round 4: -1.0
+debug | INFO flwr 2024-08-19 04:16:35,935 | server.py:498 | 		round 5: -1.0
+debug | INFO flwr 2024-08-19 04:16:35,935 | server.py:499 | 
+debug | INFO flwr 2024-08-19 16:29:17,941 | app.py:219 | Starting Flower simulation, config: num_rounds=5, no round_timeout
+debug | INFO flwr 2024-08-19 16:29:21,785 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 13276441804.0, 'memory': 26552883611.0, 'node:__internal_head__': 1.0, 'CPU': 13.0, 'node:172.17.0.2': 1.0, 'GPU': 1.0, 'accelerator_type:G': 1.0}
+debug | INFO flwr 2024-08-19 16:29:21,785 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+debug | INFO flwr 2024-08-19 16:29:21,785 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 12, 'num_gpus': 1}
+debug | INFO flwr 2024-08-19 16:29:21,801 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 1 actors
+debug | INFO flwr 2024-08-19 16:29:21,802 | server.py:92 | [INIT]
+debug | INFO flwr 2024-08-19 16:29:21,802 | server.py:279 | Requesting initial parameters from one random client
+debug | INFO flwr 2024-08-19 16:29:34,077 | server.py:286 | Received initial parameters from one random client
+debug | INFO flwr 2024-08-19 16:29:34,077 | server.py:94 | Evaluating initial global parameters
+debug | INFO flwr 2024-08-19 16:29:34,078 | server.py:110 | 
+debug | INFO flwr 2024-08-19 16:29:34,078 | server.py:111 | [ROUND 1]
+debug | INFO flwr 2024-08-19 16:29:34,078 | server.py:224 | configure_fit: strategy sampled 10 clients (out of 10)

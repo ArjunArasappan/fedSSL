@@ -7,6 +7,9 @@ import utils
 from model import SimCLR, SimCLRPredictor
 import os, glob
 
+from tqdm import tqdm
+
+
 
 DEVICE = utils.DEVICE
 
@@ -52,24 +55,28 @@ def load_model(useResnet18, simclr_predictor):
 def fine_tune_predictor(simclr_predictor, trainloader, optimizer, criterion):
     simclr_predictor.train()
 
-    for epoch in range(utils.FINETUNE_EPOCHS):
-        batch = 0
-        num_batches = len(trainloader)
+    with tqdm(total=utils.FINETUNE_EPOCHS * len(trainloader), desc=f'Global Model Finetune', position=0, leave=True) as pbar:
 
-        for item in trainloader:
-            x , labels = item['img'], item['label']
-            x, labels = x.to(DEVICE), labels.to(DEVICE)
-            
-            optimizer.zero_grad()
-            
-            outputs = simclr_predictor(x)
-            loss = criterion(outputs, labels)
-            
-            loss.backward()
-            optimizer.step()
-            
-            print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
-            batch += 1
+        for epoch in range(utils.FINETUNE_EPOCHS):
+            batch = 0
+            num_batches = len(trainloader)
+
+            for item in trainloader:
+                x , labels = item['img'], item['label']
+                x, labels = x.to(DEVICE), labels.to(DEVICE)
+                
+                optimizer.zero_grad()
+                
+                outputs = simclr_predictor(x)
+                loss = criterion(outputs, labels)
+                
+                loss.backward()
+                optimizer.step()
+                
+                pbar.update(1)
+                
+                # print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
+                batch += 1
 
 def evaluate(simclr_predictor, testloader, criterion):
     simclr_predictor.eval()
@@ -80,21 +87,25 @@ def evaluate(simclr_predictor, testloader, criterion):
 
     batch = 0
     num_batches = len(testloader)
+    
+    with tqdm(total=num_batches, desc=f'Global Model Test', position=0, leave=True) as pbar:
 
-    with torch.no_grad():
-        for item in testloader:
-            x , labels = item['img'], item['label']
-            x, labels = x.to(DEVICE), labels.to(DEVICE)
-            
-            logits = simclr_predictor(x)
-            values, predicted = torch.max(logits, 1)  
-            
-            total += labels.size(0)
-            loss += criterion(logits, labels).item()
-            correct += (predicted == labels).sum().item()
+        with torch.no_grad():
+            for item in testloader:
+                x , labels = item['img'], item['label']
+                x, labels = x.to(DEVICE), labels.to(DEVICE)
+                
+                logits = simclr_predictor(x)
+                values, predicted = torch.max(logits, 1)  
+                
+                total += labels.size(0)
+                loss += criterion(logits, labels).item()
+                correct += (predicted == labels).sum().item()
 
-            print(f"Test Batch: {batch} / {num_batches}")
-            batch += 1
+                pbar.update(1)
+
+                # print(f"Test Batch: {batch} / {num_batches}")
+                batch += 1
   
     return loss / batch, correct / total
 

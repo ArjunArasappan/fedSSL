@@ -18,7 +18,7 @@ centralized_finetune_split = 0.1
 centralized_test_split = 0.2
 
 FINETUNE_EPOCHS = 10
-BATCH_SIZE = 128
+BATCH_SIZE = 512
 
 
 
