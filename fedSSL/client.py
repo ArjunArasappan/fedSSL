@@ -6,9 +6,9 @@ from torch.utils.data import DataLoader
 from collections import OrderedDict
 from tqdm import tqdm
 
-from transform import SimCLRTransform
-from model import SimCLR, NTXentLoss
-import utils
+from fedSSL.transform import SimCLRTransform
+from fedSSL.model import SimCLR, NTXentLoss
+import fedSSL.utils as utils
 import time
 
 

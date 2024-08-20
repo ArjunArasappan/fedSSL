@@ -6,12 +6,13 @@ import torch
 from torch.utils.data import DataLoader
 from collections import OrderedDict
 from tqdm import tqdm
-
-from transform import SimCLRTransform
-from model import SimCLR, NTXentLoss
-import utils
+import os
 
 
+from fedSSL.transform import SimCLRTransform
+from fedSSL.model import SimCLR, NTXentLoss
+
+import fedSSL.utils as utils
 
 DEVICE = utils.DEVICE
 
@@ -118,24 +119,24 @@ class CifarClient(fl.client.NumPyClient):
 
         return float(loss), 1, {"accuracy": accuracy}
 
-def get_client_fn():
+
+
+def client_fn(context):
+    clientID = context.node_config["partition-id"]
+    num_clients = context.node_config["num-partitions"]
+    useResnet18 = True if context.run_config['use-resnet18'] == 1 else False
     
     ntxent = NTXentLoss( device=DEVICE).to(DEVICE)
     
-    def client_fn(Context):
-        clientID = context.node_config["partition-id"]
-        num_clients = context.node_config["num-partitions"]
-        useResnet18 = context.node_config['use-resnet18']
-        
-        train, test = utils.load_partition(fds, clientID, client_test_split = context.node_config['local-eval-fraction'])
-        simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
-        
-        return CifarClient(clientID, simclr, train, test, useResnet18, num_clients, ntxent).to_client()
+    fds = utils.get_fds(num_clients)
     
-    return client_fn
+    train, test = utils.load_partition(fds, clientID, client_test_split = context.run_config['local-eval-fraction'])
+    simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
+    
+    return CifarClient(clientID, simclr, train, test, useResnet18, num_clients, ntxent).to_client()
 
 
 
 
 
-app = ClientApp(get_client_fn())
+app = ClientApp(client_fn)

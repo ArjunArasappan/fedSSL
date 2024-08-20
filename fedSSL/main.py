@@ -5,10 +5,10 @@ from typing import List
 from collections import OrderedDict
 import argparse
 
-from client import get_client_fn
-from model import SimCLR, SimCLRPredictor, NTXentLoss
-import utils
-from test import evaluate_gb_model 
+from fedSSL.client import get_client_fn
+from fedSSL.model import SimCLR, SimCLRPredictor, NTXentLoss
+import fedSSL.utils as utils
+from fedSSL.test import evaluate_gb_model 
 import os
 
 DEVICE = utils.DEVICE

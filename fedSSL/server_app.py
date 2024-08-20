@@ -6,7 +6,6 @@ from flwr.common import Context, Metrics, ndarrays_to_parameters
 from flwr.server import ServerApp, ServerAppComponents, ServerConfig
 from flwr.server.strategy import FedAvg
 
-from pytorchexample.task import Net, get_weights
 
 
 # Define metric aggregation function
@@ -25,9 +24,6 @@ def server_fn(context: Context):
     # Read from config
     num_rounds = context.run_config["num-server-rounds"]
 
-    # Initialize model parameters
-    ndarrays = get_weights(Net())
-    parameters = ndarrays_to_parameters(ndarrays)
 
     # Define the strategy
     strategy = FedAvg(
@@ -35,7 +31,6 @@ def server_fn(context: Context):
         fraction_evaluate=context.run_config["fraction-evaluate"],
         min_available_clients=2,
         fit_metrics_aggregation_fn=weighted_average,
-        initial_parameters=parameters,
     )
     config = ServerConfig(num_rounds=num_rounds)
 

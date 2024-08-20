@@ -3,13 +3,13 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
-import utils
+
 from model import SimCLR, SimCLRPredictor
 import os, glob
 
 from tqdm import tqdm
 
-
+import fedSSL.utils as utils
 
 DEVICE = utils.DEVICE
 

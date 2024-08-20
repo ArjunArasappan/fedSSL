@@ -2,7 +2,7 @@ import torch
 from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
 
-from transform import SimCLRTransform
+from fedSSL.transform import SimCLRTransform
 import csv
 
 
