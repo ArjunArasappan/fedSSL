@@ -10,9 +10,9 @@ from pytorchexample.task import Net, get_weights
 
 
 # Define metric aggregation function
-def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
+def weighted_average(metrics: List[Tuple[int, Metrics]], field) -> Metrics:
     # Multiply accuracy of each client by number of examples used
-    accuracies = [num_examples * m["accuracy"] for num_examples, m in metrics]
+    accuracies = [num_examples * m['loss'] for num_examples, m in metrics]
     examples = [num_examples for num_examples, _ in metrics]
 
     # Aggregate and return custom metric (weighted average)
@@ -34,8 +34,7 @@ def server_fn(context: Context):
         fraction_fit=1.0,
         fraction_evaluate=context.run_config["fraction-evaluate"],
         min_available_clients=2,
-        fit_metrics_aggregation_fn= weighted_average,
-        evaluate_metrics_aggregation_fn=weighted_average,
+        fit_metrics_aggregation_fn=weighted_average,
         initial_parameters=parameters,
     )
     config = ServerConfig(num_rounds=num_rounds)

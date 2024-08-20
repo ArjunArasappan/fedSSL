@@ -7,7 +7,11 @@ from torchvision.models import resnet18, ResNet18_Weights, resnet50, ResNet50_We
 
 import utils
 
-
+def get_weights():
+        params_dict = zip(net.state_dict().keys(), parameters)
+    state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+    net.load_state_dict(state_dict, strict=True)
+    
 class NTXentLoss(nn.Module):
     def __init__(self, device, temperature=0.5, ):
         super(NTXentLoss, self).__init__()
