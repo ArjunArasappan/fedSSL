@@ -32,7 +32,7 @@ class SaveModelStrategy(FedAvg):
             state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
             gb_simclr.load_state_dict(state_dict)
             
-            dir = '.fedSSL/model_weights/'
+            dir = './fedSSL/model_weights/'
             if not os.path.exists(dir):
                 os.makedirs(dir)
 
