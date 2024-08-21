@@ -13,8 +13,8 @@ fineTuneEncoder = True
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-centralized_finetune_split = 0.1
-centralized_test_split = 0.2
+centralized_finetune_split = 1
+centralized_test_split = 1
 
 FINETUNE_EPOCHS = 10
 BATCH_SIZE = 512
@@ -53,12 +53,14 @@ def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
     centralized_train_data = fds.load_split("train")
     centralized_train_data = centralized_train_data.with_transform(transform_fn(False))
     
-    centralized_train_data = centralized_train_data.train_test_split(test_size=centralized_finetune_split, shuffle = True, seed=42)['test']
+    if centralized_finetune_split < 1:  
+        centralized_train_data = centralized_train_data.train_test_split(test_size=centralized_finetune_split, shuffle = True, seed=42)['test']
 
     centralized_test_data = fds.load_split("test")
     centralized_test_data = centralized_test_data.with_transform(transform_fn(False))
     
-    centralized_test_data = centralized_test_data.train_test_split(test_size=centralized_test_split, shuffle = True, seed=42)['test']
+    if centralized_test_split < 1:
+        centralized_test_data = centralized_test_data.train_test_split(test_size=centralized_test_split, shuffle = True, seed=42)['test']
     
     return centralized_train_data, centralized_test_data
 

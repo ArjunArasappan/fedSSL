@@ -76,7 +76,6 @@ def fine_tune_predictor(simclr_predictor, trainloader, optimizer, criterion):
                 
                 pbar.update(1)
                 
-                # print(f"Epoch: {epoch} Predictor Train Batch: {batch} / {num_batches}")
                 batch += 1
 
 def evaluate(simclr_predictor, testloader, criterion):
