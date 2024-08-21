@@ -8,24 +8,16 @@ from flwr.server.strategy import FedAvg
 
 
 
-# Define metric aggregation function
-def weighted_average(metrics: List[Tuple[int, Metrics]], field) -> Metrics:
-    # Multiply accuracy of each client by number of examples used
+def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
     accuracies = [num_examples * m['loss'] for num_examples, m in metrics]
     examples = [num_examples for num_examples, _ in metrics]
-
-    # Aggregate and return custom metric (weighted average)
     return {"accuracy": sum(accuracies) / sum(examples)}
 
 
 def server_fn(context: Context):
-    """Construct components that set the ServerApp behaviour."""
 
-    # Read from config
     num_rounds = context.run_config["num-server-rounds"]
 
-
-    # Define the strategy
     strategy = FedAvg(
         fraction_fit=1.0,
         fraction_evaluate=context.run_config["fraction-evaluate"],
@@ -36,6 +28,4 @@ def server_fn(context: Context):
 
     return ServerAppComponents(strategy=strategy, config=config)
 
-
-# Create ServerApp
 app = ServerApp(server_fn=server_fn)

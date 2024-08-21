@@ -32,9 +32,10 @@ learning-rate = 0.1
 batch-size = 512
 use-resnet18 = 0
 local-eval-fraction = 0
+local-train-epochs = 1
 
 [tool.flwr.federations]
 default = "local-simulation"
 
 [tool.flwr.federations.local-simulation]
-options.num-supernodes = 10
+options.num-supernodes = 4

@@ -84,11 +84,11 @@ def test(net, testloader, criterion, cid):
 
 
 class CifarClient(fl.client.NumPyClient):
-    def __init__(self, cid, simclr, trainset, testset, useResnet18, num_clients, loss):
+    def __init__(self, cid, simclr, trainset, testset, useResnet18, num_clients, criterion):
         self.cid = cid
         self.simclr = simclr
         self.optimizer = torch.optim.Adam(self.simclr.parameters(), lr=3e-4)
-        self.loss = loss
+        self.loss = criterion
         
         self.useResnet18 = useResnet18
         self.num_clients = num_clients

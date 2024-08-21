@@ -5,8 +5,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.models import resnet18, ResNet18_Weights, resnet50, ResNet50_Weights
 
-import fedSSL.utils as utils
-
 
     
 class NTXentLoss(nn.Module):

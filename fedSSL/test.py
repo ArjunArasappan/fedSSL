@@ -14,6 +14,7 @@ import fedSSL.utils as utils
 DEVICE = utils.DEVICE
 
 
+
 def evaluate_gb_model(useResnet18):
     simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, DEVICE, useResnet18=utils.useResnet18, tune_encoder=utils.fineTuneEncoder).to(DEVICE)
     
