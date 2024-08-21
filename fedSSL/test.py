@@ -16,7 +16,7 @@ DEVICE = utils.DEVICE
 
 
 def evaluate_gb_model(useResnet18):
-    simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, DEVICE, useResnet18=utils.useResnet18, tune_encoder=utils.fineTuneEncoder).to(DEVICE)
+    simclr_predictor = SimCLRPredictor(utils.NUM_CLASSES, DEVICE, useResnet18=useResnet18, tune_encoder=utils.fineTuneEncoder).to(DEVICE)
     
     load_model(useResnet18, simclr_predictor)
     
@@ -110,5 +110,5 @@ def evaluate(simclr_predictor, testloader, criterion):
     return loss / batch, correct / total
 
 if __name__ == "__main__":
-    loss, accuracy = evaluate_gb_model()
+    loss, accuracy = evaluate_gb_model(utils.useResnet18)
     print(f"Loss: {loss}, Accuracy: {accuracy}")

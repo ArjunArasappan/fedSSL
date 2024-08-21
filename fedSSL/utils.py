@@ -6,11 +6,10 @@ from fedSSL.transform import SimCLRTransform
 import csv
 
 
+# config for test.py
 NUM_CLASSES = 10
-
 useResnet18 = False
 fineTuneEncoder = True
-evaluateEveryRound = False
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
