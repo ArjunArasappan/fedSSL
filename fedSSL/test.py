@@ -41,7 +41,7 @@ def load_model(useResnet18, simclr_predictor):
     simclr = SimCLR(DEVICE, useResnet18=useResnet18).to(DEVICE)
 
     
-    list_of_files = [fname for fname in glob.glob("./model_weights/model_round_*")]
+    list_of_files = [fname for fname in glob.glob("./fedSSL/model_weights/model_round_*")]
     latest_round_file = max(list_of_files, key=os.path.getctime)
     print("Loading pre-trained model from:", latest_round_file)
     state_dict = torch.load(latest_round_file)
@@ -105,7 +105,6 @@ def evaluate(simclr_predictor, testloader, criterion):
 
                 pbar.update(1)
 
-                # print(f"Test Batch: {batch} / {num_batches}")
                 batch += 1
   
     return loss / batch, correct / total
