@@ -1,0 +1,4 @@
+venv/
+__pycache__/
+fedSSL/__pycache__/
+fedSSL/model_weights/
