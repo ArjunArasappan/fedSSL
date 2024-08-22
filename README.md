@@ -71,11 +71,18 @@ flwr run .
 ## Expected Results
 
 <p align="center">
-  <img src="_static/loss_graph3.png" />
+  <img src="_static/loss_graph3.png" alt="Average client loss over 1000 Rounds"/>
 </p>
 
+The graphs above show average client loss values over rounds during self-supervised local training. The quality of an SSL model can be obtained by stacking a linear predictor upon the encoder to evaluate the quality of the encoder representations. During the final evaluation of our global SimCLR model, we discard the projection head and stack a linear predictor upon the trained encoder, which is then trained for 20 epochs over the training set while freezing encoder wights. Thus ensures the information richness of the latent representations is solely reflective of the SSL training. The results below reflect the top-1 accuracies of the test set after self-supervised FL training and supervised training of the linear predictor.
 
 
-*Will Add to the results, explain manner in which SSL encoder was trained with projection head, and will explain supervised finetuning after FL rounds* 
+| Number of Clients | Test Set Accuracy |
+|-------------------|-------------------|
+| 2                 | 74.27%            |
+| 4                 | 72.84%            |
+| 6                 | 70.79%            |
+| 8                 | 67.51%            |
+| 10                | 66.31%            |
 
-The graphs above show average client loss values over rounds during local training and evaluation. A classifcation accuracy of 76.8% was achieved when training the SimCLR encoder model for 7 rounds over 5 clients with SSL, after which a linear predictor was stacked upon the encoder and fine-tuned for 20 epochs on 10 percent of the training dataset in a supervised manner.
+
