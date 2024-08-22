@@ -1,17 +1,24 @@
-# PyTorch Federated Self-Supervised Learning
+---
+tags: [ssl, image]
+dataset: [CIFAR-10]
+framework: [torch, torchvision]
+---
 
-Self-supervised learning(SSL) is a learning paradigm that provides supervisory signals when learning from large-scale and unlabeled datasets by generating synthetic pseudo-labels - thus avoiding the need for ground-truth annotations. It's gained signifigant traction in fields like computer vision, NLP, and audio signal processing that have vast collections of unlabeled data. Contrastive learning (a discriminative method) has recently gained traction in SSL, particularly for pretext tasks like repsentation learning. 
+# Federated Self-Supervised Learning for Image Domain
+
+Self-supervised learning (SSL) is a learning paradigm that provides supervisory signals when learning from large-scale and unlabeled datasets by generating synthetic pseudo-labels - thus avoiding the need for ground-truth annotations. It's gained signifigant traction in fields like computer vision, NLP, and audio signal processing that have vast collections of unlabeled data. Contrastive learning (a discriminative method) has recently gained traction in SSL, particularly for pretext tasks like repsentation learning. 
 
 Contrastive methods that employ data augmentations generate positive pairs of data by transforming each of their inputs to generate 'augmented' inputs that have modified vector values but inherently convey the same information. Negative pairs can be made by pairing data with the intention of highlighting the difference, or "contrast", between the two negatively paired inputs. The contrastive loss function(shown below) encourages similarity between model outputs of positive pairs and encourages dissimilarity between negative data pairs.
 
 <p align="center">
-  <img src="images/loss_eq.png" />
+  <img src="_static/loss_eq.png" />
 </p>
+
 
 In this example, we implement SimCLR: A Simple Framework for Contrastive Learning of Visual Representations. SimCLR makes use of image augmentations(random croppings, adding gausian noise, horizontal inversions, etc.) to generate positively paired data, where positive pairs result from different random augmentations of the same image. Here, negative pairs are made between images transformed from different source images. The noromalized temperatre-scaled cross entropy (NT-Xent) loss function above encourages similarity between positive pairs and disimilarity between negative pairs, where cosine similarity is used to compute similarity between the latent representation vectors.
 
 
-In short, SimCLR consists of an encoder network - in our case we use ResNet50/ResNet18 - and a projection head which projects encoded representations to a lower dimensional space where the contrastive loss is applied.
+In short, SimCLR consists of an encoder network - in our case we use ResNet50 - and a projection head which projects encoded representations to a lower dimensional space where the contrastive loss is applied.
 
 
 ## Environment Setup
@@ -39,63 +46,32 @@ This will create a new directory called `pytorch-federeated-self-supervised-lear
 
 ### Installing dependencies
 
-Project dependencies are defined in `requirements.txt`. Install them with:
+Project dependencies are defined in `pyproject.toml`. Install them with:
 
 ```shell
-pip install -r requirements.txt
+pip install -e .
 ```
 
-### Run with `start_simulation()`
+## Run the project
 
-Ensure you have activated your environment then:
+You can run your Flower project in both _simulation_ and _deployment_ mode without making changes to the code. If you are starting with Flower, we recommend you using the _simulation_ mode as it requires fewer components to be launched manually. By default, `flwr run` will make use of the Simulation Engine.
+
+### Run with the Simulation Engine
 
 ```bash
-# and then run the example
-python main.py
+flwr run .
 ```
 
-You can adjust the CPU/GPU resources you assign to your similation, as well as the number of clients and rounds for local training. 
+### Run with the Deployment Engine
 
-```bash
-# Will assign 2xCPUs to the simulation
-python main.py --num_cpus=2
-
-# Will assign 2xCPUs and 25% of the GPU's to the simulation
-python main.py --num_cpus=2 --num_gpus=0.25
-
-# Set
-python main.py  --num_clients=5
-
-## Run with Flower Next (preview)
-
-We conduct a 2-client setting to demonstrate how to run federated LLM fine-tuning with Flower Next.
-Please follow the steps below:
-
-1. Start the long-running Flower server (SuperLink)
-   ```bash
-   flower-superlink --insecure
-   ```
-2. Start the long-running Flower client (SuperNode)
-   ```bash
-   # In a new terminal window, start the first long-running Flower client:
-   flower-client-app app:client1 --insecure
-   ```
-   ```bash
-   # In another new terminal window, start the second long-running Flower client:
-   flower-client-app app:client2 --insecure
-   ```
-3. Run the Flower App
-   ```bash
-   # With both the long-running server (SuperLink) and two clients (SuperNode) up and running,
-   # we can now run the actual Flower App:
-   flower-server-app app:server --insecure
-   ```
+> \[!NOTE\]
+> An update to this example will show how to run this Flower application with the Deployment Engine and TLS certificates, or with Docker.
 
 
 ## Expected Results
 
 <p align="center">
-  <img src="images/loss_graph1.png" />
+  <img src="_static/loss_graph1.png" />
 </p>
 
 
