@@ -71,7 +71,7 @@ flwr run .
 ## Expected Results
 
 <p align="center">
-  <img src="_static/loss_graph1.png" />
+  <img src="_static/loss_graph3.png" />
 </p>
 
 
