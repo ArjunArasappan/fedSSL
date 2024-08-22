@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "fedSSL"
 version = "1.0.0"
-description = "Federated Self-Supervised Learning with PyTorch and Flower"
+description = "Federated Self-Supervised Learning for Image Domain"
 license = "Apache-2.0"
 dependencies = [
     "flwr[simulation]>=1.10.0",
@@ -25,19 +25,20 @@ serverapp = "fedSSL.server_app:app"
 clientapp = "fedSSL.client_app:app"
 
 [tool.flwr.app.config]
+# Sever configs
 num-server-rounds = 5
+fraction-fit = 1.0
 fraction-evaluate = 0.0
-local-epochs = 1
-learning-rate = 0.1
+
+# Client confgis
+learning-rate = 0.0003
 batch-size = 512
-use-resnet18 = 0
-local-eval-fraction = 0.0
 local-train-epochs = 1
 
 [tool.flwr.federations]
 default = "local-simulation"
 
 [tool.flwr.federations.local-simulation]
-options.num-supernodes = 10
+options.num-supernodes = 5
 options.backend.clientapp-cpus = 2
 options.backend.clientapp-gpus = 0.5

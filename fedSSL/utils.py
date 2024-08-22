@@ -1,70 +1,62 @@
-import torch
+from tqdm import tqdm
 from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
 
-from fedSSL.transform import SimCLRTransform
-import csv
+from fedSSL.model import SimClrTransform
 
 
-# config for test.py
-NUM_CLASSES = 10
-useResnet18 = False
-fineTuneEncoder = True
-
-DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-centralized_finetune_split = 1
-centralized_test_split = 1
-
-FINETUNE_EPOCHS = 10
-BATCH_SIZE = 512
+fds = None  # Cache FederatedDataset
 
 
+def load_data(partition_id: int, num_partitions: int):
+    """Load partition CIFAR10 data."""
+    # Only initialize `FederatedDataset` once
+    global fds
+    if fds is None:
+        partitioner = IidPartitioner(num_partitions=num_partitions)
+        fds = FederatedDataset(
+            dataset="uoft-cs/cifar10",
+            partitioners={"train": partitioner},
+        )
+    partition = fds.load_partition(partition_id)
+    partition = partition.with_transform(transform_fn(True))
 
-datalog_path = './log_files/datalog.csv'
+    return partition
 
-def transform_fn(augmentData):
-    simclrTransform = SimCLRTransform(size=32)  
+
+def transform_fn(augment_data):
+    simclr_transform = SimClrTransform(size=32)
+
     def apply_transforms(batch):
-        batch["img"] = [simclrTransform(img, augmentData) for img in batch["img"]]
+        batch["img"] = [simclr_transform(img, augment_data) for img in batch["img"]]
         return batch
 
     return apply_transforms
 
-def get_fds(partitions):
-    client_fds = FederatedDataset(dataset="cifar10", partitioners={'train': IidPartitioner(partitions)})
-    return client_fds
 
-def load_partition(fds, partition_id, client_test_split = 0):
-    
-    partition = fds.load_partition(partition_id, "train")
-    partition = partition.with_transform(transform_fn(True))
-    
-    if client_test_split == 0:
-        return partition, None
-    
-    partition = partition.train_test_split(test_size=client_test_split)
-    return partition["train"], partition["test"]
-    
+def train(net, cid, trainloader, optimizer, criterion, epochs, device):
+    net.to(device)  # move model to GPU if available
+    net.train()
+    criterion.to(device)
+    num_batches = len(trainloader)
+    total_loss = 0
 
-def load_centralized_data(image_size=32, batch_size=BATCH_SIZE):
-    fds = FederatedDataset(dataset="cifar10", partitioners = {'train' : 1, 'test' : 1})
-        
-    centralized_train_data = fds.load_split("train")
-    centralized_train_data = centralized_train_data.with_transform(transform_fn(False))
-    
-    if centralized_finetune_split < 1:  
-        centralized_train_data = centralized_train_data.train_test_split(test_size=centralized_finetune_split, shuffle = True, seed=42)['test']
+    with tqdm(total=num_batches * epochs, desc=f'Client {cid} Local Train', position=0, leave=True) as pbar:
+        for epoch in range(epochs):
+            for item in trainloader:
+                x_i, x_j = item['img']
+                x_i, x_j = x_i.to(device), x_j.to(device)
+                optimizer.zero_grad()
 
-    centralized_test_data = fds.load_split("test")
-    centralized_test_data = centralized_test_data.with_transform(transform_fn(False))
-    
-    if centralized_test_split < 1:
-        centralized_test_data = centralized_test_data.train_test_split(test_size=centralized_test_split, shuffle = True, seed=42)['test']
-    
-    return centralized_train_data, centralized_test_data
+                z_i = net(x_i)
+                z_j = net(x_j)
 
-def sim_log(data, path = './sim_log.txt'):
-    with open('path', 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(data)
+                loss = criterion(z_i, z_j)
+                total_loss += loss
+
+                loss.backward()
+                optimizer.step()
+
+                pbar.update(1)
+
+    return {'loss': float(total_loss / num_batches)}
