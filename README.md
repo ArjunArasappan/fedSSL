@@ -25,7 +25,7 @@ We train SimCLR on the CIFAR-10 training dataset in a self-supervised fashion in
 Start by cloning the code example. We prepared a single-line command that you can copy into your shell which will checkout the example for you:
 
 ```shell
-git clone --depth=1 https://github.com/adap/flower.git && mv flower/examples/pytorch-federeated-self-supervised . && rm -rf flower && cd pytorch-federated-self-supervised
+git clone --depth=1 https://github.com/adap/flower.git && mv flower/examples/pytorch-federated-self-supervised . && rm -rf flower && cd pytorch-federated-self-supervised
 ```
 
 This will create a new directory called `pytorch-federated-self-supervised-learning` containing the following files:
@@ -73,14 +73,15 @@ flwr run .
   <img src="_static/loss_graph3.png" alt="Average client loss over 1000 Rounds"/>
 </p>
 
-The graph above shows average client loss over self-supervised FL training. The quality of an SSL model can be obtained by stacking a linear predictor upon the encoder to evaluate the quality of the encoder representations. During the final evaluation of our global SimCLR model, we discard the projection head and stack a linear predictor upon the trained encoder, which is then trained for 20 epochs over the training set while freezing encoder weights. Freezing the encoder weights ensures the information richness of the latent representations is reflective of the SSL training alone. The results below reflect the top-1 accuracies of the test set after self-supervised FL training and supervised training of the linear predictor.
+The graphs above show average client loss values over rounds during self-supervised local training. The quality of an SSL model can be obtained by stacking a linear predictor upon the encoder to evaluate the quality of the encoder representations. During the final evaluation of our global SimCLR model, we discard the projection head and stack a linear predictor upon the trained encoder, which is then trained for 20 epochs over the training set while freezing encoder weights. Freezing the encoder weights ensures the information richness of the latent representations is reflective of the SSL training alone. The results below reflect the top-1 accuracies of the test set after self-supervised FL training and supervised training of the linear predictor.
 
 
-| Number of Clients | CIFAR-10 Test Set Accuracy |
-|-------------------|----------------------------|
-| 2                 | 74.27%                     |
-| 4                 | 72.84%                     |
-| 6                 | 70.79%                     |
-| 8                 | 67.51%                     |
-| 10                | 66.31%                     |
+| Number of Clients | Test Set Accuracy |
+|-------------------|-------------------|
+| 2                 | 74.27%            |
+| 4                 | 72.84%            |
+| 6                 | 70.79%            |
+| 8                 | 67.51%            |
+| 10                | 66.31%            |
+
 
