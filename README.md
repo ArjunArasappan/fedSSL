@@ -73,7 +73,7 @@ flwr run .
   <img src="_static/loss_graph3.png" alt="Average client loss over 1000 Rounds"/>
 </p>
 
-The graphs above show average client loss values over rounds during self-supervised local training. The quality of an SSL model can be obtained by stacking a linear predictor upon the encoder to evaluate the quality of the encoder representations. During the final evaluation of our global SimCLR model, we discard the projection head and stack a linear predictor upon the trained encoder, which is then trained for 20 epochs over the training set while freezing encoder weights. Freezing the encoder weights ensures the information richness of the latent representations is reflective of the SSL training alone. The results below reflect the top-1 accuracies of the test set after self-supervised FL training and supervised training of the linear predictor.
+The graph above shows average client loss over self-supervised FL training. The quality of an SSL model can be obtained by stacking a linear predictor upon the encoder to evaluate the quality of the encoder representations. During the final evaluation of our global SimCLR model, we discard the projection head and stack a linear predictor upon the trained encoder, which is then trained for 20 epochs over the training set while freezing encoder weights. Freezing the encoder weights ensures the information richness of the latent representations is reflective of the SSL training alone. The results below reflect the top-1 accuracies of the test set after self-supervised FL training and supervised training of the linear predictor.
 
 
 | Number of Clients | Test Set Accuracy |
